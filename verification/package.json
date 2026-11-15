@@ -52,6 +52,7 @@
     "tools/verify_zenodo.py": "2c7c4f83acb5eebb79a311c23fe248e584b048a1289660e4ea616ccea5319014",
     "verification/build.json": "ea5b1fa2a1dbd1b67b5054d4b63edeace24d27433e4a9b73b665bb887b9efba7",
     "verification/clean-export-initial.json": "9322bcd7f401d661ffc08ec6bc39ccb8ccf843db1f9b495c91c7f6f95f471a9e",
+    "verification/clean-export-v0.1.0.json": "c7575264329121b1d46fd9f5f6167fe27c8c7bea8233ae53284fcf9d75fa4d16",
     "verification/clean-export.json": "0589f58920576abe775b1929878f1787dc800c4dc618dd6c5fb986a3be9225dc",
     "verification/history/reviewed-draft/build.json": "6d8e5fa7638827cfb7d6000a00e4bd2aa43b0a6480d103dbcab85e9d54687714",
     "verification/history/reviewed-draft/internal-review.json": "e6bb9f14c671b8a16c9325ce96b3a2cd4b5aa1749adc36e5f73d0697f19a8cdb",
