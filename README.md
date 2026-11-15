@@ -34,6 +34,6 @@ Build outputs and page renders go in ignored `.build/`; the PDF and build receip
 
 ## Archiving
 
-This public repository is ready for its owner to enable Zenodo's GitHub integration. No release, tag, DOI or journal submission has been made. A future release requires its own recorded readiness decision and applicable authorization; enabling the integration is not a statement that review has occurred. The first archival release must replace development-version metadata consistently and verify the resulting public record.
+The owner reports that Zenodo's GitHub integration is enabled for this repository. No release, tag, DOI or journal submission has been made. A future release requires its own recorded readiness decision and applicable authorization; enabling the integration is not a statement that review has occurred. The first archival release must replace development-version metadata consistently and verify the resulting public record.
 
 Original archive materials are licensed under [CC BY 4.0](LICENSE). Cited third-party works retain their own licenses. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent peer review or formal certification is claimed.
