@@ -1,6 +1,6 @@
 # Optimal Search with Accidentally Collapsing Measurements
 
-**Research preprint, version 0.1.0.** Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
+**Published preprint, version 0.1.0.** [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
 
 We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags are deferred until the circuit ends. With a noiseless search oracle, the optimal constant-success unique-item search cost is
 
@@ -34,6 +34,6 @@ Build outputs and page renders go in ignored `.build/`; the PDF and build receip
 
 ## Archiving
 
-The author authorized first publication after the completed three-lens review. The existing Zenodo release integration has been verified. Version v0.1.0 is the first archival candidate; the publication record tracks execution and the verified version/concept DOIs after release. Lean certification is separate and is not claimed.
+The author authorized first publication after the completed three-lens review. The existing Zenodo release integration has been verified. Version v0.1.0 is published and verified: [version DOI](https://doi.org/10.5281/zenodo.24244953), [concept DOI](https://doi.org/10.5281/zenodo.24244952). All 54 archive files and the release PDF match the frozen tag. The DOI-bearing metadata and public receipt were added after release and are not claimed to be inside the immutable archive. Lean certification is separate and is not claimed.
 
 Original archive materials are licensed under [CC BY 4.0](LICENSE). Cited third-party works retain their own licenses. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent peer review or formal certification is claimed.

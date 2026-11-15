@@ -1,5 +1,13 @@
 # Publication status
 
+**PUBLISHED AND VERIFIED: v0.1.0**, November 15, 2026 UTC. [Version DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release and PDF](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.1.0).
+
+Frozen commit `32511403b8826a3cce4fb8896d113ffc9622f870`. Both DOI URLs, public metadata, all 54 archived files and the release PDF verify against the tag. PDF SHA-256 `1c9ba63fd8c46bdbf7189ad187661d63e430b434c2a265b039f6c0cdeaa37875`; source SHA-256 `8dfc571b591f71375023251262df4404fa853f03ac3c6c15180a3717f3022544`. Archive 326130 bytes, SHA-256 `3cbdb21628f800361e4861ba449f9dad5d4c52596cd52d472483d06b2ca035cf`. [Public verification receipt](zenodo-v0.1.0-verification.json). These receipt/citation updates are post-release records, separate from the immutable archive. Source/PDF and all reviewer reports remain unchanged from the tag.
+
+No human peer review or Lean certification is claimed. The completed preprint leaves full-manuscript formal certification and post-certification reconciliation separate. Remaining to-do list: none for this first release.
+
+## Retained pre-release decision
+
 **PUBLISH: first research preprint, v0.1.0.** November 15, 2026. The author explicitly instructed publication after the completed three-lens review and requested PaperMill intake and reranking. Publication may precede Lean certification for this candidate. Execution and public DOI verification are recorded after the frozen release; no DOI is invented in this candidate.
 
 The milestone is the matching optimal cost Theta(N^(1/3)+sqrt(epsilon N)) for N>=2 unique-item search in the declared deferred-history, independent-collapse, noiseless-oracle model. The fixed-power complete-history comparison is the contribution. The ideal endpoint, conditional-copy/fidelity tools and repeated-readout construction are attributed in [SOURCES.md](../SOURCES.md). The named primary comparisons found no matching prior theorem/direct cost-preserving implication; exhaustive priority is not claimed.
