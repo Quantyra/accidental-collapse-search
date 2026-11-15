@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Draft manuscript; no DOI or archival release yet. Use preferred-citation."
+type: software
+title: "Optimal Search with Accidentally Collapsing Measurements: manuscript archive"
+version: 0.1.0-dev
+authors:
+  - family-names: Fredriksen
+    given-names: Daniel
+    affiliation: Quantyra Inc.
+    orcid: https://orcid.org/0009-0002-9123-7435
+license: CC-BY-4.0
+repository-code: https://github.com/Quantyra/accidental-collapse-search
+url: https://github.com/Quantyra/accidental-collapse-search
+keywords:
+  - quantum query complexity
+  - non-collapsing measurements
+  - unstructured search
+preferred-citation:
+  type: article
+  title: "Optimal Search with Accidentally Collapsing Measurements"
+  authors:
+    - family-names: Fredriksen
+      given-names: Daniel
+      affiliation: Quantyra Inc.
+      orcid: https://orcid.org/0009-0002-9123-7435
+  year: 2026
+  notes: "Draft version 0.1.0-dev. Internal AI-assisted derivation and checks; no independent peer review or formal certification."
+  url: https://github.com/Quantyra/accidental-collapse-search

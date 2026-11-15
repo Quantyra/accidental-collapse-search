@@ -1,0 +1,22 @@
+{
+  "story": "S261",
+  "status": "passed",
+  "exact": true,
+  "scope": "New power potential; not independent or formal proof certification.",
+  "assertions": 374,
+  "categories": {
+    "general_scalar_polynomial": 5,
+    "normalization": 4,
+    "zero_branch": 14,
+    "ordinary_power_monotonicity": 64,
+    "noisy_power_monotonicity": 64,
+    "ideal_power_decrement": 48,
+    "noisy_power_decrement": 144,
+    "query_self_distance": 30,
+    "final_distance_constant": 1
+  },
+  "elapsed_seconds": 4.457189,
+  "aggregate_seconds": 11.378762,
+  "script_sha256": "ab634642cf2fded66897df9fb9a80619a6f8c6e140f1b58cb7c8aca2cd795bfd",
+  "preregistration_sha256": "5ca73ffa730dca901c2a30e26616385314bcc612f7e686546436043f90899846"
+}

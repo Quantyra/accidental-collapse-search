@@ -1,0 +1,19 @@
+{
+  "story": "S261",
+  "registered_before_execution": true,
+  "created_utc": "2026-11-15T08:25:58.854121+00:00",
+  "reason_for_new_diagnostic": "New analytic power-fidelity potential strengthens epsilon*sqrt(N) to sqrt(epsilon*N) and independently reconstructs the ideal cube-root bound. Existing signed-score tests do not check this new operation. This is not a rerun of the original diagnostic.",
+  "prior_run_seconds": 6.921573,
+  "aggregate_cap_seconds_including_prior": 120,
+  "max_additional_runs": 1,
+  "fixtures": [
+    "Exact polynomial identity (k-1)A^k-k A^(k-1)+1=(1-A)^2 sum_{j=0}^{k-2}(j+1)A^j for k=2,3,4,8,64",
+    "Fixed normalized complex/rational states and ordinary/projected partitions: power-score monotonicity for k=ceil(1/epsilon); no-feedback noisy history weighting; vanishing branches",
+    "Same fixtures with power lowered by one for ideal and noisy samples",
+    "Exact query self-overlap bound 1-|1-2a|^k <=2ka on fixed rational a and k",
+    "Explicit final-distance and uniform-cost constants"
+  ],
+  "first_falsifier": "A valid projector/history decreases the constant-power score when epsilon*k>=1, or the query update charges k instead of sqrt(k) in Bures distance.",
+  "stop": "Stop and retain receipt at first failure or remaining aggregate time; no further diagnostic authorized by this preregistration.",
+  "generalization": "Weighted Jensen and weighted AM-GM prove measurement monotonicity in arbitrary dimension; the Bures triangle inequality on block-diagonal tensor-power states and Cauchy-Schwarz prove the whole-query bound."
+}

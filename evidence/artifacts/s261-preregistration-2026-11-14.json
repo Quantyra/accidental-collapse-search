@@ -1,0 +1,18 @@
+{
+  "story": "S261",
+  "registered_before_execution": true,
+  "created_utc": "2026-11-15T08:21:35.123997+00:00",
+  "aggregate_diagnostic_cap_seconds": 120,
+  "max_runs": 1,
+  "purpose": "Check the exact repeated-sampling formula and candidate signed-affinity lemma, not infer asymptotic optimality from finite data.",
+  "fixtures": [
+    "Exact probability-tree recurrence for p in {0,1/16,1/4,1/2,1}, epsilon in {0,1/64,1/8,1/2,1}, r=1,...,8",
+    "Fixed rational normalized real and complex states in dimensions 2 and 4; computational/projector partitions; signed-affinity monotonicity for epsilon in {1/64,1/8,1/2,1}; include zero branches and phase cancellation",
+    "Dummy sampled register preserves distinct protected data states under both collapse branches",
+    "Rational two-amplitude Grover recurrence for N in {16,64,256,1024}, declared epsilon grid; normalization and exact success formula; explicit asymptotic constants checked only for N>=256",
+    "Symbolic algebra verifies the general signed-score measurement identity; finite checks do not certify a universal lower bound"
+  ],
+  "first_falsifier": "Existing literature settles the proposed tradeoff, or claimed advantage requires free preparation or non-collapsing-output feedback. A decreasing signed score would falsify the proposed lower-bound proof.",
+  "stop": "Stop and retain receipt at first failed assertion or aggregate cap; no parameter search, cloud/hardware/Lean/external-model review.",
+  "generalization": "Projector completeness, triangle inequality and Cauchy-Schwarz extend the proposed history potential to arbitrary dimension. The algorithm analysis uses an exact geometric recurrence, not extrapolation."
+}

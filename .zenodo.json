@@ -1,0 +1,24 @@
+{
+  "title": "Optimal Search with Accidentally Collapsing Measurements",
+  "description": "Draft research manuscript. For unique-item search with a noiseless oracle and a Born sampler that independently projects its sampled register with probability epsilon, with outcomes and flags deferred until the circuit ends, the optimal total query/readout/preparation/ordinary-measurement cost is Theta(N^(1/3)+sqrt(epsilon N)). A fixed-power conditional-history fidelity argument gives the matching lower bound despite arbitrary entangled workspace and partial measurements. The ideal endpoint, conditional-copy framework and repeated-sampling template are attributed to prior work, including ABFL, Miloschewsky--Podder and prior imperfect-readout robustness by Abbas et al. This is a specified hypothetical postquantum model, not physical noisy hardware, a classification of all noisy PDQP or an ordinary BPP/BQP result. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent human review, separate external-model review or formal certification has occurred.",
+  "version": "0.1.0-dev",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "Fredriksen, Daniel",
+      "affiliation": "Quantyra Inc.",
+      "orcid": "0009-0002-9123-7435"
+    }
+  ],
+  "access_right": "open",
+  "license": "CC-BY-4.0",
+  "language": "eng",
+  "keywords": [
+    "quantum query complexity",
+    "non-collapsing measurements",
+    "unstructured search",
+    "fidelity",
+    "postquantum computation"
+  ]
+}

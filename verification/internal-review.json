@@ -1,0 +1,19 @@
+{
+  "scope": "Same-agent analytical manuscript/proof correspondence and attribution review; no separate model or human review",
+  "source_sha256": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
+  "record": "REVIEW.md",
+  "record_sha256": "c34062cc267341a00de5b2f15b660a09e4119021db0210fc7f167a862f1ed15b",
+  "status": "COMPLETE_FOR_DRAFT_PREPARATION",
+  "changes_from_notes": [
+    "Self-contained model, complete-history lower proof and paid construction",
+    "Explicit attribution to ABFL, Abbas et al., Miloschewsky--Podder and adjacent noisy-oracle work",
+    "Clarified ordinary-only feedback, purification semantics and retained-record/nonlinear distinction",
+    "Exact integer parameter selection for supplied rational rate estimate",
+    "Bounded exhaustive small-instance fallback; no new asymptotic claim",
+    "No broad novelty, physical feasibility or ordinary BPP/BQP claim"
+  ],
+  "external_model_review": false,
+  "independent_human_review": false,
+  "formal_certification": false,
+  "new_diagnostic_execution": false
+}
