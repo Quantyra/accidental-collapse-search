@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "scope": "Clean committed export, identical PDF rebuild and package verification; not formal certification",
+  "candidate_commit": "6f95a3f53785d0f17ce7ad8b156ada79b8c7e02c",
+  "source_sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
+  "pdf_sha256": "58fdf1022c5c76d1fc2a8af3561c4c74de5d4983368bf550212a15df03165762",
+  "pages": 14,
+  "byte_identical_pdf": true,
+  "byte_identical_build_receipt": true,
+  "package_check": "PASS",
+  "review_manifest_sha256": "84a0141260e3b347c4e734df9d0fa1ff57c6a1d5a668470213bfbbbe6c6bfa9f",
+  "preserved_prior_artifact_count": 58,
+  "preserved_v0_2_top_level_receipts": 10,
+  "archive_export_sha256": "5b44f6a1561e10557cd439d9cd3864fcc42c41857d19d55c46c95b33df364644",
+  "new_research_or_lean_jobs": false
+}
