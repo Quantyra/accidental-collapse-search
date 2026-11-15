@@ -75,6 +75,7 @@
     "verification/build.json": "b1635204759fe388f1601451dcf3646bf46dfcf4371030ea97e32a1942a0e40b",
     "verification/clean-export-initial.json": "9322bcd7f401d661ffc08ec6bc39ccb8ccf843db1f9b495c91c7f6f95f471a9e",
     "verification/clean-export-v0.1.0.json": "c7575264329121b1d46fd9f5f6167fe27c8c7bea8233ae53284fcf9d75fa4d16",
+    "verification/clean-export-v0.2.0.json": "97df2645ab0cda7b449e2eab1974b9542767833da7b1c8747fc8d916e91d2c2a",
     "verification/clean-export.json": "0589f58920576abe775b1929878f1787dc800c4dc618dd6c5fb986a3be9225dc",
     "verification/history/reviewed-draft/build.json": "6d8e5fa7638827cfb7d6000a00e4bd2aa43b0a6480d103dbcab85e9d54687714",
     "verification/history/reviewed-draft/internal-review.json": "e6bb9f14c671b8a16c9325ce96b3a2cd4b5aa1749adc36e5f73d0697f19a8cdb",
@@ -86,7 +87,7 @@
     "verification/history/v0.1.0/release-source-bridge.json": "32bf4da5118ba6a094fcdeed4547447d62e32746a3cff44dc1fcccfc526ad17e",
     "verification/history/v0.1.0/visual.json": "e3d03a8bb12340b57064c514d70f419aa6a6a67d8a0f87abd63b9a37ad3951e9",
     "verification/internal-review.json": "284eb360de7a938db3b92d66a438dfc10ea1203a7dbe70499584455d78fcf0cb",
-    "verification/preflight-attempts-v0.2.0.json": "f579cd864c0f814d6b4c209bea0b5717201f5f9def87163fa09bde80728685ec",
+    "verification/preflight-attempts-v0.2.0.json": "34530ea6d7e37ca34f5a4eb7fdf72c43d92150eed4f10fd31a3095d72df39f63",
     "verification/release-source-bridge.json": "730539c09c7fd049d14357b1703763258c87eabedd28c8e932440c66609ba8e8",
     "verification/visual.json": "0d406f7009b38e471519c82d86389503e0d90570b89edce98ff8066bb431326a"
   }

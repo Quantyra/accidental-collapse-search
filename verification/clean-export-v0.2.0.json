@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "scope": "Clean committed export, complete package check and byte-identical PDF; no mathematical certification",
+  "commit": "7b42677d271a72ad0f49fbf25ee326f8f02fb4e3",
+  "pdf_sha256": "e66aa1cf67a954e902f9b1fee282e0f3201f194115ec68b985bea344cb847fd8",
+  "dependency_resolution": "Embedded Python did not use PYTHONPATH; supplied the same pinned checker dependencies in ignored .build/check-deps, as the checker supports. No global packages changed.",
+  "commands": [
+    "git archive --format=zip COMMIT",
+    "python tools/build.py --tectonic Tectonic_0.17.0",
+    "python tools/check_package.py"
+  ],
+  "source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3"
+}
