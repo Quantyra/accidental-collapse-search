@@ -4,7 +4,7 @@
 \usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
-\hypersetup{pdftitle={Optimal Search with Accidentally Collapsing Measurements},pdfauthor={Daniel Fredriksen},pdfsubject={Research preprint}}
+\hypersetup{pdftitle={Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements},pdfauthor={Daniel Fredriksen},pdfsubject={Research preprint}}
 \hyphenation{Milo-schew-sky}
 \setlength{\emergencystretch}{1.5em}
 \newtheorem{theorem}{Theorem}
@@ -17,9 +17,9 @@
 \newcommand{\bra}[1]{\langle #1\rvert}
 \newcommand{\ip}[2]{\langle #1\mid #2\rangle}
 \newcommand{\Tr}{\operatorname{Tr}}
-\title{Optimal Search with Accidentally Collapsing Measurements}
+\title{Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements}
 \author{Daniel Fredriksen\\Quantyra Inc.\\\small\href{https://orcid.org/0009-0002-9123-7435}{ORCID: 0009-0002-9123-7435}}
-\date{November 15, 2026\\\small Research preprint; version 0.2.0}
+\date{November 15, 2026\\\small Research preprint; version 0.3.0}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -43,7 +43,11 @@ a decreasing-exponent argument extends the ideal inequality
 $Q^2(P+1)=\Omega(N)$ to immediate feedback. Finite-tree induction and query
 frontiers handle unequal sampling and stopping histories.
 Full cube-root scaling survives precisely when
-$\eps=O(N^{-1/3})$. The result concerns this specified postquantum access model,
+$\eps=O(N^{-1/3})$. We also prove, for every finite Boolean promise problem $f$,
+$Q\min\{P+1,\lceil1/\eps\rceil\}\ge\operatorname{Adv}_{+}(f)/36$,
+using $P+1$ when $\eps=0$. A positive-adversary sum over complete histories
+charges each synchronized query without a factor for the number of branches.
+The results concern this specified postquantum access model,
 not physical noisy quantum hardware or ordinary BPP versus BQP.
 \end{abstract}
 
@@ -100,12 +104,44 @@ exponent of order $1/\eps$. The collapsing branch compensates for the
 information released by the non-collapsing branch at this exponent. A Bures
 distance hybrid argument then incurs only the square root of the exponent
 per query. These copies are a proof device, not an additional algorithmic
-resource. Version 0.2.0 extends both comparisons to immediate feedback via
+resource. Since version 0.2.0, both comparisons extend to immediate feedback via
 finite-tree induction and query frontiers. The original deferred-history
 model is a special case; the scalar inequalities and matching upper algorithm
 are inherited from version 0.1.0.
 Section~\ref{sec:lower} proves the lower bounds, and
 Section~\ref{sec:upper} supplies a matching fully charged construction.
+
+Our second main result extends the same local power comparisons to
+arbitrary finite Boolean promise problems through positive adversary
+certificates. Define
+\[
+ K_\eps(P)=
+ \begin{cases}
+ P+1,&\eps=0,\\
+ \min\{P+1,\lceil1/\eps\rceil\},&0<\eps\le1.
+ \end{cases}
+\]
+\begin{theorem}[Positive-adversary bound]\label{thm:adversary}
+Let $X\subseteq\{0,1\}^n$ be finite and $f:X\to\{0,1\}$.
+In the model of Section~\ref{sec:model}, replace the search oracle by
+$O_x\ket{i,b,z}=(-1)^{b x_i}\ket{i,b,z}$ and require success at least $2/3$
+on every promised input. Every finite capped algorithm satisfies
+\begin{equation}\label{eq:adversary-main}
+ QK_\eps(P)\ge c_*\operatorname{Adv}_{+}(f)
+ \ge \operatorname{Adv}_{+}(f)/36,
+ \qquad c_*:=\frac{1-2\sqrt2/3}{2}>\frac1{36}.
+\end{equation}
+Here $\operatorname{Adv}_{+}$ is the entrywise-nonnegative spectral
+adversary, defined in Section~\ref{sec:adversary}. Immediate feedback,
+arbitrary entangled workspace, partial measurements, the specified resets,
+and unequal stopping remain allowed.
+\end{theorem}
+
+This is a general lower-bound tool inside the declared model, with
+potentially exponential analytical certificates. It makes no efficient
+certificate-discovery claim. The sharper search bound in
+Theorem~\ref{thm:main} is retained. Section~\ref{sec:adversary} proves the
+new statement and gives a parity application.
 
 \subsection{Relation to prior work}
 ABFL supplies the partial-Grover/repeated-readout template \cite{abfl}.
@@ -116,6 +152,17 @@ conditional copies is a separate contribution. The fixed-power comparison keeps
 the exponent fixed as a function of $\eps$, instead of decreasing a
 readout-dependent exponent. Their paper also identifies noisy computation
 with non-collapsing measurements as a broader open direction.
+
+For general Boolean promises, Miloschewsky--Podder already proves the
+positive weighted bound $QP=\Omega(1/v_{\max})$ in its ideal PDQP model
+\cite[Lemma 4.3]{mp}. The standard nonnegative spectral convention and
+its equivalence to positive weighted methods are due to prior adversary
+work, as collected by \v{S}palek--Szegedy \cite[Theorem 3.1]{ss}.
+Theorem~\ref{thm:adversary} combines that machinery with our local power
+comparisons and a probability-weighted query-frontier charge. The
+independent-collapse and persistent-feedback scope is the extension;
+neither the adversary framework nor the spectral certificate is new.
+The cited ideal theorem does not already assert this noisy-feedback bound.
 
 The author-hosted ABFL manuscript separately defines persistent adaptive
 CQP: a controller receives samples and chooses further gates on the same
@@ -156,7 +203,7 @@ the Bures metric, Jensen's inequality, and weighted AM--GM remain inherited
 tools \cite{gln}.
 
 \section{Access model and costs}\label{sec:model}
-The input is a unique marked label $w\in[N]=\{1,\ldots,N\}$. The controlled
+For the search result, the input is a unique marked label $w\in[N]=\{1,\ldots,N\}$. The controlled
 phase oracle acts as
 \begin{equation}
  O_w\ket{i,b,z}=(-1)^{b[i=w]}\ket{i,b,z}.
@@ -165,6 +212,15 @@ A bit query is obtained with Hadamards on $b$. The oracle $O_0=I$ denotes an
 all-zero reference input used only in the proof. No success requirement is
 imposed on that input. Initial states, gates, and classical randomness are
 independent of $w$; every oracle-dependent preparation pays its queries.
+
+For Theorem~\ref{thm:adversary}, use instead the promised string $x\in X$
+and the controlled bit-phase oracle stated there. All other operations and
+initial preparations are input-independent, and the same sampler and
+controller rules below apply. Padding query addresses have value zero.
+There is no additional access to $x$ or free input-dependent preparation.
+In that theorem the caps are maxima over promised strings and branches;
+undefined formal histories are extended arbitrarily and truncated at the
+same caps. No off-promise success assumption is used.
 
 For a specified register $S$, put
 $\Pi_y=\ket{y}\bra{y}_S\otimes I$. On a conditional normalized global pure
@@ -320,7 +376,9 @@ Preparations of known ancillas and environment resets are isometries on the
 retained purification. Measurement resets consist of an ordinary measurement
 and known preparation, with the outcome retained in the history. The two
 distinct reset conventions therefore both obey the comparison. Each argument
-also applies blockwise at a history-dependent exponent.
+also applies blockwise at a history-dependent exponent. Fresh classical
+random branches multiply each pair contribution by common probabilities
+whose sum is one, so they preserve it exactly.
 
 \subsection{Fixed exponent for noisy readouts}
 \begin{lemma}[Fixed-power monotonicity]\label{lem:fixed}
@@ -357,7 +415,8 @@ Writing $k=\kappa(h)$ before the call, the new contribution is
  \ge(1-\eps)r^k+\eps r^{k-1}\ge r^k.
 \end{equation}
 Here $A\ge r$ and Lemma~\ref{lem:projection} apply. Ordinary measurements
-retain the current exponent. Consequently this changing potential is
+retain the current exponent. If $A=0$, the old contribution is zero.
+Consequently this changing potential is
 nondecreasing at nonquery steps, including at $\eps=0$. This reconstructs
 the ideal-search inequality with complete ordinary and sampler histories,
 now allowing their immediate use for control.
@@ -452,7 +511,7 @@ Thus $T\ge Q\ge1$, whereas $N^{1/3}+\sqrt{\eps N}<6$ in this bounded range.
 This completes the uniform lower bound of Theorem~\ref{thm:main} for $N\ge2$.
 The trivial $N=1$ problem is excluded, as it needs no input access.
 
-\section{Matching construction}\label{sec:upper}
+\section{Matching search construction}\label{sec:upper}
 \subsection{Exact success probability of an attempt}
 Prepare a Grover state using $t$ iterations. Its marked weight is
 $p=\sin^2((2t+1)\arcsin N^{-1/2})$. One additional bit query appends the
@@ -575,6 +634,183 @@ The two frontier values are $412/625\ge r^2$ and $84/125\ge r^3$.
 This is a symbolic check and negative control. The quantified local
 inequalities and finite-tree induction prove the general claim.
 
+\section{Positive adversaries with feedback}\label{sec:adversary}
+This section proves Theorem~\ref{thm:adversary}. Constant or empty promise
+problems have $\operatorname{Adv}_{+}(f)=0$ by convention and are immediate.
+Otherwise let $\Gamma$ be a nonzero real symmetric entrywise-nonnegative
+matrix indexed by $X$, with $\Gamma_{xy}=0$ whenever $f(x)=f(y)$. Put
+\begin{equation}\label{eq:adv-definition}
+ D_i[x,y]=\mathbf1[x_i\ne y_i],\qquad
+ \Lambda_\Gamma=\max_i\|\Gamma\circ D_i\|,\qquad
+ \operatorname{Adv}_{+}(f)=\sup_\Gamma
+                \frac{\|\Gamma\|}{\Lambda_\Gamma}.
+\end{equation}
+The norm is the spectral operator norm and $\circ$ denotes entrywise
+product. Every nonzero entry joins inputs differing in some bit, so
+$\Lambda_\Gamma>0$. This is the positive spectral convention of
+\cite{ss}, not the signed-weight general adversary.
+
+Choose a nonnegative unit vector $v$ with
+$v^T\Gamma v=\|\Gamma\|$. Existence does not require irreducibility:
+the componentwise absolute values of a norm-extremizing real eigenvector
+have Rayleigh quotient at least the absolute extremal eigenvalue, hence
+exactly $\|\Gamma\|$. No division by an entry of $v$ is needed.
+At any common prefix-free cut $H$ of the complete execution tree, set
+\begin{equation}\label{eq:adv-potential}
+ \Phi_\kappa(H)=\sum_{x,y}\Gamma_{xy}v_xv_y
+  \sum_{h\in H}\sqrt{p_x(h)p_y(h)}
+       |\ip{\psi_{x,h}}{\psi_{y,h}}|^{\kappa(h)}.
+\end{equation}
+Each execution reaches exactly one node of $H$, including halted leaves,
+so $\sum_h p_x(h)=1$. Zero-probability states may be filled arbitrarily.
+The exponent is a positive integer determined by the common history.
+At the root the states are input-independent and
+$\Phi_{\rm root}=v^T\Gamma v=\|\Gamma\|$.
+
+\subsection{Two nonquery comparisons}
+For the first argument take $\eps>0$ and the constant exponent
+$k=\lceil1/\eps\rceil$. Lemma~\ref{lem:fixed} and the ordinary-operation
+comparisons prove that every pair's history sum is nondecreasing through
+a nonquery node. For the second, separate argument take
+$\kappa(h)=P+1-p(h)$, using the actual number of preceding sampler calls.
+Equation~\eqref{eq:decreasing} proves the corresponding comparison at
+each sampler node, for every $0\le\eps\le1$; other nodes preserve the
+exponent. In both cases entrywise positivity of $\Gamma$ preserves the
+weighted comparison. Induction over each finite intervening nonquery
+forest therefore makes $\Phi$ nondecreasing. Equal histories select equal
+operations even with immediate feedback; no sampler outcome is deferred.
+These are two distinct potentials, not a trajectory mixing their exponents.
+
+\subsection{Spectral charge at a query frontier}
+As in the search proof, advance each branch to its $j$th actual query or
+to a halt. Carry halted leaves unchanged through later frontiers, with
+analytical identity padding. There are at most $Q$ query layers.
+At node $h$, let $\Pi_{h,i}$ project onto address $i$ and query control
+$b=1$ in the history-selected query register. They are orthogonal and
+$\sum_i\Pi_{h,i}\le I$; at a halted node set all these projectors to zero.
+Common routing gates are included in the preceding nonquery forest.
+For $u=\psi_{x,h}$ and $u'=\psi_{y,h}$,
+\begin{equation}\label{eq:adv-query-pair}
+ \bigl||\ip{u}{u'}|-|\ip{O_xu}{O_yu'}|\bigr|
+ \le 2\sum_{i:x_i\ne y_i}\|\Pi_{h,i}u\|\|\Pi_{h,i}u'\|.
+\end{equation}
+Indeed $O_x^*O_y=I-2\sum_{i:x_i\ne y_i}\Pi_{h,i}$, so the triangle
+and Cauchy--Schwarz inequalities apply, including complex phases and
+entangled workspace. A query preserves the history probability and its
+exponent. For $r,r'\in[0,1]$ and integer $k\ge1$,
+$|r^k-r'^k|\le k|r-r'|$.
+
+Let $K$ bound the exponents at the frontier, and define input-indexed vectors
+\[
+ a_x^{h,i}=v_x\sqrt{p_x(h)}\|\Pi_{h,i}\psi_{x,h}\|.
+\]
+Summing~\eqref{eq:adv-query-pair} with the nonnegative potential weights gives
+\begin{align}
+ \Phi(H_j)-\Phi(H_j^+)
+ &\le 2K\sum_{h,i}(a^{h,i})^T(\Gamma\circ D_i)a^{h,i}\notag\\
+ &\le 2K\Lambda_\Gamma\sum_{h,i}\|a^{h,i}\|_2^2
+ \le 2K\Lambda_\Gamma.\label{eq:adv-query-charge}
+\end{align}
+The last step uses the complete-history normalization
+\begin{equation}\label{eq:adv-history-normalization}
+ \sum_{h,i}\|a^{h,i}\|_2^2
+ =\sum_xv_x^2\sum_h p_x(h)
+               \sum_i\|\Pi_{h,i}\psi_{x,h}\|^2
+ \le\sum_xv_x^2\sum_h p_x(h)=1.
+\end{equation}
+Thus the number of histories creates no multiplicative loss. In particular,
+different registers, unequal sampling counts and halted branches are
+included with their actual probabilities. Using $K=P+1$ for varying
+exponents is valid because all summands in the pairwise bound are
+nonnegative. This reasoning does not justify a signed-weight extension.
+
+\subsection{Terminal separation and the two bounds}
+Include the actual final Boolean output in the terminal history. Opposite
+outputs of $f$ require output distributions of total variation at least
+$1/3$. Their affinity is consequently at most $\beta=2\sqrt2/3$.
+For either positive exponent assignment,
+\[
+ F_\kappa(x,y)\le\sum_h\sqrt{p_x(h)p_y(h)}
+ \le\sum_{b=0,1}\sqrt{\Pr_x[b]\Pr_y[b]}\le\beta
+ \quad(f(x)\ne f(y)).
+\]
+The middle inequality groups histories by output and applies
+Cauchy--Schwarz. The last uses the same affinity/variation inequality as
+the search proof. Hence $\Phi_{\rm final}\le\beta\|\Gamma\|$.
+Combining nonquery monotonicity with~\eqref{eq:adv-query-charge} yields
+\[
+ \beta\|\Gamma\|\ge\Phi_{\rm final}
+ \ge\|\Gamma\|-2QK\Lambda_\Gamma,
+ \qquad QK\ge c_*\frac{\|\Gamma\|}{\Lambda_\Gamma}.
+\]
+First apply this with constant $K=\lceil1/\eps\rceil$ for $\eps>0$.
+Independently apply it with $K=P+1$ for all $\eps$. Optimizing over
+$\Gamma$ and taking the minimum of these two valid bounds proves
+Theorem~\ref{thm:adversary}. Since $2\sqrt2/3<17/18$, we have $c_*>1/36$.
+At $P=0$ or $\eps=1$ the result gives an ordinary positive-adversary lower
+bound. At $\eps=0$ only the decreasing-power argument is needed.
+
+\subsection{Costs, application and a stopping check}
+Let $W$ be the worst-case sum of actual query, sampler, preparation and
+ordinary measurement/reset calls on a valid branch. With smallest valid
+caps, $Q,P,R,M\le W\le T\le4W$. A nonconstant $f$ has
+$\operatorname{Adv}_{+}(f)\ge1$ by a single opposite-output pair, and
+requires $Q\ge1$. Thus $Q(P+1)\le W(W+1)\le2W^2$ and
+$\lceil1/\eps\rceil\le2/\eps$ give separate square-root and
+linear lower bounds. Their maximum is at least half their sum, giving
+\begin{equation}\label{eq:adv-total}
+ W=\Omega\!\left(\sqrt{\operatorname{Adv}_{+}(f)}
+                  +\eps\operatorname{Adv}_{+}(f)\right).
+\end{equation}
+Every failed trial and query-dependent preparation is included. Gate,
+classical, output-bit, space and precision costs remain additional; this
+is not a matching total-bit-runtime assertion. Matrices, eigenvectors and
+complete histories may be exponentially large analytical certificates.
+The controller is not given their amplitudes or an efficient way to find them.
+
+\begin{corollary}[Parity at a fixed positive collapse rate]
+For $n$-bit parity and any fixed $\eps>0$, success at least $2/3$ requires
+$\Omega(n)$ input queries, irrespective of the sampler cap. Reading every
+bit gives a matching $O(n)$ query upper bound.
+\end{corollary}
+\begin{proof}
+Use the hypercube adjacency matrix as $\Gamma$. Adjacent inputs have
+opposite parity, $\|\Gamma\|=n$, and $\Gamma\circ D_i$ is a perfect
+matching matrix of norm one. The fixed-power bound gives explicitly
+$Q\ge n/(36\lceil1/\eps\rceil)$. The ordinary
+upper algorithm pays its queries, measurements and parity computation.
+\end{proof}
+At $\eps=0$, the general theorem instead gives the tradeoff
+$Q(P+1)\ge n/36$. This is an application of a standard certificate.
+For search, the stronger
+bound of Theorem~\ref{thm:main} remains the appropriate guarantee.
+
+For a symbolic stopping check take $f(x)=x$ on one bit,
+$\Gamma=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ and
+$v=(1,1)/\sqrt2$. Sample an input-independent $\ket{++}$ register once.
+On label $00$, halt with output zero. Otherwise query address one on a
+fresh response $\ket+$ and measure it in the $X$ basis to recover $x$.
+The flag may be ignored by the controller but remains in the history.
+Success is one on $x=0$ and $3/4$ on $x=1$, with $Q=P=1$.
+After the sampler the decreasing exponent is one. The query reduces
+$\Phi$ from one to $1/4$, while the query mass in
+\eqref{eq:adv-history-normalization} is $(3/4)(1/2)=3/8$.
+Using the actual exponent one, the charge is exactly $2(3/8)=3/4$.
+Appending $t$ unused fair classical bits divides each history's probability
+by $2^t$ without changing the total charge. Those bits and their work/space
+are paid. This symbolic family checks the stopping bookkeeping;
+the arbitrary-tree proof, not small-case agreement, establishes the theorem.
+
+The lower bound applies to actual finite-precision input-independent gates
+and preparations whenever the implemented algorithm meets the success
+contract. An ideal-to-implemented accuracy transfer needs its own paid
+whole-history argument; a linear-channel error hybrid is not assumed for
+this nonlinear sampler. If such an argument only gives failure
+$\eta<1/2$, the same proof replaces $c_*$ by
+$(1-2\sqrt{\eta(1-\eta)})/2$. No efficient certificate discovery, signed
+adversary theorem, physical realization or general classical simulator
+follows from this result.
+
 \section{Consequences and limitations}
 \begin{corollary}[Persistent adaptive ideal search]
 At $\eps=0$, immediate-feedback search in the declared finite capped model,
@@ -629,8 +865,8 @@ This preprint has an informal analytic proof and internal checks, not formal
 certification or independent peer review. The accompanying archive preserves
 two historical finite exact diagnostic runs and their source hashes; these illustrate
 algebraic and projector comparisons and do not establish universal claims
-by finite agreement. Those runs predate the feedback extension; the new
-scope is proved analytically, without a new numerical campaign.
+by finite agreement. Those runs predate the feedback and general-adversary
+extensions; both are proved analytically, without a new numerical campaign.
 OpenAI Codex assisted with derivation, literature
 comparison, drafting, and internal checking. Separate AI review was conducted
 through provider CLIs. The archive records actual model identities, review
@@ -642,7 +878,7 @@ LaTeX, the PDF, reproducibility records, and citation metadata are available at
 \url{https://github.com/Quantyra/accidental-collapse-search}. Release and DOI details are recorded in the repository. Original archive materials are licensed
 under CC BY 4.0. Cited works retain their own licenses.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \small
 \raggedright
 \bibitem{abfl}
@@ -670,6 +906,12 @@ New lower-bounds for quantum computation with non-collapsing measurements.
 \href{https://doi.org/10.4230/LIPIcs.CCC.2025.12}{doi:10.4230/LIPIcs.CCC.2025.12}.
 The comparison uses \href{https://arxiv.org/abs/2411.04085v3}{arXiv:2411.04085v3},
 September 2025.
+
+\bibitem{ss}
+Robert \v{S}palek and Mario Szegedy.
+All quantum adversary methods are equivalent.
+\emph{Theory of Computing} 2(1):1--18, 2006.
+\href{https://doi.org/10.4086/toc.2006.v002a001}{doi:10.4086/toc.2006.v002a001}.
 
 \bibitem{abbas}
 Amira Abbas, Robbie King, Hsin-Yuan Huang, William J. Huggins,

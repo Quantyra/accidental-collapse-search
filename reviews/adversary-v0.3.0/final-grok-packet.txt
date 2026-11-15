@@ -1,0 +1,1216 @@
+P011 v0.3.0 final-source complexity/resource recheck
+Source SHA-256: 88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6
+You completed the full initial resource review below with GO and no findings. This is a bounded final-source correspondence check: inspect the exact diff and updated public metadata against your initial report, confirm no resource/model regression and whether that report still clears the full final source. Do not redo unchanged arguments from scratch. Return exact source hash, GO / GO-WITH-NOTES / NO-GO and any new finding, in at most 1000 words. No tools, commands, edits, delegation or external requests. This is AI review, not human or formal certification.
+
+Changes requested by the other reviewers are expository: Rayleigh rather than unused eigen-equation, explicit classical coins and zero-overlap case, explicit parity epsilon dependence and ideal tradeoff, max-to-sum explanation and coherent version history. No theorem statement or inequality changed.
+
+YOUR COMPLETE INITIAL REVIEW
+The source SHA-256 is `9fb7efb8a19ffcdaedb5b8bd286f51c8802b4f0b80a684151cbf6a768872d1d0`. The verdict is **GO**.
+
+This is an AI review of the frozen packet only. It is not human peer review or formal certification. Earlier review outcomes were not treated as clearance. No files were modified and no external sources were opened. The proof was checked as self-contained. Citations were not re-fetched.
+
+No correctness blockers and no optional-exposition defects were found. No repair is proposed.
+
+## New theorem
+
+Theorem `thm:adversary` and Section "Positive adversaries with feedback" support
+
+\[
+QK_\varepsilon(P)\ge c_*\operatorname{Adv}_+(f)\ge\operatorname{Adv}_+(f)/36,
+\]
+
+with \(c_*=(1-2\sqrt2/3)/2=(3-2\sqrt2)/6=1/(18+12\sqrt2)>1/36\), and with \(K_\varepsilon(P)=P+1\) at \(\varepsilon=0\) and \(\min\{P+1,\lceil1/\varepsilon\rceil\}\) otherwise. The abstract, README, `.zenodo.json`, and `SOURCES.md` state the weaker \(1/36\) form and the \(\varepsilon=0\) special case. They do not overstate the theorem.
+
+The checked steps are these.
+
+- The nonnegative unit maximizer exists without irreducibility. For a real symmetric entrywise-nonnegative \(\Gamma\), if \(\Gamma u=\lambda u\) and \(|\lambda|=\|\Gamma\|\), then \(v=|u|\) satisfies \(v^T\Gamma v\ge|u^T\Gamma u|\) and hence equals \(\|\Gamma\|\). A symmetric Rayleigh maximizer is an eigenvector, so the proof never divides by an entry of \(v\).
+- Both potentials are monotone on nonquery forests. Fixed \(k=\lceil1/\varepsilon\rceil\) uses Lemma `lem:fixed`. The decreasing rule \(\kappa(h)=P+1-p(h)\) uses the displayed estimate \((1-\varepsilon)Ar^{k-1}+\varepsilon C_{k-1}\ge r^k\), including \(\varepsilon=0\). Before a sampler call the cap forces the exponent to be at least 2. Entrywise \(\Gamma_{xy}\ge0\) preserves the pair bounds. Equal histories select equal operations, so immediate feedback stays inside the induction.
+- One query layer drops \(\Phi\) by at most \(2K\Lambda_\Gamma\). The identity \(O_x^\dagger O_y=I-2\sum_{i:x_i\neq y_i}\Pi_{h,i}\) gives the factor 2. For overlaps in \([0,1]\), \(|r^k-r'^k|\le k|r-r'|\). Replacing the history exponent by \(K\in\{\lceil1/\varepsilon\rceil,P+1\}\) is valid because every summand is nonnegative. The same bound does not extend to signed weights, as the text says.
+- There is no branch-count factor. With \(a_x^{h,i}=v_x\sqrt{p_x(h)}\|\Pi_{h,i}\psi_{x,h}\|\),
+
+\[
+\sum_{h,i}\|a^{h,i}\|_2^2
+=\sum_x v_x^2\sum_h p_x(h)\sum_i\|\Pi_{h,i}\psi_{x,h}\|^2
+\le1.
+\]
+
+Halted leaves, unequal sample counts, and history-selected registers are included at their actual probabilities. Identity padding adds no calls and no query mass.
+
+- Terminal separation matches the stated constant. Success \(2/3\) on opposite outputs gives total variation at least \(1/3\) in the half-\(L_1\) convention already used for search. Affinity is at most \(2\sqrt2/3\). Thus \(\Phi_{\mathrm{final}}\le\beta\|\Gamma\|\). Chaining this with nonquery monotonicity produces \(c_*\), and \(2\sqrt2/3<17/18\) produces \(1/36\).
+- The two applications are independent, so the minimum is legitimate: each of \(Q(P+1)\) and, for \(\varepsilon>0\), \(Q\lceil1/\varepsilon\rceil\) is at least \(c_*\operatorname{Adv}_+(f)\).
+
+The one-bit stopping check is numerically consistent. For \(\Gamma=\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}\), \(v=(1,1)/\sqrt2\), and one sample of an input-independent \(\lvert++\rangle\), post-sampler \(\Phi=1\), the query moves \(\Phi\) to \(1/4\), the query mass is \((3/4)(1/2)=3/8\), and the exponent-one charge is \(2(3/8)=3/4\). Splitting by the collapse flag or by \(t\) unused fair bits does not change that charge. Success is 1 on \(x=0\) and \(3/4\) on \(x=1\), with caps \(Q=P=1\).
+
+## Checklist
+
+- Caps are worst-case branch maxima over promised inputs. Finite controllers are truncated at those caps. The reference and off-promise strings carry no success requirement. The adversary frontiers use at most \(Q\) layers.
+- Failed trials, feedback restarts, query-dependent preparations, both specified reset implementations, and ordinary partial measurements are inside \(W\) and \(T=Q+P+R+M\), with \(Q,P,R,M\le W\le T\le4W\). No expected-cost or unbounded stopping-time claim is made. The search construction pays all \(B=13120\) predetermined attempts.
+- A whole-register readout is one sampler call. Transcript storage is separate, at \(O(P\log N)\) bits. Quantum space is \(O(\log N)\) because the attempt count is an absolute constant. Gates and scheduling are \(O((T+1)\log N)\), with \(\operatorname{poly}(\log N)\) parameter arithmetic. Output bits are not free.
+- The known-rate contract is an upper estimate \(\bar\varepsilon\in[\varepsilon,\min(1,\varepsilon+1/N')]\), with integer binary search. The preparation coupling is only for the no-intervening-operation search circuit: trace distance \(\eta\le1/(24Br)\) on each conditional global pure state. An averaged reduced state is explicitly not enough. The adversary section does not import that coupling. A hypothetical whole-history failure \(\eta<1/2\) replaces \(c_*\) by \((1-2\sqrt{\eta(1-\eta)})/2\), which correctly recovers \(c_*\) at \(\eta=1/3\).
+- Parity is correct for fixed \(\varepsilon>0\). The hypercube adjacency matrix has norm \(n\), and each \(\Gamma\circ D_i\) is a perfect matching of norm 1, so \(\operatorname{Adv}_+\ge n\). The fixed-power bound gives \(\Omega(n)\) queries for any sampler cap. Reading every bit is an \(O(n)\) query upper bound and pays its measurements. Search keeps the sharper \(Q^2K\ge N/32\) law rather than the weaker positive-adversary consequence.
+- The total-call display \(W=\Omega(\sqrt{\operatorname{Adv}_+(f)}+\varepsilon\operatorname{Adv}_+(f))\) follows from \(Q(P+1)\le W(W+1)\le2W^2\) and \(\lceil1/\varepsilon\rceil\le2/\varepsilon\). It is a uniform lower bound, not a bit-runtime or matching upper bound. The manuscript says so.
+- Certificate discovery is not described as efficient. The manuscript, README, Zenodo record, and `SOURCES.md` all say that matrices, eigenvectors, and complete histories may be exponentially large analytical certificates.
+- Feedback and unequal stopping remain in the model. Frontiers align each branch at its own next query. The controller may use outcomes and flags immediately. Hiding flags is stated only as a search-cost invariance, and the upper search algorithm does not read them.
+
+The inherited search arithmetic also matches the text: \(D\le2Q\sqrt K\), \(D^2\ge N/8\) for \(N\ge12\), hence \(N/32\); the parameter bounds give success at least \(1/3280\) per attempt; \(B=13120\) leaves failure at most \(e^{-4}<1/12\). The branching negative control evaluates to the printed fractions \(18/25\), \(82/125\), \(412/625\), and \(84/125\).
+
+## Remaining limitations
+
+These are limits of the stated model, not defects.
+
+- The result concerns this noiseless-oracle, independent-collapse sampler. It does not give a physical implementation, a classification of all noisy PDQP or adaptive CQP, or an ordinary BPP versus BQP consequence.
+- Only the positive spectral adversary is proved. Signed weights, efficient certificate finding, and a general classical simulator are not obtained.
+- The factor \(1/36\) and the search factors \(32\) and \(8\) are sufficient absolute constants, not optimal constants. Search remains stronger than substituting \(\operatorname{Adv}_+=\Theta(\sqrt N)\) into the new product bound.
+- \(T\) does not include gate, transcript, space, or precision cost. Unknown-\(\varepsilon\) calibration and extra oracle or gate noise are outside the contract.
+- The \(\Omega(\sqrt{\operatorname{Adv}_+}+\varepsilon\operatorname{Adv}_+)\) form is what holds uniformly. On a particular algorithm with \(P=0\) it is weaker than the direct bound \(Q=\Omega(\operatorname{Adv}_+)\).
+- The literature comparison is a bounded primary-source comparison, not an exhaustive priority claim.
+- The preserved finite diagnostics predate the feedback and adversary arguments and are not a universal proof.
+
+EXACT DIFF
+```diff
+--- initial/main.tex
++++ final/main.tex
+@@ -104,7 +104,7 @@
+ information released by the non-collapsing branch at this exponent. A Bures
+ distance hybrid argument then incurs only the square root of the exponent
+ per query. These copies are a proof device, not an additional algorithmic
+-resource. Version 0.2.0 extends both comparisons to immediate feedback via
++resource. Since version 0.2.0, both comparisons extend to immediate feedback via
+ finite-tree induction and query frontiers. The original deferred-history
+ model is a special case; the scalar inequalities and matching upper algorithm
+ are inherited from version 0.1.0.
+@@ -376,7 +376,9 @@
+ retained purification. Measurement resets consist of an ordinary measurement
+ and known preparation, with the outcome retained in the history. The two
+ distinct reset conventions therefore both obey the comparison. Each argument
+-also applies blockwise at a history-dependent exponent.
++also applies blockwise at a history-dependent exponent. Fresh classical
++random branches multiply each pair contribution by common probabilities
++whose sum is one, so they preserve it exactly.
+ 
+ \subsection{Fixed exponent for noisy readouts}
+ \begin{lemma}[Fixed-power monotonicity]\label{lem:fixed}
+@@ -413,7 +415,8 @@
+  \ge(1-\eps)r^k+\eps r^{k-1}\ge r^k.
+ \end{equation}
+ Here $A\ge r$ and Lemma~\ref{lem:projection} apply. Ordinary measurements
+-retain the current exponent. Consequently this changing potential is
++retain the current exponent. If $A=0$, the old contribution is zero.
++Consequently this changing potential is
+ nondecreasing at nonquery steps, including at $\eps=0$. This reconstructs
+ the ideal-search inequality with complete ordinary and sampler histories,
+ now allowing their immediate use for control.
+@@ -648,7 +651,7 @@
+ \cite{ss}, not the signed-weight general adversary.
+ 
+ Choose a nonnegative unit vector $v$ with
+-$\Gamma v=\|\Gamma\|v$. Existence does not require irreducibility:
++$v^T\Gamma v=\|\Gamma\|$. Existence does not require irreducibility:
+ the componentwise absolute values of a norm-extremizing real eigenvector
+ have Rayleigh quotient at least the absolute extremal eigenvalue, hence
+ exactly $\|\Gamma\|$. No division by an entry of $v$ is needed.
+@@ -753,7 +756,8 @@
+ caps, $Q,P,R,M\le W\le T\le4W$. A nonconstant $f$ has
+ $\operatorname{Adv}_{+}(f)\ge1$ by a single opposite-output pair, and
+ requires $Q\ge1$. Thus $Q(P+1)\le W(W+1)\le2W^2$ and
+-$\lceil1/\eps\rceil\le2/\eps$ imply
++$\lceil1/\eps\rceil\le2/\eps$ give separate square-root and
++linear lower bounds. Their maximum is at least half their sum, giving
+ \begin{equation}\label{eq:adv-total}
+  W=\Omega\!\left(\sqrt{\operatorname{Adv}_{+}(f)}
+                   +\eps\operatorname{Adv}_{+}(f)\right).
+@@ -772,10 +776,13 @@
+ \begin{proof}
+ Use the hypercube adjacency matrix as $\Gamma$. Adjacent inputs have
+ opposite parity, $\|\Gamma\|=n$, and $\Gamma\circ D_i$ is a perfect
+-matching matrix of norm one. Apply the fixed-power bound. The ordinary
++matching matrix of norm one. The fixed-power bound gives explicitly
++$Q\ge n/(36\lceil1/\eps\rceil)$. The ordinary
+ upper algorithm pays its queries, measurements and parity computation.
+ \end{proof}
+-This is an application of a standard certificate. For search, the stronger
++At $\eps=0$, the general theorem instead gives the tradeoff
++$Q(P+1)\ge n/36$. This is an application of a standard certificate.
++For search, the stronger
+ bound of Theorem~\ref{thm:main} remains the appropriate guarantee.
+ 
+ For a symbolic stopping check take $f(x)=x$ on one bit,
+
+```
+FULL FINAL MANUSCRIPT
+```latex
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements},pdfauthor={Daniel Fredriksen},pdfsubject={Research preprint}}
+\hyphenation{Milo-schew-sky}
+\setlength{\emergencystretch}{1.5em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\ip}[2]{\langle #1\mid #2\rangle}
+\newcommand{\Tr}{\operatorname{Tr}}
+\title{Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements}
+\author{Daniel Fredriksen\\Quantyra Inc.\\\small\href{https://orcid.org/0009-0002-9123-7435}{ORCID: 0009-0002-9123-7435}}
+\date{November 15, 2026\\\small Research preprint; version 0.3.0}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study unstructured search on $N\ge2$ items with a hypothetical Born sampler that returns a
+measurement outcome while independently projecting the sampled register with
+probability $\eps$. Sampler outcomes and collapse flags are immediately
+available to control operations on the same continuing state.
+With a noiseless search oracle, arbitrary entangled workspace,
+and ordinary partial measurements, we prove that constant-success unique-item
+search has optimal total oracle-query, sampler, preparation, and ordinary
+measurement cost
+$\Theta(N^{1/3}+\sqrt{\eps N})$, uniformly for $0\le\eps\le1$.
+Each whole-register readout counts as one call; the construction separately
+uses $O(P\log N)$ transcript bits for $P$ readouts.
+The upper bound uses partial Grover search followed by repeated readouts and
+charges every predetermined attempt. For the lower bound, a root-fidelity
+potential on complete conditional histories remains monotone through any
+number of readouts when its copy exponent is $\lceil1/\eps\rceil$.
+Its query sensitivity gives $Q^2\lceil1/\eps\rceil=\Omega(N)$;
+a decreasing-exponent argument extends the ideal inequality
+$Q^2(P+1)=\Omega(N)$ to immediate feedback. Finite-tree induction and query
+frontiers handle unequal sampling and stopping histories.
+Full cube-root scaling survives precisely when
+$\eps=O(N^{-1/3})$. We also prove, for every finite Boolean promise problem $f$,
+$Q\min\{P+1,\lceil1/\eps\rceil\}\ge\operatorname{Adv}_{+}(f)/36$,
+using $P+1$ when $\eps=0$. A positive-adversary sum over complete histories
+charges each synchronized query without a factor for the number of branches.
+The results concern this specified postquantum access model,
+not physical noisy quantum hardware or ordinary BPP versus BQP.
+\end{abstract}
+
+\section{Introduction and contribution}
+Non-collapsing measurements provide classical information about a quantum state
+without the usual disturbance. Aaronson, Bouland, Fitzsimons, and Lee (ABFL)
+introduced the PDQP framework and a search algorithm combining partial Grover
+evolution with repeated sampling \cite{abfl}. Miloschewsky and Podder proved
+the optimal cube-root search lower bound and developed related
+conditional-copy and fidelity methods \cite{mp}. We ask how the search cost
+changes when the non-collapsing primitive sometimes performs an ordinary
+projection instead.
+
+Our primitive samples a specified register in the computational basis. An
+independent Bernoulli coin determines whether that register is projected or
+the global state is left intact. The sampled outcome and coin are recorded
+and immediately available to control later operations. This is a particular noisy
+extension of a hypothetical information resource. It does not assert a
+physical implementation of non-collapsing measurement.
+
+The noise location matters. Our oracle is noiseless, and an algorithm may
+finish all its Grover queries before invoking the sampler. Noise on oracle
+calls gives a different search problem \cite{rs,rosmanis}. Nor does collapse
+of a sampled register necessarily destroy useful information in the other
+registers. A lower bound must account for partial measurements, entanglement,
+and the full classical history rather than counting apparent restarts.
+
+\begin{theorem}[Uniform optimal cost]\label{thm:main}
+In the model of Section~\ref{sec:model}, for $N\ge2$, let $T_*(N,\eps)$ be the minimum
+worst-case cost for outputting the unique marked item with probability at
+least $2/3$ for every marked item. Then, with absolute implied constants,
+\begin{equation}\label{eq:main}
+ T_*(N,\eps)=\Theta\bigl(N^{1/3}+\sqrt{\eps N}\bigr),
+ \qquad 0\le\eps\le1.
+\end{equation}
+More precisely, for $N\ge12$, every such algorithm satisfies
+\begin{equation}\label{eq:two-lower}
+ Q^2(P+1)\ge\frac N{32},\qquad
+ Q^2\lceil1/\eps\rceil\ge\frac N{32}\quad(\eps>0).
+\end{equation}
+Here $Q$ and $P$ are worst-case oracle and sampler call caps; total cost also
+charges fresh attempts and ordinary measurement/reset calls. The achieving
+construction uses $O(\log N)$ quantum space and
+$O((N^{1/3}+\sqrt{\eps N})\log N)$ nonoracle gates and classical scheduling/scan
+work, plus $\operatorname{poly}(\log N)$ parameter arithmetic,
+with transcript storage charged separately. The same bounds hold if collapse
+flags are hidden.
+\end{theorem}
+
+The main contribution is the fixed-exponent comparison that makes the second
+inequality in~\eqref{eq:two-lower} valid despite arbitrarily many readouts.
+The proof uses complete conditional histories and a mathematical copy
+exponent of order $1/\eps$. The collapsing branch compensates for the
+information released by the non-collapsing branch at this exponent. A Bures
+distance hybrid argument then incurs only the square root of the exponent
+per query. These copies are a proof device, not an additional algorithmic
+resource. Since version 0.2.0, both comparisons extend to immediate feedback via
+finite-tree induction and query frontiers. The original deferred-history
+model is a special case; the scalar inequalities and matching upper algorithm
+are inherited from version 0.1.0.
+Section~\ref{sec:lower} proves the lower bounds, and
+Section~\ref{sec:upper} supplies a matching fully charged construction.
+
+Our second main result extends the same local power comparisons to
+arbitrary finite Boolean promise problems through positive adversary
+certificates. Define
+\[
+ K_\eps(P)=
+ \begin{cases}
+ P+1,&\eps=0,\\
+ \min\{P+1,\lceil1/\eps\rceil\},&0<\eps\le1.
+ \end{cases}
+\]
+\begin{theorem}[Positive-adversary bound]\label{thm:adversary}
+Let $X\subseteq\{0,1\}^n$ be finite and $f:X\to\{0,1\}$.
+In the model of Section~\ref{sec:model}, replace the search oracle by
+$O_x\ket{i,b,z}=(-1)^{b x_i}\ket{i,b,z}$ and require success at least $2/3$
+on every promised input. Every finite capped algorithm satisfies
+\begin{equation}\label{eq:adversary-main}
+ QK_\eps(P)\ge c_*\operatorname{Adv}_{+}(f)
+ \ge \operatorname{Adv}_{+}(f)/36,
+ \qquad c_*:=\frac{1-2\sqrt2/3}{2}>\frac1{36}.
+\end{equation}
+Here $\operatorname{Adv}_{+}$ is the entrywise-nonnegative spectral
+adversary, defined in Section~\ref{sec:adversary}. Immediate feedback,
+arbitrary entangled workspace, partial measurements, the specified resets,
+and unequal stopping remain allowed.
+\end{theorem}
+
+This is a general lower-bound tool inside the declared model, with
+potentially exponential analytical certificates. It makes no efficient
+certificate-discovery claim. The sharper search bound in
+Theorem~\ref{thm:main} is retained. Section~\ref{sec:adversary} proves the
+new statement and gives a parity application.
+
+\subsection{Relation to prior work}
+ABFL supplies the partial-Grover/repeated-readout template \cite{abfl}.
+Miloschewsky--Podder supplies the ideal cube-root result and closely related
+copy/fidelity structure \cite{mp}. We reconstruct the ideal inequality and
+extend its control scope; neither the deferred endpoint nor the use of
+conditional copies is a separate contribution. The fixed-power comparison keeps
+the exponent fixed as a function of $\eps$, instead of decreasing a
+readout-dependent exponent. Their paper also identifies noisy computation
+with non-collapsing measurements as a broader open direction.
+
+For general Boolean promises, Miloschewsky--Podder already proves the
+positive weighted bound $QP=\Omega(1/v_{\max})$ in its ideal PDQP model
+\cite[Lemma 4.3]{mp}. The standard nonnegative spectral convention and
+its equivalence to positive weighted methods are due to prior adversary
+work, as collected by \v{S}palek--Szegedy \cite[Theorem 3.1]{ss}.
+Theorem~\ref{thm:adversary} combines that machinery with our local power
+comparisons and a probability-weighted query-frontier charge. The
+independent-collapse and persistent-feedback scope is the extension;
+neither the adversary framework nor the spectral certificate is new.
+The cited ideal theorem does not already assert this noisy-feedback bound.
+
+The author-hosted ABFL manuscript separately defines persistent adaptive
+CQP: a controller receives samples and chooses further gates on the same
+state \cite[Sections 3, 6, 8]{abflcqp}. Its search lower-bound question and
+the feedback question in \cite[Section 1.5]{mp} concern this continuation.
+At $\eps=0$, our finite capped model includes these search procedures and
+answers that search question under the explicit charged-call convention.
+This is search-model inclusion, not equality of entire complexity classes.
+Adaptive calls to a \emph{stateless} circuit-sampling oracle in
+\cite[footnote 6, Section 5]{msy} start independent invocations; their
+sampling-hardness equivalence does not supply this persistent-state bound.
+
+Abbas, King, Huang, Huggins, Movassagh, Gilboa, and McClean already showed
+that sufficiently gentle imperfect measurements can support cube-root
+search \cite[Appendix E.4, Proposition 28]{abbas}. Their construction uses
+multiple copies with a gentleness assumption on the resulting state: the
+cited proof uses $O(\log N)$ copies and $1/N$-gentleness. A
+small conditional disturbance is different from a rare event with potentially
+order-one conditional disturbance. Thus robustness to imperfect readout is
+an existing idea; the present result gives a matched, all-$\eps$ law for the
+explicit independent-collapse instrument below.
+
+Regev--Schiff studies faulty oracle calls that may act as the identity
+\cite{rs}; Rosmanis studies dephasing and depolarization associated with oracle
+calls, including recorded noise events \cite{rosmanis}. Their noise acts
+during acquisition of oracle information. Here the retained nondisturbing
+Born record is an additional, nonstandard resource, and oracle calls remain
+noiseless. Section~\ref{sec:model} explains why discarding that record changes
+the operation. Fiorentino--Weigert considers a passive-measurement theory
+with different composition rules and distinguishes oracle calls from
+additional measurement effort \cite{fw}. Its state-reconstruction discussion
+does not give the charged independent-collapse tradeoff in~\eqref{eq:main}.
+
+Our focused comparison did not locate the same theorem or a direct
+cost-preserving implication from these results. This is a bounded literature
+comparison, not an assertion of exhaustive priority. Standard root fidelity,
+the Bures metric, Jensen's inequality, and weighted AM--GM remain inherited
+tools \cite{gln}.
+
+\section{Access model and costs}\label{sec:model}
+For the search result, the input is a unique marked label $w\in[N]=\{1,\ldots,N\}$. The controlled
+phase oracle acts as
+\begin{equation}
+ O_w\ket{i,b,z}=(-1)^{b[i=w]}\ket{i,b,z}.
+\end{equation}
+A bit query is obtained with Hadamards on $b$. The oracle $O_0=I$ denotes an
+all-zero reference input used only in the proof. No success requirement is
+imposed on that input. Initial states, gates, and classical randomness are
+independent of $w$; every oracle-dependent preparation pays its queries.
+
+For Theorem~\ref{thm:adversary}, use instead the promised string $x\in X$
+and the controlled bit-phase oracle stated there. All other operations and
+initial preparations are input-independent, and the same sampler and
+controller rules below apply. Padding query addresses have value zero.
+There is no additional access to $x$ or free input-dependent preparation.
+In that theorem the caps are maxima over promised strings and branches;
+undefined formal histories are extended arbitrarily and truncated at the
+same caps. No off-promise success assumption is used.
+
+For a specified register $S$, put
+$\Pi_y=\ket{y}\bra{y}_S\otimes I$. On a conditional normalized global pure
+state $\psi$, a sampler call chooses $c\sim\operatorname{Bernoulli}(\eps)$
+independently, draws $y$ with probability $p_y=\|\Pi_y\psi\|^2$, records
+$(y,c)$, and replaces the state by
+\begin{equation}\label{eq:instrument}
+ \psi\quad(c=0),\qquad
+ \frac{\Pi_y\psi}{\sqrt{p_y}}\quad(c=1).
+\end{equation}
+Zero-probability branches are omitted. The identity in $\Pi_y$ includes all
+workspace and any inaccessible reference. This specifies the update on an
+entangled state, not just the distribution on $S$.
+
+A finite capped classical controller receives sampler outcomes and flags
+immediately. Based on its history it may select gates, oracle queries,
+sampled registers, ordinary partial projective measurements, preparations,
+resets, restarts and termination, on the same continuing state. At equal
+histories its decision rule is the same in all oracle worlds. Fresh classical
+random choices have finite support and are input-independent given the history.
+Deferred feedback
+and hidden flags are restrictions of this model. There is no unknown-state
+description, physical cloning, rewinding, chosen-outcome projection or free
+postselection. A final classical map of the available transcript produces
+the answer.
+
+Mixed initial preparations are represented by an input-independent global
+purification; classical preparation choices and ordinary measurement
+outcomes are included in the history. Environments may be retained as
+inaccessible purification registers. The primitive is defined on these
+conditional global pure states. We do not assume an ensemble-independent
+nonlinear map on arbitrary reduced density matrices.
+
+Reset operations have specified implementations. A measurement reset performs
+an ordinary projective measurement, includes its outcome in the classical
+history, and prepares a known basis state. An environment reset swaps the
+register with a fresh known ancilla and retains the old register as an
+inaccessible quantum environment, without creating a classical outcome.
+Discards similarly retain their quantum purification without conditioning
+on a fictitious outcome. These implementations can produce different later
+sampler statistics and are not identified as equivalent channels here.
+Both reset implementations are allowed and charged as ordinary reset calls;
+their gate and ancillary-space costs are additional. The lower bound covers
+each implementation separately, and the main upper construction uses no resets.
+
+To see the distinction from ordinary dephasing, write
+$\rho=\ket{\psi}\bra{\psi}$ on a pure history branch. The unnormalized states
+associated with the classical outcomes are
+\begin{equation}\label{eq:record}
+ \omega_{0,y}(\rho)=(1-\eps)\Tr(\Pi_y\rho)\rho,
+ \qquad
+ \omega_{1,y}(\rho)=\eps\Pi_y\rho\Pi_y.
+\end{equation}
+Their sum, with the record discarded, is
+$(1-\eps)\rho+\eps\sum_y\Pi_y\rho\Pi_y$.
+Retaining the record instead releases a Born sample while leaving the state
+unchanged on the $c=0$ branch. That record-retaining rule is not an ordinary
+linear quantum instrument for $\eps<1$. Equal discarded-record marginals
+therefore do not justify transferring an ordinary noisy-oracle theorem.
+
+Let $Q,P,R,M$ be the smallest worst-case caps over valid marked inputs
+and complete branches on oracle calls, sampler calls, fresh attempt
+preparations and ordinary projective measurement/reset calls, respectively.
+Thus these caps are the corresponding branch maxima. We charge
+\begin{equation}\label{eq:cost}
+ T=Q+P+R+M.
+\end{equation}
+This sum of caps lies between the worst-case summed call count and four
+times that count. The finite controller and caps apply on every execution,
+including the reference oracle $O_0$. Enforce them by halting before a cap
+would be exceeded; if initially promised only on marked inputs, this
+truncation leaves every valid-input execution unchanged.
+All actual attempts are paid, including failed trials and
+feedback-selected restarts. The achieving construction schedules all attempts
+in advance and pays them even after success. No expected-cost or unbounded
+stopping-time theorem is claimed.
+Known zero ancillas have no input information and are charged in gate and
+space accounting. Register widths, transcript storage, ordinary gates,
+classical processing, and precision are additional costs stated explicitly.
+One wide-register readout is one call, not free printing of its output bits.
+The parameter $\eps$ is known; a sufficient approximation contract is given
+in Section~\ref{sec:resources}. Unknown-rate calibration is not free access.
+
+\section{Complete-history lower bound}\label{sec:lower}
+\subsection{A conditional-copy metric}
+At a prefix-free cut of the finite execution tree, let $h$ include all
+preceding ordinary outcomes, sampler
+outcomes and flags, and classical random choices. In oracle world $a$, let
+$p_a(h)$ be its probability and $\psi_{a,h}$ the conditional global pure
+state. The cut includes halted leaves. Histories retain all actual classical
+records, including erased records or hidden flags; they never measure an
+inaccessible purification to invent a record.
+Comparisons at the same $h$ apply the same input-independent
+operations. Branches having zero weight in one world contribute zero.
+
+For an integer $k\ge1$, define the mathematical state
+\begin{equation}
+ \Sigma_a^{(k)}=\bigoplus_h p_a(h)
+ \bigl(\ket{\psi_{a,h}}\bra{\psi_{a,h}}\bigr)^{\otimes k}.
+\end{equation}
+Its root fidelity with $\Sigma_b^{(k)}$ is
+\begin{equation}\label{eq:potential}
+ F_k(a,b)=\sum_h\sqrt{p_a(h)p_b(h)}
+       |\ip{\psi_{a,h}}{\psi_{b,h}}|^k.
+\end{equation}
+We use root fidelity rather than its square. The associated Bures distance
+$d_k(a,b)=\sqrt{2-2F_k(a,b)}$ obeys the triangle inequality \cite{gln}.
+For completeness, fix a purification of the middle state and choose
+overlap-maximizing purifications of each endpoint. The Euclidean triangle
+inequality on these purifications, followed by minimization between the
+endpoints, proves the Bures triangle inequality. Conditional powers in
+\eqref{eq:potential} lie \emph{inside} the history sum. No independence
+of histories or of successive snapshots is assumed.
+
+We also use a history-dependent positive integer exponent $\kappa(h)$.
+Replacing $k$ by $\kappa(h)$ inside each direct-sum block defines
+$\Sigma_a^{(\kappa)}$ and its root fidelity $F_\kappa(a,b)$ on the same
+history-indexed block spaces in both oracle worlds. The associated Bures
+distance is again a metric. This variation aligns feedback branches with
+different numbers of intermediate readouts. Bures triangles are used within
+one common cut and block space. Across different cuts we use scalar
+monotonicity, not a metric between spaces with different copy exponents.
+
+\begin{lemma}[Partial projection comparison]\label{lem:projection}
+For normalized $u,v$ and a projective measurement $\{\Pi_y\}$, write
+\[
+ r=|\ip u v|,\quad p_y=\|\Pi_yu\|^2,\quad q_y=\|\Pi_yv\|^2,
+ \quad r_y=\frac{|\bra u\Pi_y\ket v|}{\sqrt{p_yq_y}}.
+\]
+Omit terms with $p_yq_y=0$, and set
+$A=\sum_y\sqrt{p_yq_y}$ and
+$C_k=\sum_y\sqrt{p_yq_y}r_y^k$. For $k\ge1$ and $A>0$,
+\begin{equation}\label{eq:jensen}
+ r\le A\le1,\qquad C_k\ge\frac{r^k}{A^{k-1}}\ge r^k.
+\end{equation}
+If $A=0$ then $r=0$.
+\end{lemma}
+\begin{proof}
+Cauchy--Schwarz gives $A\le1$ and $r_y\le1$; when $p_yq_y=0$, it also gives
+$|\bra u\Pi_y\ket v|=0$, justifying omission. Completeness and the triangle
+inequality give
+$B_0:=\sum_y|\bra u\Pi_y\ket v|\ge r$, while $B_0\le A$.
+Weighted Jensen with weights $\sqrt{p_yq_y}/A$ gives
+$C_k\ge A(B_0/A)^k\ge r^k/A^{k-1}$. The zero case follows from $r\le A$.
+\end{proof}
+
+An ordinary measurement replaces the contribution $r^k$ of a common
+history by $C_k$. Thus it cannot decrease $F_k$. Common unitaries preserve
+$F_k$, including gates chosen after sampler outcomes and flags. Different
+child histories may choose different gates; matching child histories in the
+two worlds choose the same gate.
+Preparations of known ancillas and environment resets are isometries on the
+retained purification. Measurement resets consist of an ordinary measurement
+and known preparation, with the outcome retained in the history. The two
+distinct reset conventions therefore both obey the comparison. Each argument
+also applies blockwise at a history-dependent exponent. Fresh classical
+random branches multiply each pair contribution by common probabilities
+whose sum is one, so they preserve it exactly.
+
+\subsection{Fixed exponent for noisy readouts}
+\begin{lemma}[Fixed-power monotonicity]\label{lem:fixed}
+If $0<\eps\le1$ and $k$ is an integer with $\eps k\ge1$, a sampler call
+cannot decrease $F_k$.
+\end{lemma}
+\begin{proof}
+At a common history, the non-collapsing outcomes contribute
+$(1-\eps)Ar^k$; the collapsing outcomes contribute $\eps C_k$.
+For $A>0$, Lemma~\ref{lem:projection} gives a total of at least
+\begin{equation}\label{eq:fixed}
+ r^k\bigl((1-\eps)A+\eps A^{1-k}\bigr)
+ \ge r^k A^{1-\eps k}\ge r^k.
+\end{equation}
+The first inequality is weighted AM--GM; the second uses $A\le1$ and
+$\eps k\ge1$. If $A=0$ the old contribution is zero. Multiplying by the
+history weight and summing proves the claim. The independent flag
+probabilities produce exactly the coefficients $1-\eps$ and $\eps$.
+\end{proof}
+
+Choosing $k=\lceil1/\eps\rceil$ works for arbitrarily many readouts.
+This is a potential comparison, not a simulation using $k$ physical copies.
+In particular, it does not replace the actual number of readouts by their
+mean waiting time to a collapse.
+
+\subsection{Decreasing exponent for the ideal baseline}
+For a separate argument, set $\kappa(h)=P+1-p(h)$, where $p(h)$ is the number
+of sampler calls preceding history $h$. A real sampler call decreases that
+history's exponent by one. The worst-case cap $p(h)\le P$ ensures that its
+exponent is at least two immediately before a call and at least one afterwards.
+Writing $k=\kappa(h)$ before the call, the new contribution is
+\begin{equation}\label{eq:decreasing}
+ (1-\eps)Ar^{k-1}+\eps C_{k-1}
+ \ge(1-\eps)r^k+\eps r^{k-1}\ge r^k.
+\end{equation}
+Here $A\ge r$ and Lemma~\ref{lem:projection} apply. Ordinary measurements
+retain the current exponent. If $A=0$, the old contribution is zero.
+Consequently this changing potential is
+nondecreasing at nonquery steps, including at $\eps=0$. This reconstructs
+the ideal-search inequality with complete ordinary and sampler histories,
+now allowing their immediate use for control.
+
+\subsection{Query sensitivity}
+Compare $O_0$ with each $O_w$, and abbreviate $d_w=d_k(0,w)$.
+At a query, let $a_{0,h}(w)$ be the probability that the reference state
+has address $w$ and oracle control bit $1$. Put
+$a_0(w)=\sum_h p_0(h)a_{0,h}(w)$, so $\sum_w a_0(w)\le1$.
+As a proof device, apply $O_w$ to every copy of the reference state.
+Its overlap with the old reference block has magnitude
+$|1-2a_{0,h}(w)|^k$. For $0\le a\le1$,
+\begin{equation}\label{eq:self}
+ 1-|1-2a|^k\le2ka.
+\end{equation}
+For $a\le1/2$ this is Bernoulli's inequality; for $a\ge1/2$ the right side
+is at least one. The Bures distance from the reference state to this
+queried counterpart is at most $2\sqrt{k a_0(w)}$.
+
+Applying the same $O_w$ to both mathematical comparison states preserves
+their distance. The actual reference query is the identity. The triangle
+inequality therefore gives
+\begin{equation}
+ d'_w\le d_w+2\sqrt{k a_0(w)}.
+\end{equation}
+By Minkowski's inequality,
+\begin{equation}\label{eq:D}
+ D:=\Bigl(\sum_wd_w^2\Bigr)^{1/2}
+ \quad\text{increases by at most }2\sqrt{k}\text{ per query}.
+\end{equation}
+For history-dependent exponents, the same calculation uses
+$K=\max_h\kappa(h)$: summing~\eqref{eq:self} with history weights bounds
+the reference-query distance by $2\sqrt{K a_0(w)}$, so the aggregate
+increment is at most $2\sqrt K$.
+
+To handle outcome-controlled sampling, gates and stopping, align each branch
+at the prefix-free frontier
+immediately before their $j$th oracle call. From the previous query frontier,
+advance each branch through its intervening nonquery operations to this
+frontier; a halted branch is padded with identity queries using control bit
+zero. The stopping location is determined by the recorded history, not by
+the oracle label separately. Each intervening operation replaces one history
+contribution by a sum at least as large, so their full finite subtree
+expansion cannot decrease the fidelity. All branches at the frontier then
+make their $j$th query together, with $\sum_w a_0(w)\le1$. This gives at most
+$Q$ query frontiers, rather than summing increments over unrelated wall-clock
+slots. The exponent $\kappa(h)=P+1-p(h)$ tracks each branch's actual readouts
+and always satisfies $1\le\kappa(h)\le P+1$.
+This is induction on the actual finite execution tree: each nonquery node
+expansion obeys the local comparison, including history-selected projectors
+and zero-weight histories. There is no branch-count loss. Control-zero
+padding is analytical, adds no actual calls, and retains halted leaves.
+The frontiers do not reschedule the algorithm. Finite controller/register
+caps provide common padded quantum spaces at each cut; inaccessible
+environments remain quantum.
+
+Initially $D=0$. After the last query, advance through all remaining nonquery
+operations to termination using the same monotonicity. Consequently
+$D\le2Q\sqrt{\lceil1/\eps\rceil}$ in the fixed-power argument and
+$D\le2Q\sqrt{P+1}$ in the decreasing-power argument.
+
+\subsection{Success requires distance}
+Under $O_0$, let $z_w$ be the probability that the final output is $w$.
+Since $\sum_wz_w\le1$, at least $N-6$ labels satisfy $z_w\le1/6$.
+For any such $w$, success under $O_w$ makes the two output distributions
+differ by at least $1/2$ in total variation. If their classical root
+affinity is $A_{\rm out}$, Cauchy--Schwarz gives
+\[
+ \operatorname{TV}\le\sqrt{1-A_{\rm out}^2},
+ \qquad A_{\rm out}\le\sqrt{3}/2.
+\]
+Equation~\eqref{eq:potential} is at most the affinity of the complete
+histories. Classical processing can only increase affinity, so
+$F_k(0,w)\le A_{\rm out}$, also with $F_\kappa$ in place of $F_k$.
+Any final ordinary quantum measurement is
+included among the ordinary history steps before this processing. Hence
+$d_w^2\ge2-\sqrt3>1/4$. For $N\ge12$,
+\begin{equation}
+ D^2\ge\frac{N-6}{4}\ge\frac N8.
+\end{equation}
+Combining this with~\eqref{eq:D} proves~\eqref{eq:two-lower}.
+Since $\lceil1/\eps\rceil\le2/\eps$, we obtain
+\[
+ Q\ge\frac{\sqrt{\eps N}}8.
+\]
+Also $Q^2(P+1)\le2(Q+P)^3$ when $Q+P\ge1$, and therefore
+$Q+P\ge N^{1/3}/4$. Preparations and ordinary measurements can only add to
+the cost. The maximum and sum of the two lower bounds differ by at most a
+factor of two. For $2\le N<12$, a zero-query output law is independent of
+$w$ and succeeds for some $w$ with probability at most $1/N\le1/2$.
+Thus $T\ge Q\ge1$, whereas $N^{1/3}+\sqrt{\eps N}<6$ in this bounded range.
+This completes the uniform lower bound of Theorem~\ref{thm:main} for $N\ge2$.
+The trivial $N=1$ problem is excluded, as it needs no input access.
+
+\section{Matching search construction}\label{sec:upper}
+\subsection{Exact success probability of an attempt}
+Prepare a Grover state using $t$ iterations. Its marked weight is
+$p=\sin^2((2t+1)\arcsin N^{-1/2})$. One additional bit query appends the
+mark bit $[i=w]$. Perform $r$ sampler calls on the address and mark-bit
+registers, with no intervening operation on them. A returned mark bit $1$
+identifies the answer without a later outcome-dependent verification query.
+
+Before the first collapse, the samples have the original distribution.
+After a collapse, all further samples repeat that address and mark bit.
+First success at draw $j+1$ requires $j$ unmarked, non-collapsing draws
+and then a marked draw. Consequently the success probability is exactly
+\begin{equation}\label{eq:success}
+ s(p,r,\eps)=p\sum_{j=0}^{r-1}[(1-p)(1-\eps)]^j
+ =\frac{p\{1-[(1-p)(1-\eps)]^r\}}{p+\eps-p\eps}.
+\end{equation}
+The sum defines the zero-denominator case. It yields
+$1-(1-p)^r$ at $\eps=0$ and $p$ at $\eps=1$. No failed collapse is removed
+by conditioning.
+
+\subsection{Uniform parameter choice}
+Pad to the least power of four $N'\ge N$, so $N'<4N$. Padded labels are
+unmarked. Controlled oracle access implements this padding with an
+$O(\log N)$-gate range check and one oracle call. For $N'\ge256$, set
+\begin{equation}\label{eq:parameters}
+ m=\left\lceil\max\{(N')^{1/3},\sqrt{\eps N'}\}\right\rceil,
+ \qquad t=\lfloor m/4\rfloor,
+ \qquad r=\lceil N'/m^2\rceil.
+\end{equation}
+Because $\sqrt{N'}$ is integral, $4\le m\le\sqrt{N'}$.
+With $\theta=\arcsin(1/\sqrt{N'})$, we have
+$1/\sqrt{N'}\le\theta\le2/\sqrt{N'}$,
+$2t+1\ge m/4$, and
+$(2t+1)\theta\le1+2/\sqrt{N'}<\pi/2$.
+Using $\sin x\ge2x/\pi$ on this interval gives
+\begin{equation}\label{eq:pbound}
+ p\ge\frac{m^2}{4\pi^2N'}\ge\frac{m^2}{40N'},
+ \qquad \eps\le40p,\qquad rp\ge1/40.
+\end{equation}
+In~\eqref{eq:success}, the denominator is at most $41p$, and the numerator
+factor in braces is at least $1-e^{-rp}$. Thus
+\begin{equation}
+ s\ge\frac{1-e^{-1/40}}{41}\ge\frac1{3280}.
+\end{equation}
+For the last bound, $1-e^{-x}\ge x/2$ for $0\le x\le1$ suffices.
+Run $B=13120$ independent fresh attempts, scheduled in advance. Their
+failure probability is at most $(1-1/3280)^B\le e^{-4}<1/12$.
+Independence here is justified by the explicitly fresh product states and
+independent sampler coins; it was not assumed in the lower bound.
+All $B$ attempts are executed and charged. For bounded $N'<256$,
+exhaustively querying the bounded number of addresses is a constant-cost
+fallback, using ordinary measurements and no sampler assumption.
+
+For the main construction,
+\begin{equation}\label{eq:resources}
+ Q=B(t+1),\quad P=Br,\quad R=B,\quad M=0.
+\end{equation}
+Since $m=O(N^{1/3}+\sqrt{\eps N})$ and $N'/m^2\le(N')^{1/3}$,
+these counts prove the upper half of~\eqref{eq:main}. The final classical
+scan selects any recorded marked address. It uses no collapse flag, so
+hiding flags changes neither the construction nor the lower bound, which
+already granted access to them.
+
+\subsection{Gate, space, and precision costs}\label{sec:resources}
+All attempts can use disjoint fresh registers in one fixed circuit. As $B$
+is an absolute constant, including their inactive registers takes
+$O(\log N)$ quantum space. Uniform preparation over $N'$ uses Hadamards;
+the Grover reflection and padding controls use $O(\log N)$ reversible gates
+and clean ancillas per query block. An exact implementation using Hadamard,
+Pauli $X$, and Toffoli gates exists. Nonoracle gate count and final classical
+scheduling/scan time are $O((T+1)\log N)$; the full transcript requires
+$O(P\log N)$ bits. The parameter arithmetic below is charged additionally.
+The black-box cost of implementing a search oracle in an application must
+be added separately. The constants above certify an asymptotic law and are
+not a practical performance estimate.
+
+An upper estimate $\bar\eps\in[\eps,\min(1,\eps+1/N')]$ can replace $\eps$
+in~\eqref{eq:parameters}. The lower marked-weight and success guarantees
+still hold, while $\sqrt{\bar\eps N'}\le\sqrt{\eps N'+1}$ changes only
+constants. This requires $O(\log N)$ parameter bits, not exact arbitrary-real
+arithmetic. For a supplied rational upper estimate, $m$ is the least integer satisfying
+$m^3\ge N'$ and $m^2\ge\bar\eps N'$; binary search uses exact integer
+comparisons and time polynomial in $\log N$. It introduces no input-dependent advice.
+
+For approximate preparation, impose the error bound on the actual conditional
+global pure state of each attempt, including its workspace and reference:
+on every classical preparation branch it has trace-distance error at most
+$\eta$ from the ideal preparation before the first readout. Attempts still
+use independent preparations and coins as above, with approximation confined
+to their individual preparation gates. The initial address/mark-bit
+distributions on each such branch then have total-variation distance at most
+$\eta$. Couple the collapse coins and each pre-collapse Born draw. Once a
+collapse occurs, the sampled address and bit repeat, so the full transcript
+of one attempt differs with probability at most $r\eta$. Across $B$
+attempts the loss of success is at most $Br\eta$. Taking
+$\eta\le1/(24Br)$ preserves success above $2/3$.
+An error bound only on an averaged reduced density matrix does not imply this
+transcript estimate for the nonlinear sampler. If $G$ within-attempt unitary
+preparation gates are approximated, a sufficient condition is a sum
+of operator-norm errors at most $\eta$. Per-gate accuracy $O(\eta/G)$ uses
+$O(\log N)$ accuracy bits, with any gate-synthesis overhead charged
+separately. The exact gate implementation already avoids that overhead.
+This is a coupling for this particular no-intervening-operation construction,
+not a general trace-distance contraction property of nonlinear samplers.
+
+\subsection{A branching check and an insufficient comparator}
+Take $u=\sqrt p\ket{00}+\sqrt{1-p}\ket{11}$ and
+$v=\sqrt q\ket{00}+\sqrt{1-q}\ket{11}$, and write
+$a=\sqrt{pq}$, $b=\sqrt{(1-p)(1-q)}$, $r=a+b$.
+Sample the first qubit; halt on a collapse. On a non-collapsing outcome zero,
+proceed to the next query. On outcome one, apply $X$ to the first qubit,
+sample the second qubit, and then proceed. Branches have different stopping
+times, registers and sample counts. Put $g_k=(1-\eps)r^{k+1}+\eps r$.
+The fixed-power frontier value is
+$\eps r+(1-\eps)ar^k+(1-\eps)bg_k\ge r^k$ when $\eps k\ge1$.
+For the decreasing-power comparison with $P=2$, it is
+$\eps r+(1-\eps)ar^2+(1-\eps)b[(1-\eps)r^2+\eps r]\ge r^3$.
+At $p=1/5,q=4/5,\eps=1/2$, the unpowered one-step comparator fails:
+$g_1=18/25<4/5=r$, while $g_2=82/125\ge16/25=r^2$.
+The two frontier values are $412/625\ge r^2$ and $84/125\ge r^3$.
+This is a symbolic check and negative control. The quantified local
+inequalities and finite-tree induction prove the general claim.
+
+\section{Positive adversaries with feedback}\label{sec:adversary}
+This section proves Theorem~\ref{thm:adversary}. Constant or empty promise
+problems have $\operatorname{Adv}_{+}(f)=0$ by convention and are immediate.
+Otherwise let $\Gamma$ be a nonzero real symmetric entrywise-nonnegative
+matrix indexed by $X$, with $\Gamma_{xy}=0$ whenever $f(x)=f(y)$. Put
+\begin{equation}\label{eq:adv-definition}
+ D_i[x,y]=\mathbf1[x_i\ne y_i],\qquad
+ \Lambda_\Gamma=\max_i\|\Gamma\circ D_i\|,\qquad
+ \operatorname{Adv}_{+}(f)=\sup_\Gamma
+                \frac{\|\Gamma\|}{\Lambda_\Gamma}.
+\end{equation}
+The norm is the spectral operator norm and $\circ$ denotes entrywise
+product. Every nonzero entry joins inputs differing in some bit, so
+$\Lambda_\Gamma>0$. This is the positive spectral convention of
+\cite{ss}, not the signed-weight general adversary.
+
+Choose a nonnegative unit vector $v$ with
+$v^T\Gamma v=\|\Gamma\|$. Existence does not require irreducibility:
+the componentwise absolute values of a norm-extremizing real eigenvector
+have Rayleigh quotient at least the absolute extremal eigenvalue, hence
+exactly $\|\Gamma\|$. No division by an entry of $v$ is needed.
+At any common prefix-free cut $H$ of the complete execution tree, set
+\begin{equation}\label{eq:adv-potential}
+ \Phi_\kappa(H)=\sum_{x,y}\Gamma_{xy}v_xv_y
+  \sum_{h\in H}\sqrt{p_x(h)p_y(h)}
+       |\ip{\psi_{x,h}}{\psi_{y,h}}|^{\kappa(h)}.
+\end{equation}
+Each execution reaches exactly one node of $H$, including halted leaves,
+so $\sum_h p_x(h)=1$. Zero-probability states may be filled arbitrarily.
+The exponent is a positive integer determined by the common history.
+At the root the states are input-independent and
+$\Phi_{\rm root}=v^T\Gamma v=\|\Gamma\|$.
+
+\subsection{Two nonquery comparisons}
+For the first argument take $\eps>0$ and the constant exponent
+$k=\lceil1/\eps\rceil$. Lemma~\ref{lem:fixed} and the ordinary-operation
+comparisons prove that every pair's history sum is nondecreasing through
+a nonquery node. For the second, separate argument take
+$\kappa(h)=P+1-p(h)$, using the actual number of preceding sampler calls.
+Equation~\eqref{eq:decreasing} proves the corresponding comparison at
+each sampler node, for every $0\le\eps\le1$; other nodes preserve the
+exponent. In both cases entrywise positivity of $\Gamma$ preserves the
+weighted comparison. Induction over each finite intervening nonquery
+forest therefore makes $\Phi$ nondecreasing. Equal histories select equal
+operations even with immediate feedback; no sampler outcome is deferred.
+These are two distinct potentials, not a trajectory mixing their exponents.
+
+\subsection{Spectral charge at a query frontier}
+As in the search proof, advance each branch to its $j$th actual query or
+to a halt. Carry halted leaves unchanged through later frontiers, with
+analytical identity padding. There are at most $Q$ query layers.
+At node $h$, let $\Pi_{h,i}$ project onto address $i$ and query control
+$b=1$ in the history-selected query register. They are orthogonal and
+$\sum_i\Pi_{h,i}\le I$; at a halted node set all these projectors to zero.
+Common routing gates are included in the preceding nonquery forest.
+For $u=\psi_{x,h}$ and $u'=\psi_{y,h}$,
+\begin{equation}\label{eq:adv-query-pair}
+ \bigl||\ip{u}{u'}|-|\ip{O_xu}{O_yu'}|\bigr|
+ \le 2\sum_{i:x_i\ne y_i}\|\Pi_{h,i}u\|\|\Pi_{h,i}u'\|.
+\end{equation}
+Indeed $O_x^*O_y=I-2\sum_{i:x_i\ne y_i}\Pi_{h,i}$, so the triangle
+and Cauchy--Schwarz inequalities apply, including complex phases and
+entangled workspace. A query preserves the history probability and its
+exponent. For $r,r'\in[0,1]$ and integer $k\ge1$,
+$|r^k-r'^k|\le k|r-r'|$.
+
+Let $K$ bound the exponents at the frontier, and define input-indexed vectors
+\[
+ a_x^{h,i}=v_x\sqrt{p_x(h)}\|\Pi_{h,i}\psi_{x,h}\|.
+\]
+Summing~\eqref{eq:adv-query-pair} with the nonnegative potential weights gives
+\begin{align}
+ \Phi(H_j)-\Phi(H_j^+)
+ &\le 2K\sum_{h,i}(a^{h,i})^T(\Gamma\circ D_i)a^{h,i}\notag\\
+ &\le 2K\Lambda_\Gamma\sum_{h,i}\|a^{h,i}\|_2^2
+ \le 2K\Lambda_\Gamma.\label{eq:adv-query-charge}
+\end{align}
+The last step uses the complete-history normalization
+\begin{equation}\label{eq:adv-history-normalization}
+ \sum_{h,i}\|a^{h,i}\|_2^2
+ =\sum_xv_x^2\sum_h p_x(h)
+               \sum_i\|\Pi_{h,i}\psi_{x,h}\|^2
+ \le\sum_xv_x^2\sum_h p_x(h)=1.
+\end{equation}
+Thus the number of histories creates no multiplicative loss. In particular,
+different registers, unequal sampling counts and halted branches are
+included with their actual probabilities. Using $K=P+1$ for varying
+exponents is valid because all summands in the pairwise bound are
+nonnegative. This reasoning does not justify a signed-weight extension.
+
+\subsection{Terminal separation and the two bounds}
+Include the actual final Boolean output in the terminal history. Opposite
+outputs of $f$ require output distributions of total variation at least
+$1/3$. Their affinity is consequently at most $\beta=2\sqrt2/3$.
+For either positive exponent assignment,
+\[
+ F_\kappa(x,y)\le\sum_h\sqrt{p_x(h)p_y(h)}
+ \le\sum_{b=0,1}\sqrt{\Pr_x[b]\Pr_y[b]}\le\beta
+ \quad(f(x)\ne f(y)).
+\]
+The middle inequality groups histories by output and applies
+Cauchy--Schwarz. The last uses the same affinity/variation inequality as
+the search proof. Hence $\Phi_{\rm final}\le\beta\|\Gamma\|$.
+Combining nonquery monotonicity with~\eqref{eq:adv-query-charge} yields
+\[
+ \beta\|\Gamma\|\ge\Phi_{\rm final}
+ \ge\|\Gamma\|-2QK\Lambda_\Gamma,
+ \qquad QK\ge c_*\frac{\|\Gamma\|}{\Lambda_\Gamma}.
+\]
+First apply this with constant $K=\lceil1/\eps\rceil$ for $\eps>0$.
+Independently apply it with $K=P+1$ for all $\eps$. Optimizing over
+$\Gamma$ and taking the minimum of these two valid bounds proves
+Theorem~\ref{thm:adversary}. Since $2\sqrt2/3<17/18$, we have $c_*>1/36$.
+At $P=0$ or $\eps=1$ the result gives an ordinary positive-adversary lower
+bound. At $\eps=0$ only the decreasing-power argument is needed.
+
+\subsection{Costs, application and a stopping check}
+Let $W$ be the worst-case sum of actual query, sampler, preparation and
+ordinary measurement/reset calls on a valid branch. With smallest valid
+caps, $Q,P,R,M\le W\le T\le4W$. A nonconstant $f$ has
+$\operatorname{Adv}_{+}(f)\ge1$ by a single opposite-output pair, and
+requires $Q\ge1$. Thus $Q(P+1)\le W(W+1)\le2W^2$ and
+$\lceil1/\eps\rceil\le2/\eps$ give separate square-root and
+linear lower bounds. Their maximum is at least half their sum, giving
+\begin{equation}\label{eq:adv-total}
+ W=\Omega\!\left(\sqrt{\operatorname{Adv}_{+}(f)}
+                  +\eps\operatorname{Adv}_{+}(f)\right).
+\end{equation}
+Every failed trial and query-dependent preparation is included. Gate,
+classical, output-bit, space and precision costs remain additional; this
+is not a matching total-bit-runtime assertion. Matrices, eigenvectors and
+complete histories may be exponentially large analytical certificates.
+The controller is not given their amplitudes or an efficient way to find them.
+
+\begin{corollary}[Parity at a fixed positive collapse rate]
+For $n$-bit parity and any fixed $\eps>0$, success at least $2/3$ requires
+$\Omega(n)$ input queries, irrespective of the sampler cap. Reading every
+bit gives a matching $O(n)$ query upper bound.
+\end{corollary}
+\begin{proof}
+Use the hypercube adjacency matrix as $\Gamma$. Adjacent inputs have
+opposite parity, $\|\Gamma\|=n$, and $\Gamma\circ D_i$ is a perfect
+matching matrix of norm one. The fixed-power bound gives explicitly
+$Q\ge n/(36\lceil1/\eps\rceil)$. The ordinary
+upper algorithm pays its queries, measurements and parity computation.
+\end{proof}
+At $\eps=0$, the general theorem instead gives the tradeoff
+$Q(P+1)\ge n/36$. This is an application of a standard certificate.
+For search, the stronger
+bound of Theorem~\ref{thm:main} remains the appropriate guarantee.
+
+For a symbolic stopping check take $f(x)=x$ on one bit,
+$\Gamma=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ and
+$v=(1,1)/\sqrt2$. Sample an input-independent $\ket{++}$ register once.
+On label $00$, halt with output zero. Otherwise query address one on a
+fresh response $\ket+$ and measure it in the $X$ basis to recover $x$.
+The flag may be ignored by the controller but remains in the history.
+Success is one on $x=0$ and $3/4$ on $x=1$, with $Q=P=1$.
+After the sampler the decreasing exponent is one. The query reduces
+$\Phi$ from one to $1/4$, while the query mass in
+\eqref{eq:adv-history-normalization} is $(3/4)(1/2)=3/8$.
+Using the actual exponent one, the charge is exactly $2(3/8)=3/4$.
+Appending $t$ unused fair classical bits divides each history's probability
+by $2^t$ without changing the total charge. Those bits and their work/space
+are paid. This symbolic family checks the stopping bookkeeping;
+the arbitrary-tree proof, not small-case agreement, establishes the theorem.
+
+The lower bound applies to actual finite-precision input-independent gates
+and preparations whenever the implemented algorithm meets the success
+contract. An ideal-to-implemented accuracy transfer needs its own paid
+whole-history argument; a linear-channel error hybrid is not assumed for
+this nonlinear sampler. If such an argument only gives failure
+$\eta<1/2$, the same proof replaces $c_*$ by
+$(1-2\sqrt{\eta(1-\eta)})/2$. No efficient certificate discovery, signed
+adversary theorem, physical realization or general classical simulator
+follows from this result.
+
+\section{Consequences and limitations}
+\begin{corollary}[Persistent adaptive ideal search]
+At $\eps=0$, immediate-feedback search in the declared finite capped model,
+including the persistent CQP search procedures of \cite{abflcqp}, has
+optimal charged-call cost $\Theta(N^{1/3})$.
+\end{corollary}
+\begin{proof}
+Set $\eps=0$ in Theorem~\ref{thm:main}. The cited definition evolves a pure
+state by unitary $U_i$ and ordinary partial measurement $M_i$, then samples
+the resulting full-register Born distribution without changing the state.
+The controller may select a later segment after receiving earlier samples.
+Implement each $U_i,M_i$ directly, followed by one sampler with $c=0$;
+retain actual ordinary outcomes analytically even when not reported.
+Each returned sample is charged separately, not a free transcript for one
+circuit-oracle call. This preserves search-query and sample counts and
+adds at most one ordinary-measurement charge per sampled stage, without
+copies or replay. The fixed-policy construction belongs to the subclass;
+unused samples after its preparation gates, if required by that syntax,
+add only its separately stated gate overhead. Thus the exact $\Theta$ law
+uses the charged-call convention here; elementary-gate runtime carries the
+stated logarithmic and parameter-processing overhead. No bound on oracle
+queries alone with unlimited free samples is asserted.
+\end{proof}
+
+\begin{corollary}
+The cost is $\Theta(N^{1/3})$ exactly for rates
+$\eps=O(N^{-1/3})$. Any fixed positive rate gives $\Theta(\sqrt N)$ cost.
+If $\eps=N^{-\alpha}$ for $\alpha\ge0$, the cost exponent is
+$\max\{1/3,(1-\alpha)/2\}$.
+\end{corollary}
+\begin{proof}
+Compare the two terms in~\eqref{eq:main}.
+\end{proof}
+
+\begin{remark}[Collapse does not imply global reset]
+Let $D$ contain a query-dependent state and let the sampled register be a
+separate $\ket0_S$. Every collapse of $S$ leaves $D$ intact. This refutes
+a global-reset premise even within the declared model; it is not itself a
+faster search algorithm. The complete-history potential is what makes the
+lower bound survive this example and arbitrary entangled workspace.
+\end{remark}
+
+The theorem charges a particular postquantum sampler and a noiseless oracle.
+It does not classify all noisy PDQP or adaptive CQP computations, establish
+a physical realization, or improve general classical simulation of
+ordinary quantum computation. Additional oracle, storage, or gate noise and
+unknown-rate estimation would change the access contract. The interpolation
+is an oracle-model result, with the ordinary BPP/BQP question left open.
+
+\paragraph{Evidence and assistance disclosure.}
+This preprint has an informal analytic proof and internal checks, not formal
+certification or independent peer review. The accompanying archive preserves
+two historical finite exact diagnostic runs and their source hashes; these illustrate
+algebraic and projector comparisons and do not establish universal claims
+by finite agreement. Those runs predate the feedback and general-adversary
+extensions; both are proved analytically, without a new numerical campaign.
+OpenAI Codex assisted with derivation, literature
+comparison, drafting, and internal checking. Separate AI review was conducted
+through provider CLIs. The archive records actual model identities, review
+scopes, findings, and dispositions. These reviews are not independent human
+peer review or formal certification.
+
+\paragraph{Availability.}
+LaTeX, the PDF, reproducibility records, and citation metadata are available at
+\url{https://github.com/Quantyra/accidental-collapse-search}. Release and DOI details are recorded in the repository. Original archive materials are licensed
+under CC BY 4.0. Cited works retain their own licenses.
+
+\begin{thebibliography}{10}
+\small
+\raggedright
+\bibitem{abfl}
+Scott Aaronson, Adam Bouland, Joseph Fitzsimons, and Mitchell Lee.
+The space ``just above'' BQP.
+\emph{ITCS}, 2016. Preprint 2014.
+\href{https://arxiv.org/abs/1412.6507v1}{arXiv:1412.6507v1}.
+
+\bibitem{abflcqp}
+Scott Aaronson, Adam Bouland, Joseph Fitzsimons, and Mitchell Lee.
+The space ``just above'' BQP. Author-hosted CQP/naCQP manuscript,
+\href{https://theory.stanford.edu/~abouland/Papers/cqp.pdf}{28-page PDF},
+Sections 3, 6 and 8; inspected November 15, 2026. This undated source is
+distinguished from the pinned arXiv PDQP version above.
+
+\bibitem{msy}
+Tomoyuki Morimae, Yuki Shirakawa, and Takashi Yamakawa.
+Quantum cryptography and hardness of non-collapsing measurements.
+\href{https://arxiv.org/abs/2510.04448v1}{arXiv:2510.04448v1}, October 6, 2025.
+
+\bibitem{mp}
+David Miloschewsky and Supartha Podder.
+New lower-bounds for quantum computation with non-collapsing measurements.
+\emph{CCC}, 2025.
+\href{https://doi.org/10.4230/LIPIcs.CCC.2025.12}{doi:10.4230/LIPIcs.CCC.2025.12}.
+The comparison uses \href{https://arxiv.org/abs/2411.04085v3}{arXiv:2411.04085v3},
+September 2025.
+
+\bibitem{ss}
+Robert \v{S}palek and Mario Szegedy.
+All quantum adversary methods are equivalent.
+\emph{Theory of Computing} 2(1):1--18, 2006.
+\href{https://doi.org/10.4086/toc.2006.v002a001}{doi:10.4086/toc.2006.v002a001}.
+
+\bibitem{abbas}
+Amira Abbas, Robbie King, Hsin-Yuan Huang, William J. Huggins,
+Ramis Movassagh, Dar Gilboa, and Jarrod R. McClean.
+On quantum backpropagation, information reuse, and cheating measurement collapse.
+\emph{Advances in Neural Information Processing Systems} 36, 2023.
+\href{https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3caae2f725c8e2a55ecd600563d172-Paper-Conference.pdf}{Proceedings paper},
+Appendix E.4, Proposition 28.
+
+\bibitem{rs}
+Oded Regev and Liron Schiff.
+Impossibility of a quantum speed-up with a faulty oracle.
+\emph{ICALP}, 2008.
+\href{https://arxiv.org/abs/1202.1027v1}{arXiv:1202.1027v1} (2012 upload).
+
+\bibitem{rosmanis}
+Ansis Rosmanis.
+Quantum search with noisy oracle.
+\href{https://arxiv.org/abs/2309.14944v1}{arXiv:2309.14944v1}, 2023.
+
+\bibitem{fw}
+Vincenzo Fiorentino and Stefan Weigert.
+A quantum theory with non-collapsing measurements.
+\emph{Physics Letters A} 559, 130903, 2025.
+\href{https://arxiv.org/abs/2303.13411v2}{arXiv:2303.13411v2}.
+
+\bibitem{gln}
+Alexei Gilchrist, Nathan K. Langford, and Michael A. Nielsen.
+Distance measures to compare real and ideal quantum processes.
+\emph{Physical Review A} 71, 062310, 2005.
+\href{https://doi.org/10.1103/PhysRevA.71.062310}{doi:10.1103/PhysRevA.71.062310}.
+\href{https://arxiv.org/abs/quant-ph/0408063v2}{arXiv:quant-ph/0408063v2}.
+\end{thebibliography}
+\end{document}
+
+```
+
+PUBLIC FILE: .zenodo.json
+{
+  "title": "Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements",
+  "description": "Research preprint, version 0.3.0. We study a hypothetical Born sampler that independently projects its sampled register with probability epsilon, with immediate outcome/flag feedback on the same persistent state and a noiseless input oracle. Constant-success unique-item search has optimal total query/readout/preparation/ordinary-measurement cost Theta(N^(1/3)+sqrt(epsilon N)), with separately paid gates, classical work, space, transcript bits and precision.\n\nThe revision adds a second main theorem: every finite Boolean promise problem with success at least 2/3 satisfies Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36, using P+1 at epsilon=0. Adv_+ is the entrywise-nonnegative spectral adversary. A complete-history spectral query charge covers entangled workspace, partial measurements, permitted resets, feedback and unequal stopping without a history-count factor. Fixed and decreasing powers are proved separately. The parity application gives Omega(n) queries at any fixed positive collapse rate. The sharper search theorem is retained.\n\nThe algorithmic template, ideal endpoint and conditional-copy framework are attributed to ABFL and Miloschewsky--Podder; prior imperfect-readout robustness to Abbas et al.; positive weighted/spectral adversary machinery to the established literature including Miloschewsky--Podder and Spalek--Szegedy. Certificates may be exponentially large analytical objects. No signed-adversary extension, efficient certificate discovery, physical implementation, classification of all noisy PDQP or ordinary BPP/BQP result is claimed. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. Separate provider CLI AI-review reports and dispositions are archived; no independent human peer review or formal certification has occurred.",
+  "version": "0.3.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "Fredriksen, Daniel",
+      "affiliation": "Quantyra Inc.",
+      "orcid": "0009-0002-9123-7435"
+    }
+  ],
+  "access_right": "open",
+  "license": "CC-BY-4.0",
+  "language": "eng",
+  "keywords": [
+    "quantum query complexity",
+    "non-collapsing measurements",
+    "unstructured search",
+    "fidelity",
+    "postquantum computation",
+    "positive adversary method",
+    "Boolean promise problems"
+  ]
+}
+
+
+PUBLIC FILE: README.md
+# Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements
+
+The revision adds a second main theorem: every finite Boolean promise problem in the same model satisfies `Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36`, using P+1 at epsilon=0. Here Adv_+ is the positive spectral adversary. Complete-history query probabilities remove any branch-count factor; the proof preserves immediate feedback, partial measurements and unequal stopping. For n-bit parity, fixed positive epsilon requires Omega(n) queries. The original sharper search law is retained. Certificates can be exponential analytical objects; no signed-adversary or efficient-discovery result is claimed.
+
+**Version 0.3.0 revision: fresh review and publication pending.** Previous published version 0.2.0: [DOI 10.5281/zenodo.24255781](https://doi.org/10.5281/zenodo.24255781). Previous published version: [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
+
+We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags may immediately control later operations on the same continuing state. With a noiseless search oracle, the optimal constant-success unique-item search cost is
+
+\[
+T_*(N,\varepsilon)=\Theta(N^{1/3}+\sqrt{\varepsilon N}).
+\]
+
+The cost charges every oracle call, sampler call, fresh attempt and ordinary measurement/reset. The lower bound covers arbitrary entangled workspace and partial-register measurements: Q^2(P+1) >= N/32 and Q^2 ceil(1/epsilon) >= N/32 for N >= 12 (the second for epsilon > 0). Each whole-register readout counts as one call. The construction separately pays gates, space, O(P log N) transcript bits and precision; the theorem is stated for N >= 2.
+
+Version 0.2.0 extended the fixed/decreasing-power comparisons to immediate feedback through complete-history finite-tree induction and query-frontier alignment. At epsilon=0 this covers the cited persistent CQP search model. The matched exponent and upper algorithm are unchanged. ABFL supplies the algorithmic template; Miloschewsky--Podder supplies the ideal endpoint and conditional-copy/fidelity precedent; Abbas et al. supplies prior imperfect-readout robustness. [Source comparison and provenance](SOURCES.md) distinguish these contributions from noisy-oracle models. The theorem is not a physical noise result, a full noisy-PDQP classification, or an ordinary BPP/BQP advance.
+
+## Contents and evidence
+
+- [Manuscript](manuscript/main.tex): complete model, proof, construction, resource accounting and references.
+- [Review record](REVIEW.md): internal checks, separate CLI AI-review reports and dispositions; no human peer review or formal certification.
+- [Preserved diagnostic evidence](evidence/README.md): original scripts, preregistrations and receipts, with hashes. Finite checks do not prove the general theorem.
+- [Publication status](publication/README.md): release readiness and archival verification.
+- [CITATION.cff](CITATION.cff) and [.zenodo.json](.zenodo.json): author, title, license and archival metadata.
+
+## Build and verify
+
+Use Python 3.13, Tectonic 0.17.0 and the pinned packages in [tools/requirements.txt](tools/requirements.txt). Install these in your own environment. Then run:
+
+```sh
+python -m pip install -r tools/requirements.txt
+python tools/build.py --tectonic /path/to/tectonic --render
+python tools/check_package.py
+```
+
+Build outputs and page renders go in ignored `.build/`; the PDF and build receipt are retained. Package validation checks the existing inventory without executing the research diagnostics. After intentional artifact changes and a new visual inspection, `python tools/check_package.py --write` records the revised inventory. Build and package checks are document verification, not mathematical or formal certification. Reproduction of historical diagnostics is described separately in [evidence/README.md](evidence/README.md).
+
+## Archiving
+
+Version 0.3.0 is the current revision candidate, with fresh three-provider review and exact archive checks required before release. The existing active Zenodo integration is reused. No new-version DOI is claimed before the archive event.
+
+Previous publications remain immutable:
+
+- v0.2.0, immediate-feedback search: [version DOI](https://doi.org/10.5281/zenodo.24255781), [archive receipt](publication/zenodo-v0.2.0-verification.json); all 83 archived files and PDF verified.
+- v0.1.0, deferred-feedback search: [version DOI](https://doi.org/10.5281/zenodo.24244953), [archive receipt](publication/zenodo-v0.1.0-verification.json); all 54 archived files and PDF verified.
+
+The [concept DOI](https://doi.org/10.5281/zenodo.24244952) identifies the version family. Citation and verification additions after each release are not claimed to be inside its immutable archive. Lean certification remains separate.
+
+Original archive materials are licensed under [CC BY 4.0](LICENSE). Cited third-party works retain their own licenses. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent peer review or formal certification is claimed.
+
+
+PUBLIC FILE: SOURCES.md
+# Sources, attribution and provenance
+
+## General positive-adversary revision, November 15, 2026
+
+The new statement is Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36 for every finite Boolean promise, using P+1 at epsilon=0. The independent flagged sampler, finite persistent-feedback controller, arbitrary workspace and reset semantics are unchanged. The new bridge is the nonnegative spectral query charge summed with actual input/history probabilities; fixed and decreasing powers are applied separately. The stronger search theorem remains. Research source: commit 3781d76b93ca63cc2dc0b39744a45113843c7601, proof SHA-256 9776b0757f4cd74e4ad28cab335e543ea3d564cb90f20a56f1ec68f415c7b105. This archive contains the full proof, so the research repository is not a dependency.
+
+The named transfer question is whether the positive weighted method already supplies this exact noisy, persistent-feedback statement. [Miloschewsky--Podder v3](https://arxiv.org/html/2411.04085v3), Section 4.1 Lemma 4.3, supplies the ideal QP bound for a positive weight scheme; Section 1.5 separately asks about noise and outcome feedback. [Spalek--Szegedy, Theory of Computing 2 (2006)](https://theoryofcomputing.org/articles/v002a001/), Theorem 3.1, equation (3.1), Sections 4.1--4.2, supplies the standard nonnegative spectral convention and positive weighted equivalence. The published author PDF was inspected after the official endpoint timed out: [PDF](https://www.ucw.cz/~robert/papers/equiv-toc.pdf), SHA-256 508aec694b6bd4faf3ba0b85816d7a1c7165cfe2c38279d6b809a9077b3706f2. The MP hash is retained below. Neither inspected theorem states the present independent-collapse/feedback extension. Standard adversary machinery, Perron weighting and the parity certificate are inherited, not new discoveries. The statement concerns positive certificates only and does not claim efficient certificate discovery.
+
+This is a complete attributed extension within the specified hypothetical model. Focused primary-source correspondence does not establish exhaustive priority or community acceptance; AI review and formal certification have separate limits. No ordinary BPP/BQP result follows.
+
+
+The manuscript is self-contained. Its analytic source was frozen at commit `761389cae990d8fdd70458239d137ec9db2b2275` and its focused novelty comparison at `dd6eb45cd2be4d0e4a556394ff2abaad04f4288e` in the author's technical research repository. [Provenance](evidence/provenance.json) retains original source hashes and byte-identical own diagnostic evidence. These commit identifiers are provenance, not a requirement for reader access to a separate repository.
+
+## Closest primary results
+
+| Source and inspected version | What is inherited or distinguished |
+| --- | --- |
+| [Aaronson, Bouland, Fitzsimons, Lee, *The space "just above" BQP*, arXiv:1412.6507v1](https://arxiv.org/html/1412.6507v1), 2014 preprint / ITCS 2016; Sections 2, 4 and Appendix E | Non-collapsing computation and the partial-Grover/repeated-sampling algorithm template. Not a new template here. |
+| [Miloschewsky--Podder, *New Lower-bounds for Quantum Computation with Non-Collapsing Measurements*, arXiv:2411.04085v3](https://arxiv.org/html/2411.04085v3), September 2025; Sections 3--4 and Section 1.5; [CCC 2025 publication](https://doi.org/10.4230/LIPIcs.CCC.2025.12) | Ideal cube-root lower bound and conditional-copy/fidelity precedent. Their broader noisy-computation question motivates this specific model. A readout-dependent exponent cannot simply be replaced by a mean collapse waiting time. |
+| [Amira Abbas et al., *On quantum backpropagation, information reuse, and cheating measurement collapse*](https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3caae2f725c8e2a55ecd600563d172-Paper-Conference.pdf), NeurIPS 2023, Appendix E.4, Proposition 28 | Prior cube-root upper bound under gentle imperfect measurements on multiple copies; the cited proof uses O(log N) copies and 1/N-gentleness. Small conditional disturbance is not independent rare projection; no matching all-rate lower bound for this sampler follows. |
+| [Regev--Schiff, *Impossibility of a Quantum Speed-up with a Faulty Oracle*](https://arxiv.org/html/1202.1027v1), ICALP 2008 / 2012 arXiv upload; Theorem 1 | Faults occur at oracle calls. This theorem keeps the oracle noiseless and adds nondisturbing sampled information. |
+| [Rosmanis, *Quantum Search with Noisy Oracle*, arXiv:2309.14944v1](https://arxiv.org/html/2309.14944v1), 2023; model, Theorem 1, Sections 3--6 and 8 | Closest inspected partial-register/flag comparison, but its ordinary oracle-noise instrument lacks the nondisturbing Born record. Matching discarded-record marginals do not equate operations. |
+| [Fiorentino--Weigert, *A Quantum Theory with Non-Collapsing Measurements*, arXiv:2303.13411v2](https://arxiv.org/html/2303.13411v2), 2025; Sections II, V.2--3 and VI.2 | Passive-measurement composition and single-copy state reconstruction have a different measurement-cost and state-update contract. |
+| [Gilchrist--Langford--Nielsen, *Distance measures to compare real and ideal quantum processes*, quant-ph/0408063v2](https://arxiv.org/html/quant-ph/0408063v2), PRA 71 (2005); Section III | Standard fidelity/Bures facts, converting squared fidelity to the root-fidelity convention used here. |
+
+The retained contribution is the fixed conditional-history exponent k = ceil(1/epsilon), its noisy-readout monotonicity, the square-root query sensitivity, and the matched fully charged search law. Jensen, AM--GM, the Bures metric, the ideal endpoint and diagnostic counts are not separate new results.
+
+## Search limits
+
+The November 14, 2026 comparison searched variants of non-collapsing/noncollapsing with noise, imperfect, accidental, probabilistic, partial collapse, robustness, fidelity/Bures and search, plus PDQP noise and recent follow-ups. The named transfer questions were whether gentle-copy robustness, faulty/noisy-oracle bounds, the ideal copy method, or passive reconstruction already imply this exact instrument and cost contract. The compared statements do not directly do so; no identical theorem was found. Absence of a search hit is not exhaustive priority certification.
+
+The original comparison screened these abstracts only (the feedback audit below supersedes that limit for Morimae et al.): [Cakan et al. 2510.05055v1](https://arxiv.org/abs/2510.05055v1), [Morimae, Shirakawa and Yamakawa 2510.04448v1](https://arxiv.org/abs/2510.04448v1), and [Lolck, Mancinska and Paraashar 2411.04931v1](https://arxiv.org/abs/2411.04931v1). These were not full-proof audits and carry no theorem-level novelty conclusion here. No author contact, unpublished-work check, independent expert review or exhaustive citation crawl occurred.
+
+[Primary-source pins](evidence/primary-source-pins.json) identify the inspected files without redistributing full third-party texts. The manuscript bibliography links directly to the primary sources. Original results, the protected-workspace counterexample and the earlier weaker signed-score estimate remain in the source history; the paper centers the final matched theorem.
+
+## Immediate-feedback revision, November 15, 2026
+
+The new scope is persistent outcome/flag feedback, not a new exponent for the old model. Research derivation: commit 9c51e1171468b1cb550d5fd515916b1023be9499, proof SHA-256 061559f3c26f9b2ff3affb05b53efcaa683c08cf2368c386910740e6c4705601. Complete-history local comparisons extend by finite-tree induction to each branch's next query; the same fixed-policy upper algorithm matches.
+
+Named transfer question: does prior adaptive non-collapsing work already imply the persistent-state search lower bound? The [ABFL author-hosted CQP text](https://theory.stanford.edu/~abouland/Papers/cqp.pdf), Sections 3/6/8, permits persistent continuation and leaves its search lower bound open. This undated 28-page version is distinct from arXiv:1412.6507v1. [MP v3](https://arxiv.org/html/2411.04085v3), Sections 1.1/1.5, also leaves outcome feedback open. [Morimae--Shirakawa--Yamakawa v1](https://arxiv.org/html/2510.04448v1), footnote 6/Section 5, treats stateless adaptive circuit-oracle calls; the hardness equivalence does not supply this persistent-state query lower bound. This is search-model inclusion, not full complexity-class equality.
+
+Exact inspected source SHA-256 values: ABFL b3692abc5d78d23e88871dea8ed17b4648b84a8f423fd3354aa3f694b1d488de; MP a561dfdffd94ac3295fe1f10cb0004826b2fa0eb5a05e5f16598206b14246595; MSY fa5fbd992692ceac8fc08182c7268bb5bca014272c344116ab57fd63d5655dbc. Third-party full texts are not redistributed. Focused queries for CQP/search lower bounds, adaptive non-collapsing search and feedback/fidelity found no matching theorem; this does not certify exhaustive novelty. Original invitations concern v0.1.0 and establish no human review of this extension.
+

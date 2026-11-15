@@ -1,5 +1,14 @@
 # Sources, attribution and provenance
 
+## General positive-adversary revision, November 15, 2026
+
+The new statement is Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36 for every finite Boolean promise, using P+1 at epsilon=0. The independent flagged sampler, finite persistent-feedback controller, arbitrary workspace and reset semantics are unchanged. The new bridge is the nonnegative spectral query charge summed with actual input/history probabilities; fixed and decreasing powers are applied separately. The stronger search theorem remains. Research source: commit 3781d76b93ca63cc2dc0b39744a45113843c7601, proof SHA-256 9776b0757f4cd74e4ad28cab335e543ea3d564cb90f20a56f1ec68f415c7b105. This archive contains the full proof, so the research repository is not a dependency.
+
+The named transfer question is whether the positive weighted method already supplies this exact noisy, persistent-feedback statement. [Miloschewsky--Podder v3](https://arxiv.org/html/2411.04085v3), Section 4.1 Lemma 4.3, supplies the ideal QP bound for a positive weight scheme; Section 1.5 separately asks about noise and outcome feedback. [Spalek--Szegedy, Theory of Computing 2 (2006)](https://theoryofcomputing.org/articles/v002a001/), Theorem 3.1, equation (3.1), Sections 4.1--4.2, supplies the standard nonnegative spectral convention and positive weighted equivalence. The published author PDF was inspected after the official endpoint timed out: [PDF](https://www.ucw.cz/~robert/papers/equiv-toc.pdf), SHA-256 508aec694b6bd4faf3ba0b85816d7a1c7165cfe2c38279d6b809a9077b3706f2. The MP hash is retained below. Neither inspected theorem states the present independent-collapse/feedback extension. Standard adversary machinery, Perron weighting and the parity certificate are inherited, not new discoveries. The statement concerns positive certificates only and does not claim efficient certificate discovery.
+
+This is a complete attributed extension within the specified hypothetical model. Focused primary-source correspondence does not establish exhaustive priority or community acceptance; AI review and formal certification have separate limits. No ordinary BPP/BQP result follows.
+
+
 The manuscript is self-contained. Its analytic source was frozen at commit `761389cae990d8fdd70458239d137ec9db2b2275` and its focused novelty comparison at `dd6eb45cd2be4d0e4a556394ff2abaad04f4288e` in the author's technical research repository. [Provenance](evidence/provenance.json) retains original source hashes and byte-identical own diagnostic evidence. These commit identifiers are provenance, not a requirement for reader access to a separate repository.
 
 ## Closest primary results

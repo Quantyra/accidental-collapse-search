@@ -1,6 +1,14 @@
 # Review record
 
-## Current v0.2.0 immediate-feedback revision
+## Current v0.3.0 general-adversary revision
+
+COMPLETE: fresh Claude proof-adversarial, Grok complexity/resource and AGY claims/attribution reviews, followed by exact final-source rechecks, cover the full revised manuscript. No unresolved blocking finding remains. [Reports and identities](reviews/adversary-v0.3.0/manifest.json); [findings and dispositions](reviews/adversary-v0.3.0/DISPOSITION.md). These are separate provider CLI AI reviews, not human peer review, exhaustive novelty validation or formal certification.
+
+The useful repairs clarify classical-randomness invariance, zero-overlap handling, Rayleigh normalization, the epsilon-dependent parity bound, the maximum-to-sum cost inference and version-history metadata. They leave both theorem statements and the declared model unchanged. Optional attempt-boundary exposition is explicitly dispositioned. Primary-source correspondence was checked by the coordinator; providers were restricted to the supplied packets. Provider configuration and returned model identities are distinguished, including AGY's unattested serving model.
+
+All fourteen final PDF pages were visually inspected. Exact source/PDF identities, package checks and clean committed-export reconstruction are retained separately. No research diagnostic, Lean job, physical experiment or author outreach ran. All earlier reports, diagnostic evidence and published tags/DOIs remain preserved. The final source is identical to the source covered by all final reports; the release bridge is empty.
+
+## Historical v0.2.0 immediate-feedback revision
 
 COMPLETE: fresh Claude proof-adversarial, Grok resource and AGY claims reviews cover the expanded theorem, followed by exact-source rechecks. No blocking finding remains. [Reports and identities](reviews/feedback-v0.2.0/manifest.json); [findings and dispositions](reviews/feedback-v0.2.0/DISPOSITION.md). This is provider CLI AI review, not human peer review, exhaustive novelty validation or formal certification.
 

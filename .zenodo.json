@@ -1,7 +1,7 @@
 {
-  "title": "Optimal Search with Accidentally Collapsing Measurements",
-  "description": "Research preprint. For unique-item search with a noiseless oracle and a Born sampler that independently projects its sampled register with probability epsilon, with immediate outcome/flag feedback on the same persistent state, the optimal total query/readout/preparation/ordinary-measurement cost is Theta(N^(1/3)+sqrt(epsilon N)). A fixed-power conditional-history fidelity argument gives the matching lower bound despite arbitrary entangled workspace and partial measurements. The deferred ideal endpoint, conditional-copy framework and repeated-sampling template are attributed to prior work, including ABFL, Miloschewsky--Podder and prior imperfect-readout robustness by Abbas et al. This is a specified hypothetical postquantum model, not physical noisy hardware, a classification of all noisy PDQP or an ordinary BPP/BQP result. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. Separate provider CLI AI-review reports and their dispositions are recorded in the archive. No independent human peer review or formal certification has occurred. The revision extends the lower bound by finite-tree induction and query-frontier alignment to adaptive control; at epsilon=0 it addresses the cited persistent CQP search question under charged-call accounting.",
-  "version": "0.2.0",
+  "title": "Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements",
+  "description": "Research preprint, version 0.3.0. We study a hypothetical Born sampler that independently projects its sampled register with probability epsilon, with immediate outcome/flag feedback on the same persistent state and a noiseless input oracle. Constant-success unique-item search has optimal total query/readout/preparation/ordinary-measurement cost Theta(N^(1/3)+sqrt(epsilon N)), with separately paid gates, classical work, space, transcript bits and precision.\n\nThe revision adds a second main theorem: every finite Boolean promise problem with success at least 2/3 satisfies Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36, using P+1 at epsilon=0. Adv_+ is the entrywise-nonnegative spectral adversary. A complete-history spectral query charge covers entangled workspace, partial measurements, permitted resets, feedback and unequal stopping without a history-count factor. Fixed and decreasing powers are proved separately. The parity application gives Omega(n) queries at any fixed positive collapse rate. The sharper search theorem is retained.\n\nThe algorithmic template, ideal endpoint and conditional-copy framework are attributed to ABFL and Miloschewsky--Podder; prior imperfect-readout robustness to Abbas et al.; positive weighted/spectral adversary machinery to the established literature including Miloschewsky--Podder and Spalek--Szegedy. Certificates may be exponentially large analytical objects. No signed-adversary extension, efficient certificate discovery, physical implementation, classification of all noisy PDQP or ordinary BPP/BQP result is claimed. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. Separate provider CLI AI-review reports and dispositions are archived; no independent human peer review or formal certification has occurred.",
+  "version": "0.3.0",
   "upload_type": "publication",
   "publication_type": "preprint",
   "creators": [
@@ -19,6 +19,8 @@
     "non-collapsing measurements",
     "unstructured search",
     "fidelity",
-    "postquantum computation"
+    "postquantum computation",
+    "positive adversary method",
+    "Boolean promise problems"
   ]
 }

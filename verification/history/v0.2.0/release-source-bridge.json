@@ -1,0 +1,8 @@
+{
+  "reviewed_source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "release_source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "replacements": [],
+  "new_provider_review": true,
+  "scientific_text_changed_after_final_review": false,
+  "reuse_basis": "Exact final2 scientific source; no post-review substitutions."
+}

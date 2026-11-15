@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "scope": "Clean committed release-source rebuild; exact PDF and package match; no research diagnostic or formal-certification run",
+  "candidate_commit": "454b021bd8441ccf5d3f8b1cfc5ab3e1be5e1a37",
+  "source_sha256": "8dfc571b591f71375023251262df4404fa853f03ac3c6c15180a3717f3022544",
+  "pdf_sha256": "1c9ba63fd8c46bdbf7189ad187661d63e430b434c2a265b039f6c0cdeaa37875",
+  "pdf_byte_identical": true,
+  "package_check": "PASS",
+  "review_bridge": "verification/release-source-bridge.json",
+  "research_diagnostics_rerun": false,
+  "retained_operational_failure": "Initial clean package check lacked jsonschema; copied the existing pinned check dependencies, then package check passed. PDF rebuild already succeeded."
+}

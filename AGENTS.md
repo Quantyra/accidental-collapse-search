@@ -9,3 +9,5 @@ Freeze source/PDF identities, compile and visually inspect the PDF, and check me
 Current authority: the author subsequently instructed publication, PaperMill certification intake and queue reranking after completed review. Execute the first preprint under the recorded readiness decision. This supersedes the earlier release restriction for this candidate only. No proof job or journal submission is authorized by this update.
 
 Current revision authority: the author requested updating P011 for the completed immediate-feedback theorem and reprioritizing it. Execute v0.2.0 integration, fresh exact-source three-lens review and versioned publication only after the readiness decision. Preserve v0.1.0 and its review scope. No outreach or Lean job is authorized.
+
+Current general-adversary revision authority: the author accepted the proposed v0.3.0 integration, fresh three-lens review and versioned release, then instructed revising P011. Record exact readiness before release; preserve all prior versions and certification ownership. No outreach or Lean execution is included.

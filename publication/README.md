@@ -1,5 +1,15 @@
 # Publication status
 
+## v0.3.0 readiness
+
+**PUBLISH after exact final commit/source/PDF freeze and clean-export/package verification.** The author accepted the proposed integration, fresh review and versioned release, then instructed revising P011. This is the existing paper's scoped preprint route; certification remains separately queued.
+
+The general positive-adversary theorem and parity application are integrated alongside the sharper search law. Fresh actual Claude/Grok/AGY initial and final-source reports have no unresolved blocker. These are AI reviews, not human peer review or Lean certification. All fourteen pages, primary-source correspondence, author/ORCID/license metadata and retained evidence were checked. Exact commit, source/PDF identities, active existing Zenodo receiver and readiness are recorded before the release event. No new DOI is claimed before publication.
+
+Earlier versions and their review scope remain immutable. No journal submission, outreach, research experiment or proof job is included. Remaining release work: execute the frozen version and verify the public archive, DOI metadata and every archived file against its tag.
+
+## Historical v0.2.0 publication
+
 **PUBLISHED AND VERIFIED: v0.2.0.** [Version DOI 10.5281/zenodo.24255781](https://doi.org/10.5281/zenodo.24255781); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.2.0). Frozen commit 257b5cc5f338525400af591064e6e2609cb647c6. All 83 archived files and the release PDF match the tag; both DOI URLs and author/license/version metadata verify. [Public archive receipt](zenodo-v0.2.0-verification.json). These citation and receipt additions follow publication and are not claimed inside the immutable archive.
 
 The expanded feedback theorem is an informal preprint with fresh three-provider AI review. Human peer review and Lean certification are not claimed. The v0.1.0 record remains unchanged. Remaining to-do list: none for this versioned release; full certification remains separate.

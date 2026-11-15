@@ -1,31 +1,34 @@
 cff-version: 1.2.0
-message: "Published research preprint. Use preferred-citation."
+message: Research preprint revision; use preferred-citation. New-version DOI pending
+  archival publication.
 type: software
-title: "Optimal Search with Accidentally Collapsing Measurements: manuscript archive"
-version: 0.2.0
-doi: 10.5281/zenodo.24255781
-date-released: "2026-11-15"
+title: 'Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing
+  Measurements: manuscript archive'
+version: 0.3.0
+date-released: '2026-11-15'
 authors:
-  - family-names: Fredriksen
-    given-names: Daniel
-    affiliation: Quantyra Inc.
-    orcid: https://orcid.org/0009-0002-9123-7435
+- family-names: Fredriksen
+  given-names: Daniel
+  affiliation: Quantyra Inc.
+  orcid: https://orcid.org/0009-0002-9123-7435
 license: CC-BY-4.0
 repository-code: https://github.com/Quantyra/accidental-collapse-search
 url: https://github.com/Quantyra/accidental-collapse-search
 keywords:
-  - quantum query complexity
-  - non-collapsing measurements
-  - unstructured search
+- quantum query complexity
+- non-collapsing measurements
+- unstructured search
 preferred-citation:
   type: article
-  title: "Optimal Search with Accidentally Collapsing Measurements"
+  title: Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing
+    Measurements
   authors:
-    - family-names: Fredriksen
-      given-names: Daniel
-      affiliation: Quantyra Inc.
-      orcid: https://orcid.org/0009-0002-9123-7435
-  doi: 10.5281/zenodo.24255781
+  - family-names: Fredriksen
+    given-names: Daniel
+    affiliation: Quantyra Inc.
+    orcid: https://orcid.org/0009-0002-9123-7435
   year: 2026
-  notes: "Preprint version 0.2.0. AI-assisted derivation and checks, with separate CLI AI reviews recorded in the archive; no independent human peer review or formal certification."
-  url: https://doi.org/10.5281/zenodo.24255781
+  notes: Preprint version 0.3.0. AI-assisted derivation and checks, with separate
+    CLI AI reviews recorded in the archive; no independent human peer review or formal
+    certification.
+  url: https://github.com/Quantyra/accidental-collapse-search

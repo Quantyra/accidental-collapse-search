@@ -1,13 +1,13 @@
 {
-  "scope": "Coordinator correspondence/primary-source audit plus separately executed CLI AI reviews",
-  "source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "scope": "Coordinator proof/model/primary-source correspondence plus actual three-provider CLI AI reviews",
+  "source_sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
   "record": "REVIEW.md",
-  "record_sha256": "a8e78a79c8f520275d4cbbc8193056eb2dc45281831369785f9919228757be6d",
+  "record_sha256": "d34d0e5b45e5c26e2261c6351041c300e2e290ac3eed35c28069c091f47ec816",
   "status": "COMPLETE_WITH_SEPARATE_CLI_REVIEWS",
   "external_model_review": true,
   "independent_human_review": false,
   "formal_certification": false,
   "new_diagnostic_execution": false,
-  "reviewed_source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
-  "release_change_scope": "No source change after final2 reviews"
+  "reviewed_source_sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
+  "release_change_scope": "No manuscript source change after final reviews; public release/citation status labels recorded separately"
 }

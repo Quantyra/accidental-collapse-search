@@ -5,3 +5,6 @@
 /reviews/feedback-v0.2.0/*-initial.md whitespace=-blank-at-eol,blank-at-eof,space-before-tab
 /reviews/feedback-v0.2.0/*-final.md whitespace=-blank-at-eol,blank-at-eof,space-before-tab
 /reviews/feedback-v0.2.0/*-final2.md whitespace=-blank-at-eol,blank-at-eof,space-before-tab
+
+/reviews/adversary-v0.3.0/*-packet.txt -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+/reviews/adversary-v0.3.0/*.md whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab

@@ -1,0 +1,13 @@
+{
+  "scope": "Coordinator correspondence/primary-source audit plus separately executed CLI AI reviews",
+  "source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "record": "REVIEW.md",
+  "record_sha256": "a8e78a79c8f520275d4cbbc8193056eb2dc45281831369785f9919228757be6d",
+  "status": "COMPLETE_WITH_SEPARATE_CLI_REVIEWS",
+  "external_model_review": true,
+  "independent_human_review": false,
+  "formal_certification": false,
+  "new_diagnostic_execution": false,
+  "reviewed_source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "release_change_scope": "No source change after final2 reviews"
+}
