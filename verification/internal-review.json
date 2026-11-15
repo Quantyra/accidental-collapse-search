@@ -1,22 +1,13 @@
 {
-  "scope": "Same-agent proof correspondence and package checks, plus separately recorded CLI AI reviews; no human or formal certification",
-  "source_sha256": "8dfc571b591f71375023251262df4404fa853f03ac3c6c15180a3717f3022544",
+  "scope": "Coordinator correspondence/primary-source audit plus separately executed CLI AI reviews",
+  "source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
   "record": "REVIEW.md",
-  "record_sha256": "5bf1ff0e3cae9f84c81604bdbac765647e58bd0c7f0ccc2e969d3747342a49b0",
+  "record_sha256": "a8e78a79c8f520275d4cbbc8193056eb2dc45281831369785f9919228757be6d",
   "status": "COMPLETE_WITH_SEPARATE_CLI_REVIEWS",
-  "changes_from_notes": [
-    "N>=2 domain and bounded small-N argument",
-    "Explicit history-dependent exponents and j-th-query-frontier alignment",
-    "Distinct measurement/environment reset semantics",
-    "Conditional global pure-state preparation-error contract",
-    "Explicit whole-register readout units and transcript cost",
-    "Primary-source check of unsupported reviewer attribution; reviewer withdrew it",
-    "Updated actual AI-review disclosure"
-  ],
   "external_model_review": true,
   "independent_human_review": false,
   "formal_certification": false,
   "new_diagnostic_execution": false,
-  "reviewed_source_sha256": "617e873d184ece9c3b51c0a98b1669cc74c2d36a52396a7a35e75e684349885e",
-  "release_change_scope": "Publication labels only, verified by exact reverse-substitution bridge"
+  "reviewed_source_sha256": "47384ca46a9b823927da5784ea9d67a1cb14b18d10cfd8a958efb21e56e6e1d3",
+  "release_change_scope": "No source change after final2 reviews"
 }

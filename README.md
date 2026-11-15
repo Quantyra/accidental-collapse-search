@@ -1,8 +1,8 @@
 # Optimal Search with Accidentally Collapsing Measurements
 
-**Published preprint, version 0.1.0.** [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
+**Immediate-feedback preprint revision, version 0.2.0; review complete, archival release pending.** Previous published version: [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
 
-We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags are deferred until the circuit ends. With a noiseless search oracle, the optimal constant-success unique-item search cost is
+We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags may immediately control later operations on the same continuing state. With a noiseless search oracle, the optimal constant-success unique-item search cost is
 
 \[
 T_*(N,\varepsilon)=\Theta(N^{1/3}+\sqrt{\varepsilon N}).
@@ -10,7 +10,7 @@ T_*(N,\varepsilon)=\Theta(N^{1/3}+\sqrt{\varepsilon N}).
 
 The cost charges every oracle call, sampler call, fresh attempt and ordinary measurement/reset. The lower bound covers arbitrary entangled workspace and partial-register measurements: Q^2(P+1) >= N/32 and Q^2 ceil(1/epsilon) >= N/32 for N >= 12 (the second for epsilon > 0). Each whole-register readout counts as one call. The construction separately pays gates, space, O(P log N) transcript bits and precision; the theorem is stated for N >= 2.
 
-The contribution is the fixed-power conditional-history comparison and the matching independent-collapse law. ABFL supplies the algorithmic template; Miloschewsky--Podder supplies the ideal endpoint and conditional-copy/fidelity precedent; Abbas et al. supplies prior imperfect-readout robustness. [Source comparison and provenance](SOURCES.md) distinguish these contributions from noisy-oracle models. The theorem is not a physical noise result, a full noisy-PDQP classification, or an ordinary BPP/BQP advance.
+The revision extends the fixed/decreasing-power comparisons to immediate feedback through complete-history finite-tree induction and query-frontier alignment. At epsilon=0 this covers the cited persistent CQP search model. The matched exponent and upper algorithm are unchanged. ABFL supplies the algorithmic template; Miloschewsky--Podder supplies the ideal endpoint and conditional-copy/fidelity precedent; Abbas et al. supplies prior imperfect-readout robustness. [Source comparison and provenance](SOURCES.md) distinguish these contributions from noisy-oracle models. The theorem is not a physical noise result, a full noisy-PDQP classification, or an ordinary BPP/BQP advance.
 
 ## Contents and evidence
 
@@ -34,6 +34,6 @@ Build outputs and page renders go in ignored `.build/`; the PDF and build receip
 
 ## Archiving
 
-The author authorized first publication after the completed three-lens review. The existing Zenodo release integration has been verified. Version v0.1.0 is published and verified: [version DOI](https://doi.org/10.5281/zenodo.24244953), [concept DOI](https://doi.org/10.5281/zenodo.24244952). All 54 archive files and the release PDF match the frozen tag. The DOI-bearing metadata and public receipt were added after release and are not claimed to be inside the immutable archive. Lean certification is separate and is not claimed.
+The author authorized this revision after the immediate-feedback proof, with fresh review and versioned archival publication. v0.2.0 has completed review; its release receipt and new DOI will be recorded after publication. The prior release remains: The existing Zenodo release integration has been verified. Version v0.1.0 is published and verified: [version DOI](https://doi.org/10.5281/zenodo.24244953), [concept DOI](https://doi.org/10.5281/zenodo.24244952). All 54 archive files and the release PDF match the frozen tag. The DOI-bearing metadata and public receipt were added after release and are not claimed to be inside the immutable archive. Lean certification is separate and is not claimed.
 
 Original archive materials are licensed under [CC BY 4.0](LICENSE). Cited third-party works retain their own licenses. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent peer review or formal certification is claimed.

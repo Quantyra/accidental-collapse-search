@@ -1,7 +1,7 @@
 {
   "result": "PASS",
-  "scope": "Actual same-agent inspection of all nine rendered release pages; not mathematical certification",
-  "pdf_sha256": "1c9ba63fd8c46bdbf7189ad187661d63e430b434c2a265b039f6c0cdeaa37875",
+  "scope": "Actual same-agent inspection of every rendered final PDF page: equations, margins, links and bibliography; not mathematical certification",
+  "pdf_sha256": "e66aa1cf67a954e902f9b1fee282e0f3201f194115ec68b985bea344cb847fd8",
   "pages_inspected": [
     1,
     2,
@@ -11,15 +11,10 @@
     6,
     7,
     8,
-    9
+    9,
+    10,
+    11
   ],
   "render_dpi": 100,
-  "checks": [
-    "All nine release pages actually viewed",
-    "Publication labels, equations, references and assistance disclosure legible",
-    "No clipping, overlap or missing glyphs observed"
-  ],
-  "limitations": [
-    "Same-agent document inspection; no human peer review or formal certification."
-  ]
+  "findings": "All eleven pages legible, no clipping or overlap. Bibliography continues on page11; no blank page. Compilation reports no TeX layout diagnostics."
 }

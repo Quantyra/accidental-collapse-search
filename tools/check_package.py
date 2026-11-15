@@ -47,7 +47,7 @@ def main():
     Draft7Validator.check_schema(schema)
     Draft7Validator(schema).validate(cff)
     zenodo = json.loads((ROOT / '.zenodo.json').read_text(encoding='utf-8'))
-    require(cff['version'] == zenodo['version'] == '0.1.0', 'Release version mismatch')
+    require(cff['version'] == zenodo['version'] == '0.2.0', 'Release version mismatch')
     require(cff['preferred-citation']['title'] == zenodo['title'], 'Title mismatch')
     require(cff['license'] == zenodo['license'] == 'CC-BY-4.0', 'License mismatch')
     require(zenodo['upload_type'] == 'publication' and zenodo['publication_type'] == 'preprint',
@@ -55,7 +55,7 @@ def main():
     require(zenodo['creators'] == [{'name': 'Fredriksen, Daniel', 'affiliation': 'Quantyra Inc.',
                                   'orcid': '0009-0002-9123-7435'}], 'Author mismatch')
     require(cff['authors'][0]['orcid'] == 'https://orcid.org/0009-0002-9123-7435', 'ORCID mismatch')
-    public_receipt = ROOT / 'publication/zenodo-v0.1.0-verification.json'
+    public_receipt = ROOT / ('publication/zenodo-v'+zenodo['version']+'-verification.json')
     if public_receipt.exists():
         published = json.loads(public_receipt.read_text(encoding='utf-8'))
         require(published['result'] == 'PASS' and published['all_files_match_tag'], 'Unverified DOI')
@@ -74,7 +74,7 @@ def main():
     require(not any(review[k] for k in ['independent_human_review',
                                         'formal_certification', 'new_diagnostic_execution']),
             'Unsupported human/formal certification or new diagnostic claim')
-    manifest_path = ROOT / 'reviews/three-lens-2026-11-15/manifest.json'
+    manifest_path = ROOT / 'reviews/feedback-v0.2.0/manifest.json'
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
         require(manifest['status'] == 'COMPLETE' and not manifest['unresolved_blocking_findings'],
@@ -128,7 +128,7 @@ def main():
     pdf_text = unicodedata.normalize('NFKC', ' '.join(p.get_text() for p in document))
     pdf_text = re.sub(r'(?<=\w)-\n(?=\w)', '', pdf_text)
     pdf_text = re.sub(r'\s+', ' ', pdf_text)
-    for phrase in ['0.1.0', 'OpenAI Codex', 'Amira Abbas', 'Release and DOI details']:
+    for phrase in ['0.2.0', 'OpenAI Codex', 'Amira Abbas', 'Release and DOI details']:
         require(phrase in pdf_text, 'Missing PDF text: '+phrase)
     provenance = json.loads((ROOT / 'evidence/provenance.json').read_text())
     for name, expected in provenance['files'].items():

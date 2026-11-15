@@ -1,5 +1,18 @@
 # Publication status
 
+## v0.2.0 readiness decision
+
+**PUBLISH after exact final freeze and package/clean-export verification.** The author requested updating P011 for the immediate-feedback theorem and reprioritizing it. This follows the proposed revision, fresh review and new-version archive workflow; the prior preprint exception remains scoped to this paper. No journal submission, outreach or Lean execution is included.
+
+The substantive change is the complete-history finite-tree/query-frontier proof for immediate outcome/flag-controlled continuation. The optimal charged-call law and upper algorithm are unchanged. At epsilon=0, the result covers the cited persistent adaptive CQP search procedures under individual sample accounting, with runtime overhead explicitly separate. Exact correspondence and bounded novelty comparison are in SOURCES.md.
+
+Fresh Claude/Grok/AGY reports and final-source checks are dispositioned with no blocker. These are AI reviews, not human or formal assurance. All-page inspection, author/ORCID/license/AI metadata, evidence preservation and package checks are required before the release. The final exact commit and source/PDF hashes are recorded by the owning release decision before any tag/release event. The existing active Zenodo release integration is reused, never recreated.
+
+Version v0.1.0 and its DOI/reviews remain immutable. The new DOI is not known or claimed before the archive event. Full-manuscript Lean certification and post-certification reconciliation remain separately queued.
+
+## Historical v0.1.0 publication
+
+
 **PUBLISHED AND VERIFIED: v0.1.0**, November 15, 2026 UTC. [Version DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release and PDF](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.1.0).
 
 Frozen commit `32511403b8826a3cce4fb8896d113ffc9622f870`. Both DOI URLs, public metadata, all 54 archived files and the release PDF verify against the tag. PDF SHA-256 `1c9ba63fd8c46bdbf7189ad187661d63e430b434c2a265b039f6c0cdeaa37875`; source SHA-256 `8dfc571b591f71375023251262df4404fa853f03ac3c6c15180a3717f3022544`. Archive 326130 bytes, SHA-256 `3cbdb21628f800361e4861ba449f9dad5d4c52596cd52d472483d06b2ca035cf`. [Public verification receipt](zenodo-v0.1.0-verification.json). These receipt/citation updates are post-release records, separate from the immutable archive. Source/PDF and all reviewer reports remain unchanged from the tag.

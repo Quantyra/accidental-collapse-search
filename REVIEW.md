@@ -1,4 +1,15 @@
-# Three-lens review record
+# Review record
+
+## Current v0.2.0 immediate-feedback revision
+
+COMPLETE: fresh Claude proof-adversarial, Grok resource and AGY claims reviews cover the expanded theorem, followed by exact-source rechecks. No blocking finding remains. [Reports and identities](reviews/feedback-v0.2.0/manifest.json); [findings and dispositions](reviews/feedback-v0.2.0/DISPOSITION.md). This is provider CLI AI review, not human peer review, exhaustive novelty validation or formal certification.
+
+The principal repairs make reference-oracle stopping limits, finite-support randomness and the smallest-cap cost convention explicit, and expand the persistent-CQP operational/cost correspondence. They preserve the matching call-cost law. The coordinator verified primary-source transfer separately; reviewers were restricted to the supplied packets. Actual provider identities and attestation limits are recorded. The final source is unchanged after final2 review, with an empty release bridge.
+
+The eleven-page PDF was built and visually inspected on every page. Package and clean-export verification are recorded separately; no new diagnostic campaign or Lean job ran. v0.1.0, its DOI, evidence and reviews remain immutable. The prior review below is historical and does not itself cover feedback.
+
+## Historical v0.1.0 review
+
 
 Status: COMPLETE. All three lenses completed on the same revised source, with no unresolved blocking finding. This is separate CLI AI review of an informal proof, not independent human peer review or formal certification. The first release uses only the publication-label substitutions recorded in verification/release-source-bridge.json; reverse substitution recovers the exact reviewed scientific source. See publication/README.md for archival status.
 

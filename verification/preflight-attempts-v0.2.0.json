@@ -1,0 +1,18 @@
+{
+  "scope": "Retained operational preflight failures; not mathematical evidence",
+  "attempts": [
+    {
+      "operation": "Candidate commit preflight",
+      "result": "STOPPED_BEFORE_COMMIT",
+      "reason": "git diff --check flagged original reviewer Markdown hard-break spaces and exact diff context in immutable input packets.",
+      "resolution": "Scoped whitespace attributes preserve original report/input bytes; no scientific source change. Ordinary files retain whitespace checks."
+    },
+    {
+      "operation": "Premature clean export after stopped commit",
+      "result": "EXCLUDED_OLD_BASELINE",
+      "commit": "6bc962f7e52f86dbb1503156257514fc4329e66e",
+      "reason": "The old v0.1.0 HEAD rebuilt to its correct nine-page PDF, which intentionally differs from the new eleven-page candidate. The candidate had not committed.",
+      "resolution": "Run a fresh clean export only after the new candidate commit succeeds; the old-baseline attempt is not a candidate validation."
+    }
+  ]
+}

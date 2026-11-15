@@ -19,14 +19,15 @@
 \newcommand{\Tr}{\operatorname{Tr}}
 \title{Optimal Search with Accidentally Collapsing Measurements}
 \author{Daniel Fredriksen\\Quantyra Inc.\\\small\href{https://orcid.org/0009-0002-9123-7435}{ORCID: 0009-0002-9123-7435}}
-\date{November 15, 2026\\\small Research preprint; version 0.1.0}
+\date{November 15, 2026\\\small Research preprint; version 0.2.0}
 \begin{document}
 \maketitle
 \begin{abstract}
 We study unstructured search on $N\ge2$ items with a hypothetical Born sampler that returns a
 measurement outcome while independently projecting the sampled register with
-probability $\eps$. All sampler outcomes and collapse flags are deferred until
-the circuit ends. With a noiseless search oracle, arbitrary entangled workspace,
+probability $\eps$. Sampler outcomes and collapse flags are immediately
+available to control operations on the same continuing state.
+With a noiseless search oracle, arbitrary entangled workspace,
 and ordinary partial measurements, we prove that constant-success unique-item
 search has optimal total oracle-query, sampler, preparation, and ordinary
 measurement cost
@@ -38,8 +39,10 @@ charges every predetermined attempt. For the lower bound, a root-fidelity
 potential on complete conditional histories remains monotone through any
 number of readouts when its copy exponent is $\lceil1/\eps\rceil$.
 Its query sensitivity gives $Q^2\lceil1/\eps\rceil=\Omega(N)$;
-a decreasing-exponent argument recovers the known ideal bound
-$Q^2(P+1)=\Omega(N)$. Full cube-root scaling survives precisely when
+a decreasing-exponent argument extends the ideal inequality
+$Q^2(P+1)=\Omega(N)$ to immediate feedback. Finite-tree induction and query
+frontiers handle unequal sampling and stopping histories.
+Full cube-root scaling survives precisely when
 $\eps=O(N^{-1/3})$. The result concerns this specified postquantum access model,
 not physical noisy quantum hardware or ordinary BPP versus BQP.
 \end{abstract}
@@ -56,8 +59,8 @@ projection instead.
 
 Our primitive samples a specified register in the computational basis. An
 independent Bernoulli coin determines whether that register is projected or
-the global state is left intact. The sampled outcome and coin are recorded,
-but neither is available to control the circuit. This is a particular noisy
+the global state is left intact. The sampled outcome and coin are recorded
+and immediately available to control later operations. This is a particular noisy
 extension of a hypothetical information resource. It does not assert a
 physical implementation of non-collapsing measurement.
 
@@ -81,10 +84,11 @@ More precisely, for $N\ge12$, every such algorithm satisfies
  Q^2(P+1)\ge\frac N{32},\qquad
  Q^2\lceil1/\eps\rceil\ge\frac N{32}\quad(\eps>0).
 \end{equation}
-Here $Q$ counts oracle calls and $P$ counts sampler calls; total cost also
+Here $Q$ and $P$ are worst-case oracle and sampler call caps; total cost also
 charges fresh attempts and ordinary measurement/reset calls. The achieving
 construction uses $O(\log N)$ quantum space and
-$O((N^{1/3}+\sqrt{\eps N})\log N)$ nonoracle gates and classical processing,
+$O((N^{1/3}+\sqrt{\eps N})\log N)$ nonoracle gates and classical scheduling/scan
+work, plus $\operatorname{poly}(\log N)$ parameter arithmetic,
 with transcript storage charged separately. The same bounds hold if collapse
 flags are hidden.
 \end{theorem}
@@ -96,18 +100,33 @@ exponent of order $1/\eps$. The collapsing branch compensates for the
 information released by the non-collapsing branch at this exponent. A Bures
 distance hybrid argument then incurs only the square root of the exponent
 per query. These copies are a proof device, not an additional algorithmic
-resource. Section~\ref{sec:lower} proves the lower bounds, and
+resource. Version 0.2.0 extends both comparisons to immediate feedback via
+finite-tree induction and query frontiers. The original deferred-history
+model is a special case; the scalar inequalities and matching upper algorithm
+are inherited from version 0.1.0.
+Section~\ref{sec:lower} proves the lower bounds, and
 Section~\ref{sec:upper} supplies a matching fully charged construction.
 
 \subsection{Relation to prior work}
 ABFL supplies the partial-Grover/repeated-readout template \cite{abfl}.
 Miloschewsky--Podder supplies the ideal cube-root result and closely related
-copy/fidelity structure \cite{mp}. We explicitly reconstruct the ideal bound
-inside our history model; we do not claim that endpoint or the use of
-conditional copies as a separate contribution. The new comparison keeps
+copy/fidelity structure \cite{mp}. We reconstruct the ideal inequality and
+extend its control scope; neither the deferred endpoint nor the use of
+conditional copies is a separate contribution. The fixed-power comparison keeps
 the exponent fixed as a function of $\eps$, instead of decreasing a
 readout-dependent exponent. Their paper also identifies noisy computation
 with non-collapsing measurements as a broader open direction.
+
+The author-hosted ABFL manuscript separately defines persistent adaptive
+CQP: a controller receives samples and chooses further gates on the same
+state \cite[Sections 3, 6, 8]{abflcqp}. Its search lower-bound question and
+the feedback question in \cite[Section 1.5]{mp} concern this continuation.
+At $\eps=0$, our finite capped model includes these search procedures and
+answers that search question under the explicit charged-call convention.
+This is search-model inclusion, not equality of entire complexity classes.
+Adaptive calls to a \emph{stateless} circuit-sampling oracle in
+\cite[footnote 6, Section 5]{msy} start independent invocations; their
+sampling-hardness equivalence does not supply this persistent-state bound.
 
 Abbas, King, Huang, Huggins, Movassagh, Gilboa, and McClean already showed
 that sufficiently gentle imperfect measurements can support cube-root
@@ -160,14 +179,17 @@ Zero-probability branches are omitted. The identity in $\Pi_y$ includes all
 workspace and any inaccessible reference. This specifies the update on an
 entangled state, not just the distribution on $S$.
 
-The circuit and sampler schedule are fixed before execution. Ordinary
-projective measurements on subsets are allowed; any classical control they
-provide uses only ordinary outcomes. Sampler outcomes and collapse flags
-are returned after the entire circuit and cannot control later gates,
-queries, preparations, or restarts. A final classical map produces the
-answer. Randomized circuits can choose their classical seed at the start.
-The lower bound also permits ordinary-history-controlled operations with
-fixed worst-case caps, so this allowance introduces no gap in the argument.
+A finite capped classical controller receives sampler outcomes and flags
+immediately. Based on its history it may select gates, oracle queries,
+sampled registers, ordinary partial projective measurements, preparations,
+resets, restarts and termination, on the same continuing state. At equal
+histories its decision rule is the same in all oracle worlds. Fresh classical
+random choices have finite support and are input-independent given the history.
+Deferred feedback
+and hidden flags are restrictions of this model. There is no unknown-state
+description, physical cloning, rewinding, chosen-outcome projection or free
+postselection. A final classical map of the available transcript produces
+the answer.
 
 Mixed initial preparations are represented by an input-independent global
 purification; classical preparation choices and ordinary measurement
@@ -203,13 +225,22 @@ unchanged on the $c=0$ branch. That record-retaining rule is not an ordinary
 linear quantum instrument for $\eps<1$. Equal discarded-record marginals
 therefore do not justify transferring an ordinary noisy-oracle theorem.
 
-We charge $Q$ oracle calls, $P$ sampler calls, $R$ fresh attempt preparations,
-and $M$ ordinary projective measurement/reset calls, with
+Let $Q,P,R,M$ be the smallest worst-case caps over valid marked inputs
+and complete branches on oracle calls, sampler calls, fresh attempt
+preparations and ordinary projective measurement/reset calls, respectively.
+Thus these caps are the corresponding branch maxima. We charge
 \begin{equation}\label{eq:cost}
  T=Q+P+R+M.
 \end{equation}
-All attempts are predetermined and paid even if an earlier one succeeds.
-There are no free postselected trials or uncharged expected retries.
+This sum of caps lies between the worst-case summed call count and four
+times that count. The finite controller and caps apply on every execution,
+including the reference oracle $O_0$. Enforce them by halting before a cap
+would be exceeded; if initially promised only on marked inputs, this
+truncation leaves every valid-input execution unchanged.
+All actual attempts are paid, including failed trials and
+feedback-selected restarts. The achieving construction schedules all attempts
+in advance and pays them even after success. No expected-cost or unbounded
+stopping-time theorem is claimed.
 Known zero ancillas have no input information and are charged in gate and
 space accounting. Register widths, transcript storage, ordinary gates,
 classical processing, and precision are additional costs stated explicitly.
@@ -219,11 +250,14 @@ in Section~\ref{sec:resources}. Unknown-rate calibration is not free access.
 
 \section{Complete-history lower bound}\label{sec:lower}
 \subsection{A conditional-copy metric}
-At a fixed time, let $h$ include all preceding ordinary outcomes, sampler
+At a prefix-free cut of the finite execution tree, let $h$ include all
+preceding ordinary outcomes, sampler
 outcomes and flags, and classical random choices. In oracle world $a$, let
 $p_a(h)$ be its probability and $\psi_{a,h}$ the conditional global pure
-state. An analytical history may include outcomes inaccessible to the
-algorithm. Comparisons at the same $h$ apply the same input-independent
+state. The cut includes halted leaves. Histories retain all actual classical
+records, including erased records or hidden flags; they never measure an
+inaccessible purification to invent a record.
+Comparisons at the same $h$ apply the same input-independent
 operations. Branches having zero weight in one world contribute zero.
 
 For an integer $k\ge1$, define the mathematical state
@@ -249,8 +283,10 @@ We also use a history-dependent positive integer exponent $\kappa(h)$.
 Replacing $k$ by $\kappa(h)$ inside each direct-sum block defines
 $\Sigma_a^{(\kappa)}$ and its root fidelity $F_\kappa(a,b)$ on the same
 history-indexed block spaces in both oracle worlds. The associated Bures
-distance is again a metric. This variation is needed only to align
-ordinary-control branches with different numbers of intermediate readouts.
+distance is again a metric. This variation aligns feedback branches with
+different numbers of intermediate readouts. Bures triangles are used within
+one common cut and block space. Across different cuts we use scalar
+monotonicity, not a metric between spaces with different copy exponents.
 
 \begin{lemma}[Partial projection comparison]\label{lem:projection}
 For normalized $u,v$ and a projective measurement $\{\Pi_y\}$, write
@@ -277,7 +313,9 @@ $C_k\ge A(B_0/A)^k\ge r^k/A^{k-1}$. The zero case follows from $r\le A$.
 
 An ordinary measurement replaces the contribution $r^k$ of a common
 history by $C_k$. Thus it cannot decrease $F_k$. Common unitaries preserve
-$F_k$, including conditional unitaries after an ordinary measurement.
+$F_k$, including gates chosen after sampler outcomes and flags. Different
+child histories may choose different gates; matching child histories in the
+two worlds choose the same gate.
 Preparations of known ancillas and environment resets are isometries on the
 retained purification. Measurement resets consist of an ordinary measurement
 and known preparation, with the outcome retained in the history. The two
@@ -321,7 +359,8 @@ Writing $k=\kappa(h)$ before the call, the new contribution is
 Here $A\ge r$ and Lemma~\ref{lem:projection} apply. Ordinary measurements
 retain the current exponent. Consequently this changing potential is
 nondecreasing at nonquery steps, including at $\eps=0$. This reconstructs
-the known ideal-search baseline with complete ordinary and sampler histories.
+the ideal-search inequality with complete ordinary and sampler histories,
+now allowing their immediate use for control.
 
 \subsection{Query sensitivity}
 Compare $O_0$ with each $O_w$, and abbreviate $d_w=d_k(0,w)$.
@@ -354,8 +393,8 @@ $K=\max_h\kappa(h)$: summing~\eqref{eq:self} with history weights bounds
 the reference-query distance by $2\sqrt{K a_0(w)}$, so the aggregate
 increment is at most $2\sqrt K$.
 
-Fixed circuits already have aligned query steps. To cover ordinary-control
-branches with differently timed queries, align histories at the frontier
+To handle outcome-controlled sampling, gates and stopping, align each branch
+at the prefix-free frontier
 immediately before their $j$th oracle call. From the previous query frontier,
 advance each branch through its intervening nonquery operations to this
 frontier; a halted branch is padded with identity queries using control bit
@@ -367,8 +406,13 @@ make their $j$th query together, with $\sum_w a_0(w)\le1$. This gives at most
 $Q$ query frontiers, rather than summing increments over unrelated wall-clock
 slots. The exponent $\kappa(h)=P+1-p(h)$ tracks each branch's actual readouts
 and always satisfies $1\le\kappa(h)\le P+1$.
-These frontiers are analytical observation points; they do not reschedule
-the algorithm or make its deferred sampler records available for control.
+This is induction on the actual finite execution tree: each nonquery node
+expansion obeys the local comparison, including history-selected projectors
+and zero-weight histories. There is no branch-count loss. Control-zero
+padding is analytical, adds no actual calls, and retains halted leaves.
+The frontiers do not reschedule the algorithm. Finite controller/register
+caps provide common padded quantum spaces at each cut; inaccessible
+environments remain quantum.
 
 Initially $D=0$. After the last query, advance through all remaining nonquery
 operations to termination using the same monotonicity. Consequently
@@ -478,7 +522,8 @@ $O(\log N)$ quantum space. Uniform preparation over $N'$ uses Hadamards;
 the Grover reflection and padding controls use $O(\log N)$ reversible gates
 and clean ancillas per query block. An exact implementation using Hadamard,
 Pauli $X$, and Toffoli gates exists. Nonoracle gate count and final classical
-scan time are $O(T\log N)$; the full transcript requires $O(P\log N)$ bits.
+scheduling/scan time are $O((T+1)\log N)$; the full transcript requires
+$O(P\log N)$ bits. The parameter arithmetic below is charged additionally.
 The black-box cost of implementing a search oracle in an application must
 be added separately. The constants above certify an asymptotic law and are
 not a practical performance estimate.
@@ -512,7 +557,48 @@ separately. The exact gate implementation already avoids that overhead.
 This is a coupling for this particular no-intervening-operation construction,
 not a general trace-distance contraction property of nonlinear samplers.
 
+\subsection{A branching check and an insufficient comparator}
+Take $u=\sqrt p\ket{00}+\sqrt{1-p}\ket{11}$ and
+$v=\sqrt q\ket{00}+\sqrt{1-q}\ket{11}$, and write
+$a=\sqrt{pq}$, $b=\sqrt{(1-p)(1-q)}$, $r=a+b$.
+Sample the first qubit; halt on a collapse. On a non-collapsing outcome zero,
+proceed to the next query. On outcome one, apply $X$ to the first qubit,
+sample the second qubit, and then proceed. Branches have different stopping
+times, registers and sample counts. Put $g_k=(1-\eps)r^{k+1}+\eps r$.
+The fixed-power frontier value is
+$\eps r+(1-\eps)ar^k+(1-\eps)bg_k\ge r^k$ when $\eps k\ge1$.
+For the decreasing-power comparison with $P=2$, it is
+$\eps r+(1-\eps)ar^2+(1-\eps)b[(1-\eps)r^2+\eps r]\ge r^3$.
+At $p=1/5,q=4/5,\eps=1/2$, the unpowered one-step comparator fails:
+$g_1=18/25<4/5=r$, while $g_2=82/125\ge16/25=r^2$.
+The two frontier values are $412/625\ge r^2$ and $84/125\ge r^3$.
+This is a symbolic check and negative control. The quantified local
+inequalities and finite-tree induction prove the general claim.
+
 \section{Consequences and limitations}
+\begin{corollary}[Persistent adaptive ideal search]
+At $\eps=0$, immediate-feedback search in the declared finite capped model,
+including the persistent CQP search procedures of \cite{abflcqp}, has
+optimal charged-call cost $\Theta(N^{1/3})$.
+\end{corollary}
+\begin{proof}
+Set $\eps=0$ in Theorem~\ref{thm:main}. The cited definition evolves a pure
+state by unitary $U_i$ and ordinary partial measurement $M_i$, then samples
+the resulting full-register Born distribution without changing the state.
+The controller may select a later segment after receiving earlier samples.
+Implement each $U_i,M_i$ directly, followed by one sampler with $c=0$;
+retain actual ordinary outcomes analytically even when not reported.
+Each returned sample is charged separately, not a free transcript for one
+circuit-oracle call. This preserves search-query and sample counts and
+adds at most one ordinary-measurement charge per sampled stage, without
+copies or replay. The fixed-policy construction belongs to the subclass;
+unused samples after its preparation gates, if required by that syntax,
+add only its separately stated gate overhead. Thus the exact $\Theta$ law
+uses the charged-call convention here; elementary-gate runtime carries the
+stated logarithmic and parameter-processing overhead. No bound on oracle
+queries alone with unlimited free samples is asserted.
+\end{proof}
+
 \begin{corollary}
 The cost is $\Theta(N^{1/3})$ exactly for rates
 $\eps=O(N^{-1/3})$. Any fixed positive rate gives $\Theta(\sqrt N)$ cost.
@@ -532,8 +618,8 @@ lower bound survive this example and arbitrary entangled workspace.
 \end{remark}
 
 The theorem charges a particular postquantum sampler and a noiseless oracle.
-It does not classify all noisy PDQP models, allow sampler-outcome feedback,
-establish a physical realization, or improve general classical simulation of
+It does not classify all noisy PDQP or adaptive CQP computations, establish
+a physical realization, or improve general classical simulation of
 ordinary quantum computation. Additional oracle, storage, or gate noise and
 unknown-rate estimation would change the access contract. The interpolation
 is an oracle-model result, with the ordinary BPP/BQP question left open.
@@ -541,9 +627,11 @@ is an oracle-model result, with the ordinary BPP/BQP question left open.
 \paragraph{Evidence and assistance disclosure.}
 This preprint has an informal analytic proof and internal checks, not formal
 certification or independent peer review. The accompanying archive preserves
-two finite exact diagnostic runs and their source hashes; these illustrate
+two historical finite exact diagnostic runs and their source hashes; these illustrate
 algebraic and projector comparisons and do not establish universal claims
-by finite agreement. OpenAI Codex assisted with derivation, literature
+by finite agreement. Those runs predate the feedback extension; the new
+scope is proved analytically, without a new numerical campaign.
+OpenAI Codex assisted with derivation, literature
 comparison, drafting, and internal checking. Separate AI review was conducted
 through provider CLIs. The archive records actual model identities, review
 scopes, findings, and dispositions. These reviews are not independent human
@@ -555,12 +643,25 @@ LaTeX, the PDF, reproducibility records, and citation metadata are available at
 under CC BY 4.0. Cited works retain their own licenses.
 
 \begin{thebibliography}{9}
+\small
 \raggedright
 \bibitem{abfl}
 Scott Aaronson, Adam Bouland, Joseph Fitzsimons, and Mitchell Lee.
 The space ``just above'' BQP.
 \emph{ITCS}, 2016. Preprint 2014.
 \href{https://arxiv.org/abs/1412.6507v1}{arXiv:1412.6507v1}.
+
+\bibitem{abflcqp}
+Scott Aaronson, Adam Bouland, Joseph Fitzsimons, and Mitchell Lee.
+The space ``just above'' BQP. Author-hosted CQP/naCQP manuscript,
+\href{https://theory.stanford.edu/~abouland/Papers/cqp.pdf}{28-page PDF},
+Sections 3, 6 and 8; inspected November 15, 2026. This undated source is
+distinguished from the pinned arXiv PDQP version above.
+
+\bibitem{msy}
+Tomoyuki Morimae, Yuki Shirakawa, and Takashi Yamakawa.
+Quantum cryptography and hardness of non-collapsing measurements.
+\href{https://arxiv.org/abs/2510.04448v1}{arXiv:2510.04448v1}, October 6, 2025.
 
 \bibitem{mp}
 David Miloschewsky and Supartha Podder.
