@@ -1,6 +1,12 @@
 # Publication status
 
-## v0.3.0 readiness
+## v0.3.0 publication
+
+**PUBLISHED AND VERIFIED: v0.3.0.** [Version DOI 10.5281/zenodo.24261197](https://doi.org/10.5281/zenodo.24261197); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.3.0). Frozen commit afd4ccc246841586f6fa8a6995a29ea1e79598bc. All 110 archived files and the release PDF match the tag; both DOI URLs and author/license/version metadata verify. [Public archive receipt](zenodo-v0.3.0-verification.json). This citation/status/receipt update follows publication and is separate from the immutable archive.
+
+Fresh Claude, Grok and AGY review and exact final-source rechecks have no unresolved blocker. These are AI reviews, not independent human peer review or Lean certification. Both previous versions remain intact. Remaining to-do list: none for this versioned release; full PaperMill certification and reconciliation remain separately queued.
+
+## Retained v0.3.0 readiness
 
 **PUBLISH after exact final commit/source/PDF freeze and clean-export/package verification.** The author accepted the proposed integration, fresh review and versioned release, then instructed revising P011. This is the existing paper's scoped preprint route; certification remains separately queued.
 
