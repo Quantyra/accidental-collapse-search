@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "Clean committed-source export rebuild; no research diagnostic or certification job",
+  "candidate_commit": "dbc8f69268a3306ca182913dcfc0d678c085b412",
+  "source_sha256": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
+  "pdf_sha256": "5b13237a67dfeb8fd2ccd571120e33fd74ddf4fc756ae21291d3c329caf135d3",
+  "pdf_byte_identical": true,
+  "package_check": "PASS",
+  "reused_dependencies": "Tectonic 0.17.0; PyMuPDF 1.28.2; PyYAML 6.0.3; jsonschema 4.25.1",
+  "research_diagnostics_rerun": false
+}

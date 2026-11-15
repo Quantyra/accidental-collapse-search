@@ -25,7 +25,7 @@
     "LICENSE": "08f46cb0e10fa97b8cd5bd3d3051ece6fd7fd4c03950e2a0b9a32ec2a1ca9612",
     "manuscript/main.pdf": "5b13237a67dfeb8fd2ccd571120e33fd74ddf4fc756ae21291d3c329caf135d3",
     "manuscript/main.tex": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
-    "publication/README.md": "58c4ae8ba982a4421efa0904873f2a8dd600b7518cf78a32d2257843a108f3bd",
+    "publication/README.md": "e83231f03a38467e38d18e3c95be8fd22810fd1aa254deef88acf4ede2a5ec7f",
     "README.md": "ac63f3f410be21dded045e82acdd462f45fcede5784379665e86a8c5351ba251",
     "REVIEW.md": "c34062cc267341a00de5b2f15b660a09e4119021db0210fc7f167a862f1ed15b",
     "SOURCES.md": "a75ef7980f5940fe5866f847762f2a1e89e15bb2c6f28b6b445601857cbe97f6",
@@ -33,6 +33,7 @@
     "tools/check_package.py": "82a8bdea2d915780b4dfd5f8d137cc38782e768994a4fb191e670421d551e7e6",
     "tools/requirements.txt": "51f9939becc283211e6792439332e4622fd6af4b8b4f05e45a65fa9863e7369f",
     "verification/build.json": "e4dcdb0668a710c70abee8735dab7ad55a0503455536f983af80f9cea41c352f",
+    "verification/clean-export.json": "9322bcd7f401d661ffc08ec6bc39ccb8ccf843db1f9b495c91c7f6f95f471a9e",
     "verification/internal-review.json": "3e8fea90ddfc2668fa3dc232c3843d7b4552b71bd5cc33404e5b52cc717173e2",
     "verification/visual.json": "4c8fa6ee2de295440080276d0c43179cabe00930a021d6922fa5bdf84152fd0f"
   }
