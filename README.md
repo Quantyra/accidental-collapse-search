@@ -1,6 +1,6 @@
 # Optimal Search with Accidentally Collapsing Measurements
 
-**Draft for review, version 0.1.0-dev.** Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
+**Research preprint, version 0.1.0.** Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
 
 We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags are deferred until the circuit ends. With a noiseless search oracle, the optimal constant-success unique-item search cost is
 
@@ -17,7 +17,7 @@ The contribution is the fixed-power conditional-history comparison and the match
 - [Manuscript](manuscript/main.tex): complete model, proof, construction, resource accounting and references.
 - [Review record](REVIEW.md): internal checks, separate CLI AI-review reports and dispositions; no human peer review or formal certification.
 - [Preserved diagnostic evidence](evidence/README.md): original scripts, preregistrations and receipts, with hashes. Finite checks do not prove the general theorem.
-- [Publication status](publication/README.md): preparation only, no release or DOI yet.
+- [Publication status](publication/README.md): release readiness and archival verification.
 - [CITATION.cff](CITATION.cff) and [.zenodo.json](.zenodo.json): author, title, license and archival metadata.
 
 ## Build and verify
@@ -34,6 +34,6 @@ Build outputs and page renders go in ignored `.build/`; the PDF and build receip
 
 ## Archiving
 
-The owner reports that Zenodo's GitHub integration is enabled for this repository. No release, tag, DOI or journal submission has been made. A future release requires its own recorded readiness decision and applicable authorization; enabling the integration is not a statement that review has occurred. The first archival release must replace development-version metadata consistently and verify the resulting public record.
+The author authorized first publication after the completed three-lens review. The existing Zenodo release integration has been verified. Version v0.1.0 is the first archival candidate; the publication record tracks execution and the verified version/concept DOIs after release. Lean certification is separate and is not claimed.
 
 Original archive materials are licensed under [CC BY 4.0](LICENSE). Cited third-party works retain their own licenses. OpenAI Codex assisted derivation, literature comparison, drafting and internal checking. No independent peer review or formal certification is claimed.

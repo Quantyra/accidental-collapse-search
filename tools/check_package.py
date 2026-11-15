@@ -47,7 +47,7 @@ def main():
     Draft7Validator.check_schema(schema)
     Draft7Validator(schema).validate(cff)
     zenodo = json.loads((ROOT / '.zenodo.json').read_text(encoding='utf-8'))
-    require(cff['version'] == zenodo['version'] == '0.1.0-dev', 'Draft version mismatch')
+    require(cff['version'] == zenodo['version'] == '0.1.0', 'Release version mismatch')
     require(cff['preferred-citation']['title'] == zenodo['title'], 'Title mismatch')
     require(cff['license'] == zenodo['license'] == 'CC-BY-4.0', 'License mismatch')
     require(zenodo['upload_type'] == 'publication' and zenodo['publication_type'] == 'preprint',
@@ -55,9 +55,14 @@ def main():
     require(zenodo['creators'] == [{'name': 'Fredriksen, Daniel', 'affiliation': 'Quantyra Inc.',
                                   'orcid': '0009-0002-9123-7435'}], 'Author mismatch')
     require(cff['authors'][0]['orcid'] == 'https://orcid.org/0009-0002-9123-7435', 'ORCID mismatch')
-    require('doi' not in cff and 'doi' not in cff['preferred-citation'] and 'doi' not in zenodo,
-            'Unissued manuscript DOI')
-    require('date-released' not in cff, 'Draft misrepresented as released')
+    public_receipt = ROOT / 'publication/zenodo-v0.1.0-verification.json'
+    if public_receipt.exists():
+        published = json.loads(public_receipt.read_text(encoding='utf-8'))
+        require(published['result'] == 'PASS' and published['all_files_match_tag'], 'Unverified DOI')
+        require(cff.get('doi') == cff['preferred-citation'].get('doi') == published['version_doi'], 'DOI mismatch')
+    else:
+        require('doi' not in cff and 'doi' not in cff['preferred-citation'], 'Unissued manuscript DOI')
+    require('doi' not in zenodo, 'Do not override the GitHub integration DOI')
 
     source_hash, pdf_hash = sha(ROOT / 'manuscript/main.tex'), sha(ROOT / 'manuscript/main.pdf')
     build = json.loads((ROOT / 'verification/build.json').read_text())
@@ -74,7 +79,16 @@ def main():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
         require(manifest['status'] == 'COMPLETE' and not manifest['unresolved_blocking_findings'],
                 'Three-lens review is incomplete or has unresolved blockers')
-        require(manifest['final_source_sha256'] == source_hash, 'Review is for another manuscript')
+        bridge = json.loads((ROOT / 'verification/release-source-bridge.json').read_text(encoding='utf-8'))
+        reviewed_hash = bridge['reviewed_source_sha256']
+        require(bridge['release_source_sha256'] == source_hash, 'Stale release bridge')
+        restored = (ROOT / 'manuscript/main.tex').read_text(encoding='utf-8')
+        for item in reversed(bridge['replacements']):
+            require(restored.count(item['after']) == 1, 'Non-unique release substitution')
+            restored = restored.replace(item['after'], item['before'])
+        require(hashlib.sha256(restored.encode('utf-8')).hexdigest() == reviewed_hash,
+                'Scientific source changed after review')
+        require(manifest['final_source_sha256'] == reviewed_hash, 'Review source mismatch')
         require(sha(ROOT / manifest['disposition']) == manifest['disposition_sha256'],
                 'Changed review disposition')
         require({x['lens'] for x in manifest['reviews']} == {
@@ -85,7 +99,7 @@ def main():
         require(all(x['provider'] in {'claude', 'grok', 'agy'} for x in manifest['reviews']),
                 'Unrecorded provider type')
         for item in manifest['reviews']:
-            require(item['last_source_sha256'] == source_hash, 'Reviewer has not covered final source')
+            require(item['last_source_sha256'] == reviewed_hash, 'Reviewer has not covered final source')
             require(item['phases'][-1]['verdict'] in {'GO', 'GO-WITH-NOTES'},
                     'Final reviewer verdict does not clear this draft')
             for phase in item['phases']:
@@ -114,7 +128,7 @@ def main():
     pdf_text = unicodedata.normalize('NFKC', ' '.join(p.get_text() for p in document))
     pdf_text = re.sub(r'(?<=\w)-\n(?=\w)', '', pdf_text)
     pdf_text = re.sub(r'\s+', ' ', pdf_text)
-    for phrase in ['0.1.0-dev', 'OpenAI Codex', 'Amira Abbas', 'no DOI has yet been issued']:
+    for phrase in ['0.1.0', 'OpenAI Codex', 'Amira Abbas', 'Release and DOI details']:
         require(phrase in pdf_text, 'Missing PDF text: '+phrase)
     provenance = json.loads((ROOT / 'evidence/provenance.json').read_text())
     for name, expected in provenance['files'].items():
@@ -144,7 +158,7 @@ def main():
                     continue
                 require((p.parent / target.split('#', 1)[0]).exists(),
                         'Broken local link: '+p.name+' -> '+target)
-    result = {'result': 'PASS', 'scope': 'Draft package identities, metadata and recorded checks only; not mathematical certification',
+    result = {'result': 'PASS', 'scope': 'Preprint package identities, metadata and recorded checks only; not mathematical certification',
               'source_sha256': source_hash, 'pdf_sha256': pdf_hash, 'pages': len(document),
               'embedded_fonts': len(font_ids), 'citation_schema_sha256': sha(schema_path),
               'historical_diagnostics_rerun': False,

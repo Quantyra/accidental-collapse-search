@@ -1,6 +1,6 @@
 # Three-lens review record
 
-Status: COMPLETE. All three lenses completed on the same revised source, with no unresolved blocking finding. This is separate CLI AI review of an informal proof, not independent human peer review or formal certification. No release or DOI has been issued.
+Status: COMPLETE. All three lenses completed on the same revised source, with no unresolved blocking finding. This is separate CLI AI review of an informal proof, not independent human peer review or formal certification. The first release uses only the publication-label substitutions recorded in verification/release-source-bridge.json; reverse substitution recovers the exact reviewed scientific source. See publication/README.md for archival status.
 
 | Lens | Actual reviewer | Revised-source status |
 | --- | --- | --- |

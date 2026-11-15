@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "Draft manuscript; no DOI or archival release yet. Use preferred-citation."
+message: "Research preprint. Use preferred-citation; archival DOI is recorded after publication."
 type: software
 title: "Optimal Search with Accidentally Collapsing Measurements: manuscript archive"
-version: 0.1.0-dev
+version: 0.1.0
 authors:
   - family-names: Fredriksen
     given-names: Daniel
@@ -24,5 +24,5 @@ preferred-citation:
       affiliation: Quantyra Inc.
       orcid: https://orcid.org/0009-0002-9123-7435
   year: 2026
-  notes: "Draft version 0.1.0-dev. AI-assisted derivation and checks, with separate CLI AI reviews recorded in the archive; no independent human peer review or formal certification."
+  notes: "Preprint version 0.1.0. AI-assisted derivation and checks, with separate CLI AI reviews recorded in the archive; no independent human peer review or formal certification."
   url: https://github.com/Quantyra/accidental-collapse-search
