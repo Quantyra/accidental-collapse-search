@@ -1,5 +1,10 @@
 # Publication status
 
+**PUBLISHED AND VERIFIED: v0.2.0.** [Version DOI 10.5281/zenodo.24255781](https://doi.org/10.5281/zenodo.24255781); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.2.0). Frozen commit 257b5cc5f338525400af591064e6e2609cb647c6. All 83 archived files and the release PDF match the tag; both DOI URLs and author/license/version metadata verify. [Public archive receipt](zenodo-v0.2.0-verification.json). These citation and receipt additions follow publication and are not claimed inside the immutable archive.
+
+The expanded feedback theorem is an informal preprint with fresh three-provider AI review. Human peer review and Lean certification are not claimed. The v0.1.0 record remains unchanged. Remaining to-do list: none for this versioned release; full certification remains separate.
+
+
 ## v0.2.0 readiness decision
 
 **PUBLISH after exact final freeze and package/clean-export verification.** The author requested updating P011 for the immediate-feedback theorem and reprioritizing it. This follows the proposed revision, fresh review and new-version archive workflow; the prior preprint exception remains scoped to this paper. No journal submission, outreach or Lean execution is included.
