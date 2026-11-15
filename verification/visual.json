@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "scope": "Actual same-agent inspection of rendered PDF pages; not mathematical certification",
-  "pdf_sha256": "5b13237a67dfeb8fd2ccd571120e33fd74ddf4fc756ae21291d3c329caf135d3",
+  "pdf_sha256": "a40e84abf6d8841def3572eb042dc4b81ca18d654eeb96a32f7cae7de1cb8692",
   "pages_inspected": [
     1,
     2,
@@ -15,13 +15,12 @@
   ],
   "render_dpi": 100,
   "checks": [
-    "Title, author, ORCID, draft date and version visible",
-    "Every page viewed; equations, theorem labels, citations and text legible",
-    "No clipping, overlapping text or missing glyphs observed",
-    "All seven references and disclosure/availability text present"
+    "All nine revised pages actually viewed",
+    "N>=2 theorem, variable-exponent/frontier formulas, reset and conditional-pure error text legible",
+    "No clipping, overlap or missing glyphs; equation (6) location additionally verified in PDF text coordinates",
+    "Author, draft version/date, seven references and updated AI-review disclosure visible"
   ],
   "limitations": [
-    "The theorem spans pages 1?2 and references pages 8?9; normal page breaks retained.",
-    "No independent visual or mathematical reviewer."
+    "Same-agent visual inspection; no independent visual or mathematical certification."
   ]
 }

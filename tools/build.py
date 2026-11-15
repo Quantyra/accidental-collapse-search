@@ -26,7 +26,7 @@ def main():
         raise SystemExit(f'Expected Tectonic 0.17.0; got {version}')
     build = ROOT / '.build'
     build.mkdir(exist_ok=True)
-    epoch = int(datetime.datetime(2026, 11, 14, tzinfo=datetime.timezone.utc).timestamp())
+    epoch = int(datetime.datetime(2026, 11, 15, tzinfo=datetime.timezone.utc).timestamp())
     env = dict(os.environ, SOURCE_DATE_EPOCH=str(epoch), TZ='UTC')
     result = subprocess.run(
         [args.tectonic, '--keep-logs', '--outdir', str(build), 'main.tex'],

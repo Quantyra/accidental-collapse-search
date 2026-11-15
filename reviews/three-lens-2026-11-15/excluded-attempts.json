@@ -1,0 +1,21 @@
+{
+  "scope": "Operational noncompletion; not a mathematical finding and not review clearance",
+  "attempts": [
+    {
+      "provider": "grok",
+      "phase": "initial",
+      "status": "TIMEOUT_NO_COMPLETION",
+      "elapsed_seconds": 1200.19,
+      "exit_code": 1,
+      "configured_model": "grok-4.7",
+      "effort": "high",
+      "input_packet": "reviews/three-lens-2026-11-15/initial-grok-packet.txt",
+      "packet_sha256": "faa8d92895c6c12e376f2916ea4acfdacc1b8ea9076ed83e94730e3ee9ef7455",
+      "source_sha256": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recovery": "Fresh full-scope resource review of revised source with medium effort after original CLI terminated"
+    }
+  ]
+}

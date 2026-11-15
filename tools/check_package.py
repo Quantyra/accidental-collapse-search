@@ -66,9 +66,43 @@ def main():
     require(build['source_sha256'] == review['source_sha256'] == source_hash, 'Stale source record')
     require(build['pdf_sha256'] == visual['pdf_sha256'] == pdf_hash, 'Stale PDF record')
     require(review['record_sha256'] == sha(ROOT / review['record']), 'Changed internal review record')
-    require(not any(review[k] for k in ['external_model_review', 'independent_human_review',
+    require(not any(review[k] for k in ['independent_human_review',
                                         'formal_certification', 'new_diagnostic_execution']),
-            'This draft checker expects the recorded internal-only review scope')
+            'Unsupported human/formal certification or new diagnostic claim')
+    manifest_path = ROOT / 'reviews/three-lens-2026-11-15/manifest.json'
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+        require(manifest['status'] == 'COMPLETE' and not manifest['unresolved_blocking_findings'],
+                'Three-lens review is incomplete or has unresolved blockers')
+        require(manifest['final_source_sha256'] == source_hash, 'Review is for another manuscript')
+        require(sha(ROOT / manifest['disposition']) == manifest['disposition_sha256'],
+                'Changed review disposition')
+        require({x['lens'] for x in manifest['reviews']} == {
+            'proof-adversarial', 'complexity/resource', 'non-claims/attribution'}, 'Missing lens')
+        require(len(manifest['reviews']) == 3 and len({
+            x['phases'][-1]['report'] for x in manifest['reviews']}) == 3,
+            'The three lenses require three separate final reports')
+        require(all(x['provider'] in {'claude', 'grok', 'agy'} for x in manifest['reviews']),
+                'Unrecorded provider type')
+        for item in manifest['reviews']:
+            require(item['last_source_sha256'] == source_hash, 'Reviewer has not covered final source')
+            require(item['phases'][-1]['verdict'] in {'GO', 'GO-WITH-NOTES'},
+                    'Final reviewer verdict does not clear this draft')
+            for phase in item['phases']:
+                require(phase['completion_verified'], 'Unverified review completion')
+                require(sha(ROOT / phase['input_packet']) == phase['input_packet_sha256'],
+                        'Changed immutable review input')
+                require('Source SHA-256: '+phase['source_sha256'] in (
+                    ROOT / phase['input_packet']).read_text(encoding='utf-8'),
+                    'Review packet source identity mismatch')
+                report = ROOT / phase['report']
+                require(report.stat().st_size > 200 and sha(report) == phase['report_sha256'],
+                        'Missing or changed review report')
+                require(phase['source_sha256'] in report.read_text(encoding='utf-8'),
+                        'Reviewer did not identify the reviewed source')
+        require(review['external_model_review'], 'Review status has not been updated')
+    else:
+        require(not review['external_model_review'], 'External review has no manifest')
     require(build['final_log_diagnostics'] == [], 'TeX diagnostics remain')
     document = pymupdf.open(ROOT / 'manuscript/main.pdf')
     require(document.metadata['title'] == zenodo['title'], 'PDF title mismatch')

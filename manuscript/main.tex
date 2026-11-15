@@ -19,11 +19,11 @@
 \newcommand{\Tr}{\operatorname{Tr}}
 \title{Optimal Search with Accidentally Collapsing Measurements}
 \author{Daniel Fredriksen\\Quantyra Inc.\\\small\href{https://orcid.org/0009-0002-9123-7435}{ORCID: 0009-0002-9123-7435}}
-\date{November 14, 2026\\\small Draft for review; version 0.1.0-dev}
+\date{November 15, 2026\\\small Draft for review; version 0.1.0-dev}
 \begin{document}
 \maketitle
 \begin{abstract}
-We study unstructured search with a hypothetical Born sampler that returns a
+We study unstructured search on $N\ge2$ items with a hypothetical Born sampler that returns a
 measurement outcome while independently projecting the sampled register with
 probability $\eps$. All sampler outcomes and collapse flags are deferred until
 the circuit ends. With a noiseless search oracle, arbitrary entangled workspace,
@@ -31,6 +31,8 @@ and ordinary partial measurements, we prove that constant-success unique-item
 search has optimal total oracle-query, sampler, preparation, and ordinary
 measurement cost
 $\Theta(N^{1/3}+\sqrt{\eps N})$, uniformly for $0\le\eps\le1$.
+Each whole-register readout counts as one call; the construction separately
+uses $O(P\log N)$ transcript bits for $P$ readouts.
 The upper bound uses partial Grover search followed by repeated readouts and
 charges every predetermined attempt. For the lower bound, a root-fidelity
 potential on complete conditional histories remains monotone through any
@@ -67,7 +69,7 @@ registers. A lower bound must account for partial measurements, entanglement,
 and the full classical history rather than counting apparent restarts.
 
 \begin{theorem}[Uniform optimal cost]\label{thm:main}
-In the model of Section~\ref{sec:model}, let $T_*(N,\eps)$ be the minimum
+In the model of Section~\ref{sec:model}, for $N\ge2$, let $T_*(N,\eps)$ be the minimum
 worst-case cost for outputting the unique marked item with probability at
 least $2/3$ for every marked item. Then, with absolute implied constants,
 \begin{equation}\label{eq:main}
@@ -110,7 +112,8 @@ with non-collapsing measurements as a broader open direction.
 Abbas, King, Huang, Huggins, Movassagh, Gilboa, and McClean already showed
 that sufficiently gentle imperfect measurements can support cube-root
 search \cite[Appendix E.4, Proposition 28]{abbas}. Their construction uses
-multiple copies with a gentleness assumption on the resulting state. A
+multiple copies with a gentleness assumption on the resulting state: the
+cited proof uses $O(\log N)$ copies and $1/N$-gentleness. A
 small conditional disturbance is different from a rare event with potentially
 order-one conditional disturbance. Thus robustness to imperfect readout is
 an existing idea; the present result gives a matched, all-$\eps$ law for the
@@ -173,6 +176,18 @@ inaccessible purification registers. The primitive is defined on these
 conditional global pure states. We do not assume an ensemble-independent
 nonlinear map on arbitrary reduced density matrices.
 
+Reset operations have specified implementations. A measurement reset performs
+an ordinary projective measurement, includes its outcome in the classical
+history, and prepares a known basis state. An environment reset swaps the
+register with a fresh known ancilla and retains the old register as an
+inaccessible quantum environment, without creating a classical outcome.
+Discards similarly retain their quantum purification without conditioning
+on a fictitious outcome. These implementations can produce different later
+sampler statistics and are not identified as equivalent channels here.
+Both reset implementations are allowed and charged as ordinary reset calls;
+their gate and ancillary-space costs are additional. The lower bound covers
+each implementation separately, and the main upper construction uses no resets.
+
 To see the distinction from ordinary dephasing, write
 $\rho=\ket{\psi}\bra{\psi}$ on a pure history branch. The unnormalized states
 associated with the classical outcomes are
@@ -230,6 +245,13 @@ endpoints, proves the Bures triangle inequality. Conditional powers in
 \eqref{eq:potential} lie \emph{inside} the history sum. No independence
 of histories or of successive snapshots is assumed.
 
+We also use a history-dependent positive integer exponent $\kappa(h)$.
+Replacing $k$ by $\kappa(h)$ inside each direct-sum block defines
+$\Sigma_a^{(\kappa)}$ and its root fidelity $F_\kappa(a,b)$ on the same
+history-indexed block spaces in both oracle worlds. The associated Bures
+distance is again a metric. This variation is needed only to align
+ordinary-control branches with different numbers of intermediate readouts.
+
 \begin{lemma}[Partial projection comparison]\label{lem:projection}
 For normalized $u,v$ and a projective measurement $\{\Pi_y\}$, write
 \[
@@ -245,7 +267,8 @@ $C_k=\sum_y\sqrt{p_yq_y}r_y^k$. For $k\ge1$ and $A>0$,
 If $A=0$ then $r=0$.
 \end{lemma}
 \begin{proof}
-Cauchy--Schwarz gives $A\le1$ and $r_y\le1$. Completeness and the triangle
+Cauchy--Schwarz gives $A\le1$ and $r_y\le1$; when $p_yq_y=0$, it also gives
+$|\bra u\Pi_y\ket v|=0$, justifying omission. Completeness and the triangle
 inequality give
 $B_0:=\sum_y|\bra u\Pi_y\ket v|\ge r$, while $B_0\le A$.
 Weighted Jensen with weights $\sqrt{p_yq_y}/A$ gives
@@ -255,10 +278,11 @@ $C_k\ge A(B_0/A)^k\ge r^k/A^{k-1}$. The zero case follows from $r\le A$.
 An ordinary measurement replaces the contribution $r^k$ of a common
 history by $C_k$. Thus it cannot decrease $F_k$. Common unitaries preserve
 $F_k$, including conditional unitaries after an ordinary measurement.
-Preparations of known ancillas are isometries; discards can be retained in
-the inaccessible purification, and resets can be represented by ordinary
-measurement and preparation. The comparison therefore retains the full
-workspace and all ordinary branches.
+Preparations of known ancillas and environment resets are isometries on the
+retained purification. Measurement resets consist of an ordinary measurement
+and known preparation, with the outcome retained in the history. The two
+distinct reset conventions therefore both obey the comparison. Each argument
+also applies blockwise at a history-dependent exponent.
 
 \subsection{Fixed exponent for noisy readouts}
 \begin{lemma}[Fixed-power monotonicity]\label{lem:fixed}
@@ -285,9 +309,11 @@ In particular, it does not replace the actual number of readouts by their
 mean waiting time to a collapse.
 
 \subsection{Decreasing exponent for the ideal baseline}
-For a separate argument, initialize $k=P+1$ and decrease $k$ by one at
-each sampler call. Immediately before a call, $k\ge2$. The new contribution
-of a common history is
+For a separate argument, set $\kappa(h)=P+1-p(h)$, where $p(h)$ is the number
+of sampler calls preceding history $h$. A real sampler call decreases that
+history's exponent by one. The worst-case cap $p(h)\le P$ ensures that its
+exponent is at least two immediately before a call and at least one afterwards.
+Writing $k=\kappa(h)$ before the call, the new contribution is
 \begin{equation}\label{eq:decreasing}
  (1-\eps)Ar^{k-1}+\eps C_{k-1}
  \ge(1-\eps)r^k+\eps r^{k-1}\ge r^k.
@@ -323,12 +349,31 @@ By Minkowski's inequality,
  D:=\Bigl(\sum_wd_w^2\Bigr)^{1/2}
  \quad\text{increases by at most }2\sqrt{k}\text{ per query}.
 \end{equation}
-All nonquery steps make $D$ nonincreasing by the preceding comparisons.
-Initially $D=0$. Thus $D\le2Q\sqrt{\lceil1/\eps\rceil}$ in the fixed-power
-argument and $D\le2Q\sqrt{P+1}$ in the decreasing-power argument.
-Ordinary adaptive branches can be padded to fixed caps, using control bit
-zero for unused query slots and dummy-register readouts for unused sampler
-slots. The same estimate applies to each common history.
+For history-dependent exponents, the same calculation uses
+$K=\max_h\kappa(h)$: summing~\eqref{eq:self} with history weights bounds
+the reference-query distance by $2\sqrt{K a_0(w)}$, so the aggregate
+increment is at most $2\sqrt K$.
+
+Fixed circuits already have aligned query steps. To cover ordinary-control
+branches with differently timed queries, align histories at the frontier
+immediately before their $j$th oracle call. From the previous query frontier,
+advance each branch through its intervening nonquery operations to this
+frontier; a halted branch is padded with identity queries using control bit
+zero. The stopping location is determined by the recorded history, not by
+the oracle label separately. Each intervening operation replaces one history
+contribution by a sum at least as large, so their full finite subtree
+expansion cannot decrease the fidelity. All branches at the frontier then
+make their $j$th query together, with $\sum_w a_0(w)\le1$. This gives at most
+$Q$ query frontiers, rather than summing increments over unrelated wall-clock
+slots. The exponent $\kappa(h)=P+1-p(h)$ tracks each branch's actual readouts
+and always satisfies $1\le\kappa(h)\le P+1$.
+These frontiers are analytical observation points; they do not reschedule
+the algorithm or make its deferred sampler records available for control.
+
+Initially $D=0$. After the last query, advance through all remaining nonquery
+operations to termination using the same monotonicity. Consequently
+$D\le2Q\sqrt{\lceil1/\eps\rceil}$ in the fixed-power argument and
+$D\le2Q\sqrt{P+1}$ in the decreasing-power argument.
 
 \subsection{Success requires distance}
 Under $O_0$, let $z_w$ be the probability that the final output is $w$.
@@ -342,7 +387,8 @@ affinity is $A_{\rm out}$, Cauchy--Schwarz gives
 \]
 Equation~\eqref{eq:potential} is at most the affinity of the complete
 histories. Classical processing can only increase affinity, so
-$F_k(0,w)\le A_{\rm out}$. Any final ordinary quantum measurement is
+$F_k(0,w)\le A_{\rm out}$, also with $F_\kappa$ in place of $F_k$.
+Any final ordinary quantum measurement is
 included among the ordinary history steps before this processing. Hence
 $d_w^2\ge2-\sqrt3>1/4$. For $N\ge12$,
 \begin{equation}
@@ -356,7 +402,11 @@ Since $\lceil1/\eps\rceil\le2/\eps$, we obtain
 Also $Q^2(P+1)\le2(Q+P)^3$ when $Q+P\ge1$, and therefore
 $Q+P\ge N^{1/3}/4$. Preparations and ordinary measurements can only add to
 the cost. The maximum and sum of the two lower bounds differ by at most a
-factor of two, proving the lower half of Theorem~\ref{thm:main}.
+factor of two. For $2\le N<12$, a zero-query output law is independent of
+$w$ and succeeds for some $w$ with probability at most $1/N\le1/2$.
+Thus $T\ge Q\ge1$, whereas $N^{1/3}+\sqrt{\eps N}<6$ in this bounded range.
+This completes the uniform lower bound of Theorem~\ref{thm:main} for $N\ge2$.
+The trivial $N=1$ problem is excluded, as it needs no input access.
 
 \section{Matching construction}\label{sec:upper}
 \subsection{Exact success probability of an attempt}
@@ -441,15 +491,21 @@ arithmetic. For a supplied rational upper estimate, $m$ is the least integer sat
 $m^3\ge N'$ and $m^2\ge\bar\eps N'$; binary search uses exact integer
 comparisons and time polynomial in $\log N$. It introduces no input-dependent advice.
 
-For approximate preparation, suppose the joint state of each attempt has
-trace-distance error at most $\eta$ before its first readout. The initial
-address/mark-bit distributions then have total-variation distance at most
+For approximate preparation, impose the error bound on the actual conditional
+global pure state of each attempt, including its workspace and reference:
+on every classical preparation branch it has trace-distance error at most
+$\eta$ from the ideal preparation before the first readout. Attempts still
+use independent preparations and coins as above, with approximation confined
+to their individual preparation gates. The initial address/mark-bit
+distributions on each such branch then have total-variation distance at most
 $\eta$. Couple the collapse coins and each pre-collapse Born draw. Once a
 collapse occurs, the sampled address and bit repeat, so the full transcript
 of one attempt differs with probability at most $r\eta$. Across $B$
 attempts the loss of success is at most $Br\eta$. Taking
 $\eta\le1/(24Br)$ preserves success above $2/3$.
-If $G$ preparation gates are approximated, a sufficient condition is a sum
+An error bound only on an averaged reduced density matrix does not imply this
+transcript estimate for the nonlinear sampler. If $G$ within-attempt unitary
+preparation gates are approximated, a sufficient condition is a sum
 of operator-norm errors at most $\eta$. Per-gate accuracy $O(\eta/G)$ uses
 $O(\log N)$ accuracy bits, with any gate-synthesis overhead charged
 separately. The exact gate implementation already avoids that overhead.
@@ -488,9 +544,10 @@ certification or independent peer review. The accompanying archive preserves
 two finite exact diagnostic runs and their source hashes; these illustrate
 algebraic and projector comparisons and do not establish universal claims
 by finite agreement. OpenAI Codex assisted with derivation, literature
-comparison, drafting, and internal checking. The archive's review record
-states the actual review status; no separate external-model or human review
-is represented as completed.
+comparison, drafting, and internal checking. Separate AI review was conducted
+through provider CLIs. The archive records actual model identities, review
+scopes, findings, and dispositions. These reviews are not independent human
+peer review or formal certification.
 
 \paragraph{Availability.}
 LaTeX, the PDF, reproducibility records, and citation metadata are available at

@@ -8,14 +8,14 @@ We study a hypothetical Born sampler that independently projects the sampled reg
 T_*(N,\varepsilon)=\Theta(N^{1/3}+\sqrt{\varepsilon N}).
 \]
 
-The cost charges every oracle call, sampler call, fresh attempt and ordinary measurement/reset. The lower bound covers arbitrary entangled workspace and partial-register measurements: Q^2(P+1) >= N/32 and Q^2 ceil(1/epsilon) >= N/32 for N >= 12 (the second for epsilon > 0). The construction separately pays gates, space, transcript bits and precision.
+The cost charges every oracle call, sampler call, fresh attempt and ordinary measurement/reset. The lower bound covers arbitrary entangled workspace and partial-register measurements: Q^2(P+1) >= N/32 and Q^2 ceil(1/epsilon) >= N/32 for N >= 12 (the second for epsilon > 0). Each whole-register readout counts as one call. The construction separately pays gates, space, O(P log N) transcript bits and precision; the theorem is stated for N >= 2.
 
 The contribution is the fixed-power conditional-history comparison and the matching independent-collapse law. ABFL supplies the algorithmic template; Miloschewsky--Podder supplies the ideal endpoint and conditional-copy/fidelity precedent; Abbas et al. supplies prior imperfect-readout robustness. [Source comparison and provenance](SOURCES.md) distinguish these contributions from noisy-oracle models. The theorem is not a physical noise result, a full noisy-PDQP classification, or an ordinary BPP/BQP advance.
 
 ## Contents and evidence
 
 - [Manuscript](manuscript/main.tex): complete model, proof, construction, resource accounting and references.
-- [Review record](REVIEW.md): actual internal checking and limitations; no independent or external-model review claimed.
+- [Review record](REVIEW.md): internal checks, separate CLI AI-review reports and dispositions; no human peer review or formal certification.
 - [Preserved diagnostic evidence](evidence/README.md): original scripts, preregistrations and receipts, with hashes. Finite checks do not prove the general theorem.
 - [Publication status](publication/README.md): preparation only, no release or DOI yet.
 - [CITATION.cff](CITATION.cff) and [.zenodo.json](.zenodo.json): author, title, license and archival metadata.

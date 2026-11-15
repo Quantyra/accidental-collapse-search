@@ -1,24 +1,28 @@
-# Review record
+# Three-lens review record
 
-Status: internal manuscript preparation; no separate external-model review, independent human peer review or formal certification. This record does not claim that research diagnostics establish the theorem by finite agreement.
+Status: COMPLETE. All three lenses completed on the same revised source, with no unresolved blocking finding. This is separate CLI AI review of an informal proof, not independent human peer review or formal certification. No release or DOI has been issued.
 
-## Scope and disposition
+| Lens | Actual reviewer | Revised-source status |
+| --- | --- | --- |
+| Build/artifact audit | Coordinator; Tectonic and package tools | Compilation and actual nine-page inspection pass; exact package and clean-export receipts are in verification/. |
+| Proof-adversarial | Claude Code; returned model `claude-opus-5-5` | GO-WITH-NOTES; no HIGH/MEDIUM issue or declared-model gap. |
+| Complexity/resource | Grok; returned model `grok-4.7-build` | GO; the original high-effort request timed out and is excluded. |
+| Non-claims/attribution | AGY; configured `gemini-3.8-flash-high` | GO; returned JSON does not attest the serving model. |
 
-The manuscript transcribes the retained analytic proof of the uniform independent-collapse search law. Internal checking covers the following specific obligations:
+The [review directory](reviews/three-lens-2026-11-15/) contains immutable input packets, actual reports, exclusions and the [findings/disposition record](reviews/three-lens-2026-11-15/DISPOSITION.md). The original candidate is `b791bd13ec9046a161dfd6afa49f06fef1f8b6e9`. The revised source SHA-256 is `617e873d184ece9c3b51c0a98b1669cc74c2d36a52396a7a35e75e684349885e`. Exact model/provider/input identities establish what was reviewed; they are not an independent audit of provider serving infrastructure.
 
-| Obligation | Argument and current disposition |
-| --- | --- |
-| State update with entangled reference | Projectors act on the sampled register and identity on all workspace/reference; histories carry global conditional pure states. Mixed preparation semantics are explicit, with no unspecified reduced-density extension. |
-| Complete histories | Copy powers occur inside the history sum; outputs and flags are retained jointly. No independent-snapshot premise is used. |
-| Fixed exponent | Weighted Jensen gives C_k >= r^k/A^(k-1); weighted AM-GM makes (1-epsilon)A+epsilon A^(1-k) >= 1 when epsilon k >= 1. Zero branches handled separately. |
-| Query cost | The auxiliary reference query and Bures triangle inequality give 2 sqrt(k a_0(w)); summing squared distances costs 2 sqrt(k), not k. |
-| Success comparison | The zero-oracle input needs no success guarantee. At least N-6 labels give output variation >= 1/2 and D^2 >= N/8. |
-| Construction and failure costs | Mark bits are appended coherently before readout. All 13,120 attempts run; no feedback verification or free restart. Small instances have a bounded exhaustive fallback. |
-| Precision and computation | Power-of-four padding uses a controlled oracle; exact gates are available. Approximate preparation uses a construction-specific coupling, not general nonlinear contractivity. Parameter selection uses integer comparisons. |
-| Literature and claims | Credits ABFL, Abbas et al. and Miloschewsky--Podder; distinguishes noisy oracle, gentleness and retained-record access. No broad priority, physical or BPP/BQP claim. |
+## Changes made in response to review
 
-The published manuscript is not yet a release: source/PDF hashes, compiler checks, actual all-page inspection and metadata consistency are recorded in `verification/`. The two original finite diagnostic runs are preserved without rerunning or overwriting them. Their 1,468 exact assertions support local sanity checks, while the general argument is analytic.
+The statement explicitly excludes the trivial N=1 case and covers bounded N>=2. The lower proof aligns ordinary-control branches at their j-th-query frontiers and uses history-dependent copy exponents for actual sampler calls. It distinguishes measurement resets from environment resets and imposes preparation-error control on each conditional global pure branch. A bound only on an averaged reduced state is not claimed. Whole-register readout units and transcript-bit costs are explicit. These repairs preserve the matched asymptotic bound.
 
-## Recommended focus for a subsequent adversarial review
+The coordinator checked one proposed attribution correction against Abbas et al.'s primary proceedings page 28. The cited proof uses O(log N) copies and 1/N-gentleness; the initial AGY single-copy assertion was unsupported and was not adopted. AGY withdrew it in its revised-source report. The positive multiple-copy attribution remains. No independent full literature audit or exhaustive novelty certification is implied.
 
-Inspect complete-history conditioning and purification semantics; the auxiliary-state triangle-inequality step; no-feedback legality; and the exact prior-work boundary. Any selected review must preserve actual provider/model identity, input hashes, raw findings and dispositions. No reviewer verdict is manufactured here. No mandatory human-review prerequisite is introduced. Formal Lean certification, if selected, is a separate project.
+Claude's final LOW notes concern additional exposition of the larger ordinary-control class and fixed-cut use of Bures distance. They are dispositioned as nonblocking: the declared theorem remains within its fixed sampler schedule, and the proof applies the metric within common history-block spaces while using scalar monotonicity across cuts. No sampler-feedback extension or new investigation is selected.
+
+## Evidence and limits
+
+Initial and revised reports are preserved separately. The original Grok timeout is retained in [excluded attempts](reviews/three-lens-2026-11-15/excluded-attempts.json); it is not a passing review or mathematical failure. The subsequent full-scope resource request completed GO on the revised source after the earlier CLI terminated. Five substantive reports completed across the initial and revised rounds; one empty noncompletion is excluded. The prepared alternative-provider request was never launched. All review jobs are terminal.
+
+The two historical diagnostic runs remain unchanged and were not rerun. Their 1,468 assertions are finite checks, not the universal proof. There is no Lean build, physical trial, ordinary BPP/BQP bound improvement, human peer review or formal certificate. Source compilation, rendering, metadata and hash checks are operational verification; the analytic arguments and actual review findings remain the mathematical evidence.
+
+The [manifest](reviews/three-lens-2026-11-15/manifest.json) binds all three final reports to the revised source, and preserves the initial reports and failed attempt separately. A ceiling shorthand in Grok?s report is corrected in the disposition: r <= (N')^(1/3)+1 is sufficient, and the manuscript already uses the exact ceiling. No broader model claim is inferred from reviewer comments. Remaining LOW exposition suggestions are nonblocking and do not require another source revision.

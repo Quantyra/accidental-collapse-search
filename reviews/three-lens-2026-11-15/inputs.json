@@ -1,0 +1,37 @@
+{
+  "scope": "Initial frozen inputs for independent CLI lens reviews; no completion implied",
+  "candidate_commit": "b791bd13ec9046a161dfd6afa49f06fef1f8b6e9",
+  "source_sha256": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
+  "pdf_sha256": "5b13237a67dfeb8fd2ccd571120e33fd74ddf4fc756ae21291d3c329caf135d3",
+  "files": {
+    "manuscript/main.tex": "c8c3465e0ec9cddb825b47935efead06bba0c4ad292c1afe81898aa2c755a2fa",
+    "README.md": "5d8e2227f4854d5f2223aa884ed2cd774234178d3f09c9861efa7c220d2f9e3e",
+    "SOURCES.md": "a75ef7980f5940fe5866f847762f2a1e89e15bb2c6f28b6b445601857cbe97f6",
+    ".zenodo.json": "af0882d8bf5e523a99aa8270939240dc66326ac2816cd23d0c9b1d44c5a54144",
+    "CITATION.cff": "0342765cfe32c08f76985f7e46f19166bd6cf7f9a8f6b468f957ed2ecfd4c6f2",
+    "publication/README.md": "53482a506d13aa8f901cb7b10146564f871fea5a3f10d8b5c0fa3265e39a0ce3"
+  },
+  "assignments": {
+    "claude": {
+      "lens": "proof-adversarial",
+      "input_packet": "reviews/three-lens-2026-11-15/initial-claude-packet.txt",
+      "packet_sha256": "344710b65b3c8d8ffec48c82cfb9ec8d89f286e8050b200f2d7456385fba7205"
+    },
+    "grok": {
+      "lens": "complexity/resource",
+      "input_packet": "reviews/three-lens-2026-11-15/initial-grok-packet.txt",
+      "packet_sha256": "faa8d92895c6c12e376f2916ea4acfdacc1b8ea9076ed83e94730e3ee9ef7455"
+    },
+    "agy": {
+      "lens": "non-claims/attribution",
+      "input_packet": "reviews/three-lens-2026-11-15/initial-agy-packet.txt",
+      "packet_sha256": "93ad60d237a3d5aaa18744495869181f12671340aedab8a04d05596d0d4156a5"
+    }
+  },
+  "selected_models": {
+    "claude": "opus (returned identity to be recorded)",
+    "grok": "grok-4.7",
+    "agy": "gemini-3.8-flash-high (available installed AGY model; no claim of Gemini 3.1 Pro High)"
+  },
+  "limits": "One initial review per lens, up to 20 minutes each; preserve failures. Focused rechecks after changes are distinct attempts. No research diagnostics, formal builds, cloud/hardware trials or release."
+}
