@@ -1,9 +1,9 @@
 cff-version: 1.2.0
-message: Research preprint revision, version 0.4.0; use preferred-citation. AI review
-  is not human peer review or formal certification.
+message: Published research preprint, version 0.4.0; use preferred-citation. AI review is
+  not human peer review or formal certification.
 type: software
-title: 'Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing
-  Measurements: manuscript archive'
+title: 'Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements:
+  manuscript archive'
 version: 0.4.0
 date-released: '2026-11-16'
 authors:
@@ -20,15 +20,15 @@ keywords:
 - unstructured search
 preferred-citation:
   type: article
-  title: Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing
-    Measurements
+  title: Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements
   authors:
   - family-names: Fredriksen
     given-names: Daniel
     affiliation: Quantyra Inc.
     orcid: https://orcid.org/0009-0002-9123-7435
   year: 2026
-  notes: Preprint version 0.4.0. AI-assisted derivation and checks, with separate
-    CLI AI reviews recorded in the archive; no independent human peer review or formal
-    certification.
-  url: https://github.com/Quantyra/accidental-collapse-search
+  notes: Preprint version 0.4.0. AI-assisted derivation and checks, with separate CLI AI reviews
+    recorded in the archive; no independent human peer review or formal certification.
+  url: https://doi.org/10.5281/zenodo.24267165
+  doi: 10.5281/zenodo.24267165
+doi: 10.5281/zenodo.24267165
