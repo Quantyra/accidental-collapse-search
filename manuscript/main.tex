@@ -19,7 +19,7 @@
 \newcommand{\Tr}{\operatorname{Tr}}
 \title{Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements}
 \author{Daniel Fredriksen\\Quantyra Inc.\\\small\href{https://orcid.org/0009-0002-9123-7435}{ORCID: 0009-0002-9123-7435}}
-\date{November 15, 2026\\\small Research preprint; version 0.3.0}
+\date{November 15, 2026\\\small Research preprint; version 0.4.0}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -47,6 +47,10 @@ $\eps=O(N^{-1/3})$. We also prove, for every finite Boolean promise problem $f$,
 $Q\min\{P+1,\lceil1/\eps\rceil\}\ge\operatorname{Adv}_{+}(f)/36$,
 using $P+1$ when $\eps=0$. A positive-adversary sum over complete histories
 charges each synchronized query without a factor for the number of branches.
+As an auxiliary consequence, ordinary-gate operator-norm errors
+$\delta_j$ change the complete adaptive transcript distribution by at most
+$\sqrt{K_\eps(P)}\sum_j\delta_j$, independently of dimension; collapse-rate
+error $\tau$ adds at most $P\tau$ for the same controller.
 The results concern this specified postquantum access model,
 not physical noisy quantum hardware or ordinary BPP versus BQP.
 \end{abstract}
@@ -143,6 +147,12 @@ certificate-discovery claim. The sharper search bound in
 Theorem~\ref{thm:main} is retained. Section~\ref{sec:adversary} proves the
 new statement and gives a parity application.
 
+Section~\ref{sec:precision} adds a supporting implementation-error theorem.
+It converts the retained local power comparisons into a bound on complete
+adaptive transcript distributions under ordinary-gate approximation, with
+explicit precision, success and compilation costs. This is an auxiliary
+consequence of the existing machinery, not a new lower-bound framework.
+
 \subsection{Relation to prior work}
 ABFL supplies the partial-Grover/repeated-readout template \cite{abfl}.
 Miloschewsky--Podder supplies the ideal cube-root result and closely related
@@ -196,7 +206,20 @@ with different composition rules and distinguishes oracle calls from
 additional measurement effort \cite{fw}. Its state-reconstruction discussion
 does not give the charged independent-collapse tradeoff in~\eqref{eq:main}.
 
-Our focused comparison did not locate the same theorem or a direct
+ABFL already proves gate-set independence for ideal PDQP
+\cite[Appendix D]{abfl}. Its dimension-dependent estimate requires
+exponentially small numerical error but only polynomially many accuracy
+bits; efficient gate-set independence is not new here.
+\c{C}akan et al. already prove a dimension-independent conditional-copy
+trace-distance comparison with factor three
+\cite[Section 8.2, Claim 8.3]{cakan}. Their inspected statement treats
+two-time states in a fixed ideal circuit and does not itself state our
+collapse-sensitive square-root budget for persistent feedback.
+Theorem~\ref{thm:precision} is presented as a quantitative auxiliary
+consequence, with no first-continuity or exhaustive novelty claim.
+Compilation uses established fixed-dimensional gate synthesis \cite{dn}.
+
+Our focused comparison did not locate the same search tradeoff theorem or a direct
 cost-preserving implication from these results. This is a bounded literature
 comparison, not an assertion of exhaustive priority. Standard root fidelity,
 the Bures metric, Jensen's inequality, and weighted AM--GM remain inherited
@@ -803,13 +826,276 @@ the arbitrary-tree proof, not small-case agreement, establishes the theorem.
 
 The lower bound applies to actual finite-precision input-independent gates
 and preparations whenever the implemented algorithm meets the success
-contract. An ideal-to-implemented accuracy transfer needs its own paid
-whole-history argument; a linear-channel error hybrid is not assumed for
-this nonlinear sampler. If such an argument only gives failure
-$\eta<1/2$, the same proof replaces $c_*$ by
-$(1-2\sqrt{\eta(1-\eta)})/2$. No efficient certificate discovery, signed
+contract. Section~\ref{sec:precision} supplies a paid ideal-to-implemented
+whole-history transfer under an explicit ordinary-gate error contract.
+If the resulting failure is $\eta<1/2$, the same adversary proof replaces
+$c_*$ by $(1-2\sqrt{\eta(1-\eta)})/2$. No efficient certificate discovery, signed
 adversary theorem, physical realization or general classical simulator
 follows from this result.
+
+\section{Implementation error for complete adaptive histories}\label{sec:precision}
+The power comparisons also give an auxiliary precision theorem. This
+section compares two implementations of the same controller, with the same
+exact input oracle, rather than two different oracle inputs.
+
+\subsection{Contract and theorem}
+Let $A,B$ start in the same global state or specified purification and use
+the same finite capped classical decision rule, projectors, coin laws and
+reset conventions. At every formal history $h$ immediately before the
+$j$th ordinary gate, let its ideal and implemented isometries satisfy
+\begin{equation}\label{eq:gate-contract}
+ \|U_h-V_h\|_{\rm op}\le\delta_j,\qquad 1\le j\le G.
+\end{equation}
+This contract may hold after multiplying the entire $V_h$ by a scalar
+phase. Choose that representative separately at each classical history;
+all comparisons use absolute overlaps and are unchanged. A coherently
+controlled gate includes its controls: its relative phases must be preserved.
+Use common padded domain and codomain spaces and tensor the isometries
+with the identity on untouched registers. The gate cap $G$ and sampler
+cap $P$ apply on every branch in both implementations, including the
+formal extensions of zero-probability histories. Changed preparation and
+measurement-basis rotations are counted gates. There is no free initial
+state change or altered classical decision rule. A common partial
+projective measurement remains exact; approximate basis changes can be
+represented by gates surrounding it. A reduced-state error estimate or
+arbitrary noisy-channel bound is not substituted for
+\eqref{eq:gate-contract}.
+
+The logical transcript includes ordinary and sampler outcomes, flags,
+classical random choices and termination. Retain erased or hidden actual
+records for the proof and then project to the visible transcript.
+The transcript does not include an added log of compiled gate names or
+running times. Compilation preserves the logical event boundaries and
+inserts no sampler inside a compiled gate word.
+
+\begin{theorem}[Adaptive implementation error]\label{thm:precision}
+For the contract above, at the same collapse rate $\eps$,
+\begin{equation}\label{eq:precision-main}
+ \operatorname{TV}(\mathcal T_A,\mathcal T_B)
+ \le\min\left\{1,\sqrt{K_\eps(P)}\sum_{j=1}^G\delta_j\right\}.
+\end{equation}
+In particular, uniform gate error $\delta$ gives
+$\operatorname{TV}\le\min\{1,G\sqrt{K_\eps(P)}\delta\}$.
+The constant is one, independently of quantum dimension, the number of
+histories and the smallest nonzero branch probability. Immediate feedback,
+arbitrary entangled workspace, retained purification, partial measurements
+and unequal stopping are permitted.
+\end{theorem}
+
+\subsection{Gate insertion and composition}
+At one common cut write $p_h,u_h$ for $A$ and $q_h,v_h$ for $B$.
+Use $F_\kappa$ and $d_\kappa=\sqrt{2-2F_\kappa}$ from
+Section~\ref{sec:lower}. In this pure-block case the triangle inequality
+can also be seen directly: with
+$X=\bigoplus_h\sqrt{p_h}u_h^{\otimes\kappa(h)}$ and the analogous $Y$,
+\[
+ d_\kappa(A,B)=\min_{|z_h|=1}
+       \|X-\operatorname{diag}(z_h)Y\|_2.
+\]
+Each block phase optimizes its inner product. Compose the two optimizing
+phase maps and use the Euclidean triangle inequality. Every triangle below
+is on one common cut with identical block spaces; across cuts use scalar
+monotonicity. Zero-weight blocks contribute zero.
+
+At a gate frontier insert an auxiliary execution $A^V$ that applies $V_h$
+to $A$'s state. For $s_h=|\ip{U_hu_h}{V_hu_h}|$,
+\[
+ 2(1-s_h)\le\|U_hu_h-V_hu_h\|^2\le\delta_j^2,
+ \qquad 1-s_h^k\le k(1-s_h).
+\]
+If $K$ bounds the exponents on this cut, then
+\begin{equation}\label{eq:gate-charge}
+ \begin{split}
+ d_\kappa(A^U,A^V)^2
+ &=2\sum_{h\ \mathrm{active}}p_h(1-s_h^{\kappa(h)})\\
+ &\le K\delta_j^2\sum_{h\ \mathrm{active}}p_h
+ \le K\delta_j^2.
+ \end{split}
+\end{equation}
+Halted leaves incur no charge. Applying the same $V_h$ on both sides is
+a common block isometry, so the triangle inequality gives
+\begin{equation}\label{eq:gate-insertion}
+ d_\kappa(A^U,B^V)
+ \le d_\kappa(A,B)+\sqrt K\delta_j.
+\end{equation}
+Normalized active probability mass, rather than a sum of unweighted
+per-history bounds, is essential in~\eqref{eq:gate-charge}. Tensoring the
+gate with an arbitrarily large identity preserves its operator norm.
+
+\begin{proof}[Proof of Theorem~\ref{thm:precision}]
+Use two separate power choices. For $\eps>0$, take the constant
+$k=\lceil1/\eps\rceil$. Lemma~\ref{lem:fixed} and the ordinary-operation
+comparisons make $d_k$ nonincreasing between perturbed gates.
+Independently, for every $0\le\eps\le1$, choose
+$\kappa(h)=P+1-p(h)$. Equation~\eqref{eq:decreasing} makes the scalar
+fidelity nondecreasing across a sampler call as its exponent decreases;
+ordinary operations preserve the exponent and obey
+Lemma~\ref{lem:projection}. Thus $d_\kappa$ is nonincreasing through
+the intervening common operations, with $1\le\kappa(h)\le P+1$.
+
+Align the branches at their $j$th ordinary gate or halt, using ordinal
+gate counts rather than wall-clock slots. Include halted leaves at every
+later cut. Between consecutive cuts, expand the finite common controller
+forest, allowing exact queries, partial ordinary measurements, sampler
+calls, resets and classical decisions. Matching complete histories select
+the same operation; multiply each local comparison by its history weight
+and induct over the finite forest. The initially identical states have
+distance zero. Apply~\eqref{eq:gate-insertion} at each gate cut and expand
+the remaining forest to termination. This gives separately
+\[
+ d_{\rm final}\le\sqrt{\lceil1/\eps\rceil}\sum_j\delta_j
+ \quad(\eps>0),\qquad
+ d_{\rm final}\le\sqrt{P+1}\sum_j\delta_j
+ \quad(0\le\eps\le1).
+\]
+Padding is analytical, with no physical copies or additional operations.
+The two distances use their respective comparison states; their exponents
+are not mixed opportunistically.
+
+At termination put $A_T=\sum_h\sqrt{p_hq_h}$. Since
+$F_\kappa\le A_T$, Cauchy--Schwarz gives
+\[
+ \operatorname{TV}(p,q)\le\sqrt{1-A_T^2}
+ \le\sqrt{2-2A_T}\le d_\kappa.
+\]
+Projection to the visible logical record cannot increase variation.
+Apply this to each complete power argument and take the smaller bound.
+If $G=0$ the executions coincide; if $P=0$ or $\eps=1$, $K_\eps(P)=1$.
+The cap at one handles large errors. No positive lower bound on any
+branch probability is used.
+\end{proof}
+
+\subsection{Rare branches and collapse-rate approximation}
+An exact diagnostic illustrates why normalized postselection is misleading.
+Set $0<a<1$, $c=\sqrt{1-a^2}$ and prepare
+$u=c\ket{00}+a\ket{10}$. Replace one identity gate by a rotation through
+$0\le\phi\le\pi/2$ on $\operatorname{span}\{\ket{00},\ket{11}\}$,
+leaving the other basis vectors fixed. The resulting state is
+\[
+ v=c\cos\phi\ket{00}+a\ket{10}+b\ket{11},\qquad
+ b=c\sin\phi,\qquad d=\|R_\phi-I\|=2\sin(\phi/2).
+\]
+Ordinarily measure the first qubit; halt on zero. On one, sample the second
+qubit at most $m$ times, stopping at the first sampled one and retaining
+flags. Write $q=a^2+b^2$ and $t=a^2/q$. If $L$ is the first collapse
+index capped at $m$, then $\Pr[L>j]=(1-\eps)^j$ for $0\le j<m$.
+The perturbed all-zero rare-branch mass is $q\mathbb E[t^L]$.
+For each flag sequence it is at most the ideal mass, since $L\ge1$;
+the perturbed early-halt-on-zero mass is also at most its ideal value.
+All excess mass is therefore on transcripts containing a sampled one,
+and the exact distance is
+\begin{equation}\label{eq:rare-precision}
+ \operatorname{TV}=q(1-\mathbb E[t^L])
+ =b^2\sum_{j=0}^{m-1}((1-\eps)t)^j
+ \le\min\{1,K_\eps(m)d^2\}\le\sqrt{K_\eps(m)}d.
+\end{equation}
+Although the conditional states can become nearly orthogonal as $a/b$
+tends to zero with $d\to0$, there is no inverse rare-probability factor.
+The formula extends continuously to $a=0$; if $q=0$ the distance is zero.
+Additional common fair bits only split terminal probabilities and leave
+the distance unchanged, with their work and storage still paid. This
+symbolic family is diagnostic; the preceding proof gives generality.
+
+For a separate rate comparison, freeze the entire classical policy and
+implemented gates, and let $|\eps-\hat\eps|\le\tau\le1$.
+Until the first flag mismatch, couple the flags maximally and use identical
+Born draws and ordinary randomness; the states and actions then coincide.
+At most $P$ sampler calls imply
+\begin{equation}\label{eq:rate-precision}
+ \operatorname{TV}(\mathcal T_{B,\eps},\mathcal T_{B,\hat\eps})
+ \le1-(1-\tau)^P\le P\tau.
+\end{equation}
+Consequently the combined bound is
+\begin{equation}\label{eq:combined-precision}
+ \operatorname{TV}(\mathcal T_{A,\eps},\mathcal T_{B,\hat\eps})
+ \le\min\left\{1,\sqrt{K_\eps(P)}\sum_j\delta_j+P\tau\right\}.
+\end{equation}
+Rounding a rate and then changing a branch threshold, schedule or cap is
+not covered by $P\tau$ alone. Such a policy change needs its own argument.
+Unknown-rate calibration and physical control of the primitive are not
+provided by this coupling.
+
+\subsection{Precision, success and complete compilation costs}
+For a total error allowance $0<\zeta<1$ and $G,P>0$, it suffices that
+\begin{equation}\label{eq:precision-budget}
+ \delta\le\frac{\zeta}{2G\sqrt K},\qquad
+ \tau\le\frac{\zeta}{2P},\qquad K=K_\eps(P).
+\end{equation}
+Omit a term and set its unused bit budget to zero when its cap is zero;
+with exact rate the factor two in the
+gate allocation is unnecessary. Set $J=\lceil\log_2 K\rceil$,
+$H=\lceil J/2\rceil$ and choose
+\[
+ b_g=\lceil\log_2(2G/\zeta)\rceil+H,\qquad
+ b_\eps=\lceil\log_2(2P/\zeta)\rceil.
+\]
+Certified accuracies $2^{-b_g}$ and $2^{-b_\eps}$ suffice because
+$2^H\ge\sqrt K$. If the reciprocal ceiling cannot be computed from
+the rate description, use the valid upper bound $K=P+1$; a certified
+rational lower bound on $\eps$ can also supply a valid fixed power.
+Exact threshold comparisons on unspecified real numbers are not free.
+
+Ideal success at least $3/4$ and $\zeta\le1/12$ retain success at least
+$2/3$. Starting with success $2/3$, 27 independent fresh repetitions
+and majority give failure at most $\exp(-27/18)<1/4$ by Hoeffding.
+Charge every run, including preparations, measurements and resets,
+the classical majority work and its counter. Recompute the budgets using
+the enlarged caps, at most $27G,27P$ plus any additional counted
+preparation gates. Apply the theorem to this entire repeated controller.
+
+Efficient compilation additionally requires fixed-arity gates with uniform
+effective descriptions, evaluated from the public classical input and actual history.
+Let $E(n,b),M_E(n,b)$ bound certified description evaluation time and space.
+For fixed local dimension $d_{\mathrm{loc}}$, entry accuracy in complex modulus
+at most $\delta/(4d_{\mathrm{loc}})$ contributes at most $\delta/4$ in operator
+norm. Set $c_d=\lceil\log_2(8d_{\mathrm{loc}})\rceil$; evaluating each real
+and imaginary part to accuracy $\delta/(8d_{\mathrm{loc}})$ suffices.
+The rounded matrix is not assumed unitary. If $\|W-U\|\le\delta/4<1$,
+its polar unitary $U_{\mathrm{pol}}$ obeys
+$\|U_{\mathrm{pol}}-W\|\le\delta/4$, since the singular
+values of $W$ lie within $\delta/4$ of one. Thus
+$\|U_{\mathrm{pol}}-U\|\le\delta/2$.
+Allow at most $\delta/4$ for numerical polar approximation and at most
+$\delta/4$ for gate synthesis, charging both computations. Thus with
+$\delta=2^{-b_g}$, use $b_{\mathrm{syn}}=b_g+2$ accuracy bits for
+each of these two stages. For a preparation
+isometry, require an effective fixed-dimensional unitary dilation and
+charge its description, ancillas and synthesis. Let
+$S(b),L(b),M_S(b),a(b)$ bound compiler time, output-word
+length, classical workspace and quantum ancillas, including certified
+finite arithmetic at the requested accuracy. Ancillas are reused serially
+and returned clean, with their cleanup included in these bounds.
+The complete synthesized word must satisfy
+\eqref{eq:gate-contract}. Standard fixed-dimensional synthesis supplies
+polynomial-in-$b$ costs under its universal finite inverse-closed gate-set
+and effective-input assumptions \cite{dn}. Fix overall phase
+representatives when synthesizing in $\operatorname{SU}(d_{\mathrm{loc}})$; a controlled
+gate includes its control, so relative phases must be preserved.
+
+With original classical time $T_{\rm cl}$, classical workspace $W_{\rm cl}$,
+quantum width $w$ and transcript length at most $B_{\mathrm{tr}}$, a conservative ledger is
+\begin{align*}
+ \text{ordinary gates}&\le G L(b_{\mathrm{syn}})
+       +\text{separately counted exact primitives},\\
+ \text{classical work}&\le T_{\rm cl}
+       +O\bigl(G[E(n,b_g+c_d)+S(b_{\mathrm{syn}})+L(b_{\mathrm{syn}})]\bigr)
+       +\text{rate/budget arithmetic},\\
+ \text{quantum space}&\le w+a(b_{\mathrm{syn}}),\\
+ \text{classical space}&\le W_{\rm cl}+B_{\mathrm{tr}}+M_E(n,b_g+c_d)+M_S(b_{\mathrm{syn}})\\
+ &\hspace{1em}+O\bigl(L(b_{\mathrm{syn}})+b_{\mathrm{syn}}+b_\eps+\log(G+P+2)\bigr).
+\end{align*}
+Exact queries and sampler calls remain the paid $Q,P$, with any repetition
+caps substituted. Every ordinary measurement, reset and failed attempt is
+charged. Wide readouts cost their actual transcript bits. Rate evaluation
+or calibration is separate work; calibration failure adds to the error
+budget. Gate descriptions are evaluated only along the realized history,
+without enumerating its tree or computing branch probabilities. Powers and
+inaccessible purifications are proof objects, not extra algorithmic storage.
+Polynomial original resources and uniformly polynomial compiler/evaluation
+costs therefore remain polynomial. Arbitrary growing-width matrices,
+uncomputable real descriptions and general ambient noise do not acquire
+an efficient implementation from this theorem.
+
 
 \section{Consequences and limitations}
 \begin{corollary}[Persistent adaptive ideal search]
@@ -865,8 +1151,8 @@ This preprint has an informal analytic proof and internal checks, not formal
 certification or independent peer review. The accompanying archive preserves
 two historical finite exact diagnostic runs and their source hashes; these illustrate
 algebraic and projector comparisons and do not establish universal claims
-by finite agreement. Those runs predate the feedback and general-adversary
-extensions; both are proved analytically, without a new numerical campaign.
+by finite agreement. Those runs predate the feedback, general-adversary and implementation-error
+extensions; all are proved analytically, without a new numerical campaign.
 OpenAI Codex assisted with derivation, literature
 comparison, drafting, and internal checking. Separate AI review was conducted
 through provider CLIs. The archive records actual model identities, review
@@ -878,7 +1164,7 @@ LaTeX, the PDF, reproducibility records, and citation metadata are available at
 \url{https://github.com/Quantyra/accidental-collapse-search}. Release and DOI details are recorded in the repository. Original archive materials are licensed
 under CC BY 4.0. Cited works retain their own licenses.
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{99}
 \small
 \raggedright
 \bibitem{abfl}
@@ -937,6 +1223,19 @@ Vincenzo Fiorentino and Stefan Weigert.
 A quantum theory with non-collapsing measurements.
 \emph{Physics Letters A} 559, 130903, 2025.
 \href{https://arxiv.org/abs/2303.13411v2}{arXiv:2303.13411v2}.
+
+\bibitem{cakan}
+Alper \c{C}akan, Dakshita Khurana, Tomoyuki Morimae, Yuki Shirakawa,
+Kabir Tomer, and Takashi Yamakawa.
+On the cryptographic futility of non-collapsing measurements.
+\href{https://arxiv.org/abs/2510.05055v1}{arXiv:2510.05055v1}, October 6, 2025.
+
+\bibitem{dn}
+Christopher M. Dawson and Michael A. Nielsen.
+The Solovay--Kitaev algorithm.
+\emph{Quantum Information \& Computation} 6(1):81--95, 2006.
+\href{https://arxiv.org/abs/quant-ph/0505030v2}{arXiv:quant-ph/0505030v2},
+August 23, 2005.
 
 \bibitem{gln}
 Alexei Gilchrist, Nathan K. Langford, and Michael A. Nielsen.

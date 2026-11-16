@@ -47,7 +47,7 @@ def main():
     Draft7Validator.check_schema(schema)
     Draft7Validator(schema).validate(cff)
     zenodo = json.loads((ROOT / '.zenodo.json').read_text(encoding='utf-8'))
-    require(cff['version'] == zenodo['version'] == '0.3.0', 'Release version mismatch')
+    require(cff['version'] == zenodo['version'] == '0.4.0', 'Release version mismatch')
     require(cff['preferred-citation']['title'] == zenodo['title'], 'Title mismatch')
     require(cff['license'] == zenodo['license'] == 'CC-BY-4.0', 'License mismatch')
     require(zenodo['upload_type'] == 'publication' and zenodo['publication_type'] == 'preprint',
@@ -74,7 +74,7 @@ def main():
     require(not any(review[k] for k in ['independent_human_review',
                                         'formal_certification', 'new_diagnostic_execution']),
             'Unsupported human/formal certification or new diagnostic claim')
-    manifest_path = ROOT / 'reviews/adversary-v0.3.0/manifest.json'
+    manifest_path = ROOT / 'reviews/precision-v0.4.0/manifest.json'
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
         require(manifest['status'] == 'COMPLETE' and not manifest['unresolved_blocking_findings'],
@@ -128,7 +128,7 @@ def main():
     pdf_text = unicodedata.normalize('NFKC', ' '.join(p.get_text() for p in document))
     pdf_text = re.sub(r'(?<=\w)-\n(?=\w)', '', pdf_text)
     pdf_text = re.sub(r'\s+', ' ', pdf_text)
-    for phrase in ['0.3.0', 'OpenAI Codex', 'Amira Abbas', 'Release and DOI details']:
+    for phrase in ['0.4.0', 'OpenAI Codex', 'Amira Abbas', 'Release and DOI details']:
         require(phrase in pdf_text, 'Missing PDF text: '+phrase)
     provenance = json.loads((ROOT / 'evidence/provenance.json').read_text())
     for name, expected in provenance['files'].items():

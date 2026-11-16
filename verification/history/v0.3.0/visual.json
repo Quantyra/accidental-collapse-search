@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "scope": "Actual same-agent inspection of every rendered PDF page; equations, margins and bibliography checked; not mathematical certification",
+  "pdf_sha256": "58fdf1022c5c76d1fc2a8af3561c4c74de5d4983368bf550212a15df03165762",
+  "pages_inspected": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "render_dpi": 100,
+  "findings": "All fourteen final pages actually inspected after review repairs. Equations, title, margins, bibliography and links are legible; no clipping, overlap, missing glyphs or blank pages. No TeX layout diagnostics."
+}

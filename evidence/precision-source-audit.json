@@ -1,0 +1,96 @@
+{
+  "story": "S270",
+  "date": "2026-11-15",
+  "named_questions": [
+    "Does existing gate-set independence already provide the exact dimension-independent, collapse-sensitive persistent-feedback modulus?",
+    "What prior conditional-copy continuity prevents a first-principle novelty claim?",
+    "Under which input and gate-set assumptions does precision imply efficient compilation?"
+  ],
+  "sources": [
+    {
+      "source": "P011 v0.3.0",
+      "version_date": "2026-11-15",
+      "url": "https://github.com/Quantyra/accidental-collapse-search/blob/afd4ccc246841586f6fa8a6995a29ea1e79598bc/manuscript/main.tex",
+      "sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
+      "inspected": "Sections 2-5: model, local fixed/decreasing power comparisons, metric, query frontiers, preparation robustness and general precision caveat",
+      "transfer": "Complete normalized history blocks and identical operations on matching histories enable the single-gate insertion. Sections 3-6 rederive the local comparisons and compose at ordinary-gate frontiers.",
+      "finding": "The new modulus is a direct auxiliary consequence of retained P011 machinery; its earlier preparation bound covered a particular construction."
+    },
+    {
+      "source": "Aaronson, Bouland, Fitzsimons, Lee: The space just above BQP",
+      "version": "arXiv:1412.6507v1",
+      "version_date": "2014-12-19",
+      "url": "https://arxiv.org/html/1412.6507v1#A4",
+      "inspected": "Model and Appendix D gate-set-independence comparison",
+      "transfer": "Fixed submitted circuit and Markov/history coupling establish ideal PDQP gate-set independence.",
+      "finding": "Displayed dimension factor 2^(2 ell+1) and accuracy 2^(-ell^2 T-10); exponentially small error still needs polynomial accuracy bits. This statement does not give the immediate-feedback, collapse-sensitive square-root modulus.",
+      "cache": {
+        "cache_filename": "abfl-pdqp-v1.html",
+        "sha256": "35487e4630599e502a1d55712488b9de6fb7719a1d9e576e7033ca23ef7eb937",
+        "bytes": 592338,
+        "redistributed": false
+      }
+    },
+    {
+      "source": "ABFL author-hosted CQP text",
+      "version_date": "undated author-hosted PDF",
+      "url": "https://theory.stanford.edu/~abouland/Papers/cqp.pdf",
+      "inspected": "Appendix D, printed pages 20-22; naCQP label and fixed-circuit contract",
+      "finding": "Retains a dimension-dependent gate-set-independence proof, not the full persistent-feedback contract.",
+      "cache": {
+        "cache_filename": "abfl-cqp.pdf",
+        "sha256": "b3692abc5d78d23e88871dea8ed17b4648b84a8f423fd3354aa3f694b1d488de",
+        "bytes": 445211,
+        "redistributed": false
+      }
+    },
+    {
+      "source": "Dawson and Nielsen: The Solovay-Kitaev algorithm",
+      "version": "quant-ph/0505030v2",
+      "version_date": "2005-08-23",
+      "url": "https://arxiv.org/html/quant-ph/0505030v2",
+      "inspected": "Section 2 Definition 1 and Theorem 1, Section 3 algorithm; fixed SU(d), universal inverse-closed finite gate set",
+      "transfer": "Constant local dimension and effective gate descriptions allow precision to be converted into polynomial compilation/synthesis costs; arbitrary growing-width real matrices do not have this structure automatically.",
+      "finding": "Compilation is inherited. Explicit E/S/L costs include description evaluation, finite arithmetic and printing the complete synthesized word.",
+      "cache": {
+        "cache_filename": "dawson-nielsen-v2.html",
+        "sha256": "638f8d6e5be19faca31be52b463acb1193d6634d9090967dd0b6a8871ef19d66",
+        "bytes": 311508,
+        "redistributed": false
+      }
+    },
+    {
+      "source": "Cakan et al.: On the Cryptographic Futility of Non-Collapsing Measurements",
+      "version": "arXiv:2510.05055v1",
+      "version_date": "2025-10-06",
+      "url": "https://arxiv.org/html/2510.05055v1#S8.SS2",
+      "inspected": "Definition 8.1, Section 8.2 Claim 8.3 (equation 156), its three intermediate-state comparisons (157-170), Markov comparison (150)",
+      "transfer": "Two-time conditional-copy states in a fixed ideal circuit admit trace-distance control. The present proof instead uses P011 powered histories for the collapse-sensitive all-feedback contract.",
+      "finding": "TD(A_tilde,B_tilde)<=3 TD(A,B) already gives dimension-independent conditional-copy continuity. Do not claim this general continuity principle is new. The inspected claim does not itself state the target sqrt(K) bound.",
+      "limitation": "No full cryptographic theorem audit or exhaustive priority claim.",
+      "cache": {
+        "cache_filename": "cakan-et-al-v1.html",
+        "sha256": "544f49491d124ca84eca78db37ea1db117b9e71223605fa2d561ba0c6b84a7f0",
+        "bytes": 1209005,
+        "redistributed": false
+      }
+    },
+    {
+      "source": "Morimae, Shirakawa, Yamakawa",
+      "version": "arXiv:2510.04448v1",
+      "version_date": "2025-10-06",
+      "url": "https://arxiv.org/html/2510.04448v1",
+      "inspected": "Narrow oracle-model and continuity-term check only",
+      "finding": "Model-scope check; no absence-of-prior-work conclusion follows from this limited inspection.",
+      "cache": {
+        "cache_filename": "msy-v1.html",
+        "sha256": "fa5fbd992692ceac8fc08182c7268bb5bca014272c344116ab57fd63d5655dbc",
+        "bytes": 991630,
+        "redistributed": false
+      }
+    }
+  ],
+  "classification": "Attributed auxiliary mathematical consequence of P011; internal analytical proof, not established field novelty or independent/formal certification.",
+  "limitations": "Targeted primary-text comparison, not exhaustive novelty research or validation of entire cited papers. Source hashes identify locally inspected bytes; third-party full texts are not redistributed.",
+  "decision": "Close the bounded precision obligation; SELECTION NONE for successor and no automatic publication."
+}

@@ -1,8 +1,10 @@
 # Optimal Search and Positive-Adversary Bounds with Accidentally Collapsing Measurements
 
+**Version 0.4.0: reviewed release candidate; archival publication pending.** The auxiliary implementation-error theorem gives `TV <= min{1,sqrt(K) sum_j delta_j + P tau}` for the same finite capped controller and exact oracle, where K=min{P+1,ceil(1/epsilon)} (P+1 at zero). Uniform ordinary-gate errors and a separately coupled rate error preserve arbitrary workspace, partial measurements, immediate feedback and unequal stopping. Precision, success and full compilation costs are explicit; no physical-noise or first-continuity claim. The existing search and adversary results below remain.
+
 Version 0.3.0 adds a second main theorem: every finite Boolean promise problem in the same model satisfies `Q min{P+1,ceil(1/epsilon)} >= Adv_+(f)/36`, using P+1 at epsilon=0. Here Adv_+ is the positive spectral adversary. Complete-history query probabilities remove any branch-count factor; the proof preserves immediate feedback, partial measurements and unequal stopping. For n-bit parity, fixed positive epsilon requires Omega(n) queries. The original sharper search law is retained. Certificates can be exponential analytical objects; no signed-adversary or efficient-discovery result is claimed.
 
-**Version 0.3.0: published and verified.** [DOI 10.5281/zenodo.24261197](https://doi.org/10.5281/zenodo.24261197); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952). Previous published version 0.2.0: [DOI 10.5281/zenodo.24255781](https://doi.org/10.5281/zenodo.24255781). Previous published version 0.1.0: [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
+**Previous version 0.3.0: published and verified.** [DOI 10.5281/zenodo.24261197](https://doi.org/10.5281/zenodo.24261197); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952). Previous published version 0.2.0: [DOI 10.5281/zenodo.24255781](https://doi.org/10.5281/zenodo.24255781). Previous published version 0.1.0: [DOI 10.5281/zenodo.24244953](https://doi.org/10.5281/zenodo.24244953). Daniel Fredriksen, Quantyra Inc. [ORCID 0009-0002-9123-7435](https://orcid.org/0009-0002-9123-7435). [Read the PDF](manuscript/main.pdf) or [LaTeX source](manuscript/main.tex).
 
 We study a hypothetical Born sampler that independently projects the sampled register with probability epsilon and otherwise leaves the global state intact. Sampler outcomes and collapse flags may immediately control later operations on the same continuing state. With a noiseless search oracle, the optimal constant-success unique-item search cost is
 
@@ -36,7 +38,7 @@ Build outputs and page renders go in ignored `.build/`; the PDF and build receip
 
 ## Archiving
 
-Version 0.3.0 is published through the existing Zenodo integration. Fresh three-provider AI review has no unresolved blocker; document, metadata and clean-build checks pass. The [public archive receipt](publication/zenodo-v0.3.0-verification.json) verifies the DOI metadata, all 110 archived files and the release PDF against the frozen tag. Citation and verification records added after publication remain separate from the immutable archive.
+Version 0.4.0 has completed fresh three-provider AI review with all findings dispositioned and no unresolved blocker. Exact release and public archive verification remain pending; the existing Zenodo integration will be reused. For the published version 0.3.0, three-provider AI review had no unresolved blocker and document, metadata and clean-build checks passed. Its [public archive receipt](publication/zenodo-v0.3.0-verification.json) verifies the DOI metadata, all 110 archived files and the release PDF against the frozen tag. Citation and verification records added after publication remain separate from the immutable archive.
 
 Previous publications remain immutable:
 

@@ -1,6 +1,6 @@
 {
-  "scope": "Exact manuscript source reviewed and released; no scientific or publication-label substitutions",
-  "reviewed_source_sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
-  "release_source_sha256": "88bcf523f4fccac8422273bb65a02995304f6a68bc911b20e7b8383de03a44c6",
+  "scope": "Identical reviewed and released manuscript source",
+  "reviewed_source_sha256": "42f8f7b25ee045d3412440095c3c8719dc380c627aa687b976f03142eec87769",
+  "release_source_sha256": "42f8f7b25ee045d3412440095c3c8719dc380c627aa687b976f03142eec87769",
   "replacements": []
 }

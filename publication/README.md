@@ -1,5 +1,13 @@
 # Publication status
 
+## v0.4.0 readiness
+
+**PUBLISH after exact commit/source/PDF freeze and clean-export/package verification.** The author accepted this precision-theorem integration, fresh Claude/Grok/AGY review, versioned release and existing certification-scope update by instructing "proceed". The existing pre-certification preprint route remains authorized.
+
+The auxiliary all-controller implementation-error theorem and paid precision/rate/compilation guarantees are integrated alongside the search and positive-adversary results. Eight actual reports comprise three initial reviews, two intermediate rechecks and three closeout reviews covering the exact final source; no unresolved blocker remains. All 18 pages, author/ORCID/license metadata, source attribution and retained evidence were checked. AI review is not human or formal certification. Record final commit/hash readiness and verify the existing Zenodo receiver before the release event. No new DOI is claimed before publication.
+
+Earlier versions and their review scopes remain immutable. No journal submission, outreach, research experiment or Lean job is selected. Remaining release work: publish the frozen version and verify DOI metadata and every archived file/PDF against its tag.
+
 ## v0.3.0 publication
 
 **PUBLISHED AND VERIFIED: v0.3.0.** [Version DOI 10.5281/zenodo.24261197](https://doi.org/10.5281/zenodo.24261197); [concept DOI 10.5281/zenodo.24244952](https://doi.org/10.5281/zenodo.24244952); [release](https://github.com/Quantyra/accidental-collapse-search/releases/tag/v0.3.0). Frozen commit afd4ccc246841586f6fa8a6995a29ea1e79598bc. All 110 archived files and the release PDF match the tag; both DOI URLs and author/license/version metadata verify. [Public archive receipt](zenodo-v0.3.0-verification.json). This citation/status/receipt update follows publication and is separate from the immutable archive.

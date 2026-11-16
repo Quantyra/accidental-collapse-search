@@ -1,7 +1,8 @@
 {
   "result": "PASS",
-  "scope": "Actual same-agent inspection of every rendered PDF page; equations, margins and bibliography checked; not mathematical certification",
-  "pdf_sha256": "58fdf1022c5c76d1fc2a8af3561c4c74de5d4983368bf550212a15df03165762",
+  "scope": "Coordinator directly inspected all 18 pages of the exact closeout PDF in five rendered contact sheets; layout assurance only, not mathematical certification",
+  "pdf_sha256": "8c94fdc1f7db56a19419ac89b5802cff27dbe3c8d14354412f582511d1e0b465",
+  "source_sha256": "42f8f7b25ee045d3412440095c3c8719dc380c627aa687b976f03142eec87769",
   "pages_inspected": [
     1,
     2,
@@ -16,8 +17,41 @@
     11,
     12,
     13,
-    14
+    14,
+    15,
+    16,
+    17,
+    18
   ],
-  "render_dpi": 100,
-  "findings": "All fourteen final pages actually inspected after review repairs. Equations, title, margins, bibliography and links are legible; no clipping, overlap, missing glyphs or blank pages. No TeX layout diagnostics."
+  "checks": [
+    "title/version/author readable",
+    "all equations within page margins",
+    "no clipped or overlapping content",
+    "references and hyperlinks rendered",
+    "all page numbers present",
+    "corrected active-history subscripts and compiler budget readable"
+  ],
+  "render_dpi": 80,
+  "contact_sheet_groups": [
+    [
+      1,
+      4
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      13,
+      16
+    ],
+    [
+      17,
+      18
+    ]
+  ]
 }

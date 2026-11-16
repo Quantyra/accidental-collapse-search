@@ -11,3 +11,5 @@ Current authority: the author subsequently instructed publication, PaperMill cer
 Current revision authority: the author requested updating P011 for the completed immediate-feedback theorem and reprioritizing it. Execute v0.2.0 integration, fresh exact-source three-lens review and versioned publication only after the readiness decision. Preserve v0.1.0 and its review scope. No outreach or Lean job is authorized.
 
 Current general-adversary revision authority: the author accepted the proposed v0.3.0 integration, fresh three-lens review and versioned release, then instructed revising P011. Record exact readiness before release; preserve all prior versions and certification ownership. No outreach or Lean execution is included.
+
+Current precision-revision authority: the author accepted the proposed v0.4.0 integration, fresh Claude/Grok/AGY review, versioned release and existing PaperMill certification-scope update by instructing "proceed". Record exact readiness before release, preserve prior versions/jobs/ownership and do not initiate outreach or Lean work.

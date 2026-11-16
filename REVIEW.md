@@ -1,6 +1,14 @@
 # Review record
 
-## Current v0.3.0 general-adversary revision
+## Current v0.4.0 implementation-error revision
+
+COMPLETE: fresh Claude proof-adversarial, Grok complexity/resource and AGY attribution/non-claims reviews, with exact final-source rechecks. No unresolved blocking finding remains. [Reports and identities](reviews/precision-v0.4.0/manifest.json); [findings and dispositions](reviews/precision-v0.4.0/DISPOSITION.md). These are separate provider CLI AI reviews, not human peer review, exhaustive novelty validation or formal certification.
+
+The revision repairs an active-history subscript typesetting escape, explicitly budgets complex-entry accuracy and polar rounding before synthesis, requires effective preparation dilations for compilation, distinguishes transcript/local-dimension notation and scopes historical review claims. Subsequent checks clarify the harmless whole-operator phase, preserve relative controlled phases, allocate two extra accuracy bits to numerical polar approximation and synthesis, and charge clean ancilla reuse. The error theorem remains; optional averaged-error contracts and sharpness claims were not added. Reviewer numeric labels and stress-test sketches are not adopted as independent results; exact source labels/hashes and the coordinator's dispositions govern scope.
+
+All 18 final PDF pages were visually inspected; source/PDF identities and clean committed-export reconstruction are recorded separately. The source is unchanged after final review, with an empty release bridge. All previous reports, diagnostic evidence, versions and DOIs remain preserved. No research diagnostic, Lean job, physical experiment or author outreach occurred. Primary correspondence was checked by the coordinator; reviewers had the supplied packets only. AGY's configured model and unattested serving identity remain distinguished.
+
+## Historical v0.3.0 general-adversary revision
 
 COMPLETE: fresh Claude proof-adversarial, Grok complexity/resource and AGY claims/attribution reviews, followed by exact final-source rechecks, cover the full revised manuscript. No unresolved blocking finding remains. [Reports and identities](reviews/adversary-v0.3.0/manifest.json); [findings and dispositions](reviews/adversary-v0.3.0/DISPOSITION.md). These are separate provider CLI AI reviews, not human peer review, exhaustive novelty validation or formal certification.
 
